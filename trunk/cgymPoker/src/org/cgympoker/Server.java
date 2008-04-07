@@ -3,10 +3,10 @@ package org.cgympoker;
 import java.util.List;
 
 public interface Server {
-	List<Tournament> getAllTournaments();
-	List<Tournament> getStartedTournaments();
-	List<Tournament> getOpenTournaments();
-	List<Player> getPlayers();
-	Felix getFelix();
-	void disconnect();
+	public List<Tournament> getAllTournaments();
+	public List<Tournament> getStartedTournaments();
+	public List<Tournament> getOpenTournaments();
+	public List<Player> getPlayers();
+	public Felix getFelix();
+	public void disconnect();
 }
