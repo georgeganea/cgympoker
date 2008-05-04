@@ -1,8 +1,9 @@
 package org.cgympoker;
 
+import java.rmi.Remote;
 import java.util.List;
 
-public class ServerImpl implements Server{
+public class ServerImpl implements Remote, Server{
 
 	@Override
 	public void disconnect() {
