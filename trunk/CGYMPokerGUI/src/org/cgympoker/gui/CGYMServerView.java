@@ -6,14 +6,17 @@
 
 package org.cgympoker.gui;
 
+import org.cgympoker.Server;
+
 /**
  *
  * @author  Mihai
  */
 public class CGYMServerView extends javax.swing.JFrame {
-    
+    private final Server server;
     /** Creates new form CGYMServerView */
-    public CGYMServerView() {
+    public CGYMServerView(Server server) {
+        this.server = server;
         initComponents();
     }
     
@@ -252,7 +255,7 @@ public class CGYMServerView extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CGYMServerView().setVisible(true);
+                new CGYMServerView(null).setVisible(true);
             }
         });
     }
