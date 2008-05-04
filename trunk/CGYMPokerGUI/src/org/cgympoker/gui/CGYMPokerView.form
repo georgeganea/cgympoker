@@ -4,6 +4,7 @@
   <NonVisualComponents>
     <Container class="javax.swing.JPanel" name="mainPanel">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" resourceKey="mainPanel.foreground"/>
         <Property name="name" type="java.lang.String" value="mainPanel" noResource="true"/>
       </Properties>
 
@@ -102,10 +103,15 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Login information"/>
+                <TitledBorder title="Login information">
+                  <Property name="titleX" resourceKey="jPanel2.border.title"/>
+                  <Property name="font" resourceKey="jPanel2.border.titleFont"/>
+                  <Property name="color" resourceKey="jPanel2.border.titleColor"/>
+                </TitledBorder>
               </Border>
             </Property>
             <Property name="name" type="java.lang.String" value="jPanel2" noResource="true"/>
+            <Property name="opaque" type="boolean" value="false"/>
           </Properties>
 
           <Layout>
@@ -147,7 +153,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" pref="21" max="32767" attributes="0"/>
+                          <Component id="jLabel3" pref="22" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
