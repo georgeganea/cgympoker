@@ -1,6 +1,10 @@
 package org.cgympoker;
 
-public interface Login {
-	public Server login(String user, String password);
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+
+public interface Login extends Remote{
+	public void login() throws RemoteException;
 }
 

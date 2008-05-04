@@ -1,5 +1,9 @@
 package org.cgympoker;
-
+import java.rmi.Naming;
+import java.rmi.Remote;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,4 +61,28 @@ public class ServerCentral {
 		// TODO Auto-generated method stub
 		return null;
 	}
+        
+        public static void main(String[] args) {
+       /* if (System.getSecurityManager() == null) {
+            System.setSecurityManager(new SecurityManager());
+        }*/
+            
+        try {     
+            String name = "CgymPokerLogin";
+            LoginImpl server = new LoginImpl() ;
+            Login stub = (Login) UnicastRemoteObject.exportObject(server, 0);
+           Registry registry = LocateRegistry.getRegistry();
+            
+            registry.rebind(name, stub);
+        //    Naming.rebind(name, stub);
+            
+            System.out.println("CgymPokerLogin");
+        } catch (Exception e) {
+            System.err.println("ComputeEngine exception:");
+            e.printStackTrace();
+        }
+    }
+
+        
+
 }
