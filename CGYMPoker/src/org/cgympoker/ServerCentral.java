@@ -1,4 +1,5 @@
 package org.cgympoker;
+import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
@@ -7,6 +8,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerCentral {
 	//singleton
@@ -63,9 +66,15 @@ public class ServerCentral {
 	}
         
         public static void main(String[] args) {
-       /* if (System.getSecurityManager() == null) {
+        try {
+            /* if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
-        }*/
+            }*/
+            
+            new ClassFileServer(2001, "/home/george/NetBeansProjects/trunk/CGYMPoker/build/classes");
+        } catch (IOException ex) {
+            Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
+        }
             
         try {     
             String name = "CgymPokerLogin";
@@ -74,7 +83,7 @@ public class ServerCentral {
            Registry registry = LocateRegistry.getRegistry();
             
             registry.rebind(name, stub);
-        //    Naming.rebind(name, stub);
+        //Naming.rebind(name, stub);
             
             System.out.println("CgymPokerLogin");
         } catch (Exception e) {
