@@ -27,7 +27,7 @@ public class TestRmi {
             Remote  login = (Remote) registry.lookup(name);
             //login.login();
             Login log = (Login) login;
-            log.login();
+            log.login("user.","pass");
             System.out.println("login to string "+log.toString());
         } catch (Exception e) {
             System.err.println("CgymPokerLogin exception:");
