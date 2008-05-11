@@ -24,6 +24,11 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.cgympoker.Server;
+import java.rmi.Remote;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import org.cgympoker.Login;
+
 
 /**
  * The application's main frame.
@@ -104,31 +109,21 @@ public class CGYMPokerView extends FrameView {
 
     //TODO : check username and password
     private Server checkData(String username, String password) {
-       return new Server() {
-
-            public List<Tournament> getAllTournaments() {
-                return null;
-            }
-
-            public List<Tournament> getStartedTournaments() {
-                return null;
-            }
-
-            public List<Tournament> getOpenTournaments() {
-                return null;
-            }
-
-            public List<Player> getPlayers() {
-                return null;
-            }
-
-            public Felix getFelix() {
-                return null;
-            }
-
-            public void disconnect() {
-            }
-        };
+        
+        try {
+            String name = "CgymPokerLogin";
+            Registry registry = LocateRegistry.getRegistry("127.0.0.1");
+            Remote  login = (Remote) registry.lookup(name);
+            //login.login();
+            Login log = (Login) login;
+         return   log.login(username,password);
+           // System.out.println("login to string "+log.toString());
+        } catch (Exception e) {
+            System.err.println("CgymPokerLogin exception:");
+            e.printStackTrace();
+        }
+        
+      return null;
     }
 
     private Server checkInfo() {
