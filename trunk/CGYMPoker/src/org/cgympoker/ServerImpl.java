@@ -1,9 +1,10 @@
 package org.cgympoker;
 
+import java.io.Serializable;
 import java.rmi.Remote;
 import java.util.List;
 
-public class ServerImpl implements Remote, Server{
+public class ServerImpl implements Remote, Server,Serializable{
 
 	@Override
 	public void disconnect() {
