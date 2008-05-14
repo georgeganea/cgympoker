@@ -6,7 +6,20 @@
 
 package org.cgympoker.gui;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import org.cgympoker.Felix;
+import org.cgympoker.Player;
 import org.cgympoker.Server;
+import org.cgympoker.Table;
+import org.cgympoker.Tournament;
 
 /**
  *
@@ -14,9 +27,11 @@ import org.cgympoker.Server;
  */
 public class CGYMServerView extends javax.swing.JFrame {
     private final Server server;
+    private Object[][] tournaments;
     /** Creates new form CGYMServerView */
     public CGYMServerView(Server server) {
         this.server = server;
+        initTournaments();
         initComponents();
     }
     
@@ -52,25 +67,7 @@ public class CGYMServerView extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "ID", "Status", "StartTime"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(tournaments, new String [] {"ID", "Status", "Start Time"}));
         jTable1.setName("jTable1"); // NOI18N
         jTable1.setShowVerticalLines(false);
         jScrollPane1.setViewportView(jTable1);
@@ -276,5 +273,20 @@ public class CGYMServerView extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
+
+    private void initTournaments() {
+        List<Tournament> tournamentList = server.getAllTournaments();
+        tournaments = new Object[tournamentList.size()][3];
+        Iterator<Tournament> iterator = tournamentList.iterator();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        int i = 0;
+        while(iterator.hasNext()){
+            Tournament tournament = iterator.next();
+            tournaments[i][0] = tournament.getID();
+            tournaments[i][1] = tournament.getStatus();
+            tournaments[i][2] = sdf.format(tournament.getStartTime());
+            i++;
+        }
+    }
     
 }
