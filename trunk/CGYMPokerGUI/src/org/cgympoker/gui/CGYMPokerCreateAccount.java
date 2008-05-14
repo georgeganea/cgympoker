@@ -6,15 +6,63 @@
 
 package org.cgympoker.gui;
 
+import java.util.Arrays;
+
 /**
  *
  * @author  Ioana
  */
 public class CGYMPokerCreateAccount extends javax.swing.JFrame {
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String username;
     
     /** Creates new form CGYMPokerCreateAccount */
     public CGYMPokerCreateAccount() {
         initComponents();
+    }
+
+    public boolean isValidEmail(String email) {
+        String regex = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*(\\.[_A-Za-z0-9-]+)";
+        return email.matches(regex);
+    }
+    
+    private boolean checkData() {
+        firstName = firstNameTextField.getText();
+        if (firstName.trim().compareTo("")==0) {
+            CGYMPokerUtil.showErrorMessage(mainPanel, "First name cannot be left empty");
+            return false;
+        }
+        lastName = lastNameTextField.getText();
+        if (lastName.trim().compareTo("")==0) {
+            CGYMPokerUtil.showErrorMessage(mainPanel, "Last name cannot be left empty");
+            return false;
+        }
+        email = emailTextField.getText();
+        if (!isValidEmail(email)){
+            CGYMPokerUtil.showErrorMessage(mainPanel, "Invalid e-mail addess");
+            return false;
+        }
+        username = usernameTextField.getText();
+        if (username.trim().compareTo("")==0) {
+            CGYMPokerUtil.showErrorMessage(mainPanel, "Please select an user name");
+            return false;
+        }
+        char[] pass = passwordtextField.getPassword();
+        String password = new String(pass);
+        if (password.trim().compareTo("") == 0) {
+            CGYMPokerUtil.showErrorMessage(mainPanel,"Password cannot be left empty");
+            return false;
+        }
+        Arrays.fill(pass, '0');
+        pass = rePasswordTextField.getPassword();
+        if (password.compareTo(new String(pass)) != 0){
+            CGYMPokerUtil.showErrorMessage(mainPanel,"The passwords do not match");
+            return false;
+        }
+        Arrays.fill(pass, '0');
+        return true;
     }
     
     /** This method is called from within the constructor to
@@ -34,7 +82,7 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lastNameTextField = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        createAccountButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         usernameTextField = new javax.swing.JTextField();
@@ -108,8 +156,13 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
 
         jPanel1.setName("jPanel1"); // NOI18N
 
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
+        createAccountButton.setText(resourceMap.getString("createAccountButton.text")); // NOI18N
+        createAccountButton.setName("createAccountButton"); // NOI18N
+        createAccountButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                createAccountButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,14 +170,14 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(149, 149, 149)
-                .addComponent(jButton1)
+                .addComponent(createAccountButton)
                 .addContainerGap(170, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(createAccountButton)
                 .addContainerGap())
         );
 
@@ -223,6 +276,13 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void createAccountButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAccountButtonMouseClicked
+        if (checkData()==true){
+            System.out.println("Se va conecta la server");
+        }
+        throw new UnsupportedOperationException("Not yet implemented");
+}//GEN-LAST:event_createAccountButtonMouseClicked
     
     /**
      * @param args the command line arguments
@@ -236,10 +296,10 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton createAccountButton;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField firstNameTextField;
     private javax.swing.JPanel infoPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

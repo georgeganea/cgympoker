@@ -4,13 +4,6 @@
 
 package org.cgympoker.gui;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import org.cgympoker.Felix;
-import org.cgympoker.Player;
-import org.cgympoker.Tournament;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -22,7 +15,6 @@ import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import org.cgympoker.Server;
 import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
@@ -134,24 +126,18 @@ public class CGYMPokerView extends FrameView {
     private Server checkInfo() {
         String username = usernameTextField.getText();
         if (username.trim().compareTo("") == 0) {
-            showErrorMessage("Username cannot be left empty");
+            CGYMPokerUtil.showErrorMessage(mainPanel,"Username cannot be left empty");
             return null;
         }
         char[] pass = passwordField.getPassword();
         String password = new String(pass);
         if (password.trim().compareTo("") == 0) {
-            showErrorMessage("Password cannot be left empty");
+            CGYMPokerUtil.showErrorMessage(mainPanel,"Password cannot be left empty");
             return null;
         }
         return checkData(username, password);
     }
     
-    private void showErrorMessage(String errorMessage){
-        JOptionPane.showMessageDialog(mainPanel,
-                  errorMessage,
-                  "CGYM error",
-                 JOptionPane.ERROR_MESSAGE);
-    }
 
     /** This method is called from within the constructor to
      * initialize the form.
