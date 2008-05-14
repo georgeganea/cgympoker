@@ -17,6 +17,7 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
     private String lastName;
     private String email;
     private String username;
+    private CGYMServerView serverView = null;
     
     /** Creates new form CGYMPokerCreateAccount */
     public CGYMPokerCreateAccount() {
@@ -281,7 +282,13 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
         if (checkData()==true){
             System.out.println("Se va conecta la server");
         }
-        throw new UnsupportedOperationException("Not yet implemented");
+        //TO DO sa se conecteze si sa obtina un obiect de tipul Server
+        this.setVisible(false);
+        if (serverView == null) {
+           serverView = new CGYMServerView(null);
+         }
+        CGYMPokerApp.getApplication().show(serverView);
+        
 }//GEN-LAST:event_createAccountButtonMouseClicked
     
     /**
