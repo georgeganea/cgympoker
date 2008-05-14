@@ -35,6 +35,7 @@ import org.cgympoker.Login;
  */
 public class CGYMPokerView extends FrameView {
     private CGYMServerView serverView = null;
+    private CGYMPokerCreateAccount createAccountView = null;
     private Server server;
 
     public CGYMPokerView(SingleFrameApplication app) {
@@ -169,7 +170,7 @@ public class CGYMPokerView extends FrameView {
         jLabel2 = new javax.swing.JLabel();
         jCheckBox = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        jCreateAccountButton = new javax.swing.JButton();
+        createAccountButton = new javax.swing.JButton();
         jExitButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         statusPanel = new javax.swing.JPanel();
@@ -248,8 +249,13 @@ public class CGYMPokerView extends FrameView {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)))
         );
 
-        jCreateAccountButton.setText(resourceMap.getString("createAccountButton.text")); // NOI18N
-        jCreateAccountButton.setName("createAccountButton"); // NOI18N
+        createAccountButton.setText(resourceMap.getString("createAccountButton.text")); // NOI18N
+        createAccountButton.setName("createAccountButton"); // NOI18N
+        createAccountButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                createAccountButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(org.cgympoker.gui.CGYMPokerApp.class).getContext().getActionMap(CGYMPokerView.class, this);
         jExitButton.setAction(actionMap.get("quit")); // NOI18N
@@ -282,7 +288,7 @@ public class CGYMPokerView extends FrameView {
                         .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGap(99, 99, 99)
-                        .addComponent(jCreateAccountButton)))
+                        .addComponent(createAccountButton)))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
@@ -291,7 +297,7 @@ public class CGYMPokerView extends FrameView {
                 .addContainerGap()
                 .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCreateAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLoginButton)
@@ -354,9 +360,17 @@ public class CGYMPokerView extends FrameView {
         }
 }//GEN-LAST:event_jLoginButtonMouseClicked
 
+    private void createAccountButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAccountButtonMouseClicked
+        this.getFrame().setVisible(false);
+        if (createAccountView == null) {
+                createAccountView = new CGYMPokerCreateAccount();
+            }
+            CGYMPokerApp.getApplication().show(createAccountView);
+}//GEN-LAST:event_createAccountButtonMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton createAccountButton;
     private javax.swing.JCheckBox jCheckBox;
-    private javax.swing.JButton jCreateAccountButton;
     private javax.swing.JButton jExitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
