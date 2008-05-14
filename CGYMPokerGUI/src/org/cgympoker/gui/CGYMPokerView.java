@@ -163,7 +163,6 @@ public class CGYMPokerView extends FrameView {
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         progressBar = new javax.swing.JProgressBar();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(org.cgympoker.gui.CGYMPokerApp.class).getContext().getResourceMap(CGYMPokerView.class);
@@ -215,8 +214,8 @@ public class CGYMPokerView extends FrameView {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3))
                     .addComponent(passwordField)
-                    .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         loginPanelLayout.setVerticalGroup(
             loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,18 +261,18 @@ public class CGYMPokerView extends FrameView {
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(66, 66, 66)
+                        .addGap(80, 80, 80)
                         .addComponent(jLoginButton)
-                        .addGap(68, 68, 68)
+                        .addGap(88, 88, 88)
                         .addComponent(jExitButton))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(223, 223, 223)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addContainerGap(283, Short.MAX_VALUE)
                         .addComponent(jLabel4))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(loginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(99, 99, 99)
+                        .addGap(128, 128, 128)
                         .addComponent(createAccountButton)))
                 .addContainerGap())
         );
@@ -288,7 +287,7 @@ public class CGYMPokerView extends FrameView {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLoginButton)
                     .addComponent(jExitButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -305,27 +304,8 @@ public class CGYMPokerView extends FrameView {
         statusAnimationLabel.setName("statusAnimationLabel"); // NOI18N
         statusPanel.add(statusAnimationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel1.setName("jPanel1"); // NOI18N
-
         progressBar.setName("progressBar"); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(174, Short.MAX_VALUE)
-                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        statusPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, -1));
+        statusPanel.add(progressBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 160, -1));
 
         setComponent(mainPanel);
         setStatusBar(statusPanel);
@@ -363,7 +343,6 @@ public class CGYMPokerView extends FrameView {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jLoginButton;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPasswordField passwordField;
