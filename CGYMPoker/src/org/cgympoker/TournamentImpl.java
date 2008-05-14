@@ -56,4 +56,13 @@ public class TournamentImpl implements Tournament {
 		// TODO
 	}
 
+    public String getID() {
+       //TO DO returneaza un identificator al turneului
+        return "";
+    }
+
+    public String getStatus() {
+        return "Started";
+    }
+
 }
