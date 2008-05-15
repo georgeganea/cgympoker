@@ -6,8 +6,11 @@
 package org.cgympoker.gui.test;
 
 import java.util.*;
+import java.util.ArrayList;
+import org.cgympoker.Card;
 import org.cgympoker.Felix;
 import org.cgympoker.Player;
+import org.cgympoker.PlayerImpl;
 import org.cgympoker.Server;
 import org.cgympoker.Table;
 import org.cgympoker.Tournament;
@@ -21,7 +24,41 @@ public class CGYMServerViewTest{
                 Tournament t1 = new Tournament() {
 
                     public List<Table> getTables() {
-                        throw new UnsupportedOperationException("Not supported yet.");
+                        List <Table> tableList = new ArrayList<Table>();
+                        Table t1 = new Table() {
+
+                            public Status getStatus() {
+                                return Status.ANTE;
+                            }
+
+                            public List<Player> getPlayers() {
+                                List<Player> playerList = new ArrayList<Player>();
+                                playerList.add(new PlayerImpl());
+                                return playerList;
+                            }
+
+                            public Player getActivePlayer() {
+                                throw new UnsupportedOperationException("Not supported yet.");
+                            }
+
+                            public Player getDealer() {
+                                throw new UnsupportedOperationException("Not supported yet.");
+                            }
+
+                            public List<Card> getCards() {
+                                throw new UnsupportedOperationException("Not supported yet.");
+                            }
+
+                            public String getBlinds() {
+                                return "1/2";
+                            }
+
+                            public Integer getAveragePot() {
+                                return 10;
+                            }
+                        };
+                        tableList.add(t1);
+                        return tableList;
                     }
 
                     public List<Player> getPlayers() {

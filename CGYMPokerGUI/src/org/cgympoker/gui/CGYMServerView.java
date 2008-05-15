@@ -6,17 +6,12 @@
 
 package org.cgympoker.gui;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import org.cgympoker.Felix;
-import org.cgympoker.Player;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import org.cgympoker.Server;
 import org.cgympoker.Table;
 import org.cgympoker.Tournament;
@@ -28,11 +23,15 @@ import org.cgympoker.gui.test.CGYMServerViewTest;
  */
 public class CGYMServerView extends javax.swing.JFrame {
     private final Server server;
-    private Object[][] tournaments;
+    private Object[][] tournaments, tables;
     private List<Tournament> tournamentList;
+    private DefaultListSelectionModel listSelectionModel;
+    private List<Table> tablesList;
+   
     /** Creates new form CGYMServerView */
     public CGYMServerView(Server server) {
         this.server = CGYMServerViewTest.createTestServer();//server;
+        initListeners();
         initTournaments();
         initComponents();
     }
@@ -73,11 +72,10 @@ public class CGYMServerView extends javax.swing.JFrame {
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         tournamentsTable.setModel(new javax.swing.table.DefaultTableModel(tournaments, new String [] {"ID", "Status", "Start Time"}));
-        tournamentsTable.setColumnSelectionAllowed(true);
         tournamentsTable.setName("tournamentsTable"); // NOI18N
+        tournamentsTable.setSelectionModel(listSelectionModel);
         tournamentsTable.setShowVerticalLines(false);
         jScrollPane1.setViewportView(tournamentsTable);
-        tournamentsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
@@ -105,25 +103,7 @@ public class CGYMServerView extends javax.swing.JFrame {
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
-        tablesTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Name", "Blinds", "Players", "Avg Pot"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        tablesTable.setModel(new javax.swing.table.DefaultTableModel(tables, new String [] {"Status", "Blinds", "Players", "Avg Pot"}));
         tablesTable.setColumnSelectionAllowed(true);
         tablesTable.setName("tablesTable"); // NOI18N
         tablesTable.setShowVerticalLines(false);
@@ -157,7 +137,7 @@ public class CGYMServerView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(647, Short.MAX_VALUE))
+                .addContainerGap(890, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +217,7 @@ public class CGYMServerView extends javax.swing.JFrame {
                         .addComponent(tablesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
                         .addComponent(playersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,6 +265,36 @@ public class CGYMServerView extends javax.swing.JFrame {
     private javax.swing.JTable tournamentsTable;
     // End of variables declaration//GEN-END:variables
 
+    private void initListeners() {
+      listSelectionModel = new DefaultListSelectionModel();
+      listSelectionModel.addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()){
+                    if (tournamentsTable.getSelectedRow() != -1)
+                        updateTablesTable(tournamentList.get(tournamentsTable.getSelectedRow()));
+                }
+            }
+        });
+    }
+    // End of variables declaration
+
+    private void updateTablesTable(Tournament tournament) {
+        System.out.println("Se va face update la tabela pentru turneul:"+tournament.getID());
+        tablesList = tournament.getTables();
+        tables = new Object[tablesList.size()][4];
+        Iterator<Table> iterator = tablesList.iterator();
+        int i = 0;
+        while(iterator.hasNext()){
+            Table table = iterator.next();
+            tables[i][0] = table.getStatus();
+            tables[i][1] = table.getBlinds();
+            tables[i][2] = table.getPlayers().size();
+            tables[i][3] = table.getAveragePot();
+            i++;
+        }
+        //To do:repaint the table
+    }
+    
     private void initTournaments() {
         tournamentList = server.getAllTournaments();
         tournaments = new Object[tournamentList.size()][3];
