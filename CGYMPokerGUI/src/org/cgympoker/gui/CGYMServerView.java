@@ -20,6 +20,7 @@ import org.cgympoker.Player;
 import org.cgympoker.Server;
 import org.cgympoker.Table;
 import org.cgympoker.Tournament;
+import org.cgympoker.gui.test.CGYMServerViewTest;
 
 /**
  *
@@ -30,10 +31,12 @@ public class CGYMServerView extends javax.swing.JFrame {
     private Object[][] tournaments;
     /** Creates new form CGYMServerView */
     public CGYMServerView(Server server) {
-        this.server = server;
+        this.server = CGYMServerViewTest.createTestServer();//server;
         initTournaments();
         initComponents();
     }
+    
+
     
     /** This method is called from within the constructor to
      * initialize the form.

@@ -281,14 +281,13 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
     private void createAccountButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAccountButtonMouseClicked
         if (checkData()==true){
             System.out.println("Se va conecta la server");
+            //TO DO sa se conecteze si sa obtina un obiect de tipul Server
+            this.setVisible(false);
+            if (serverView == null) {
+               serverView = new CGYMServerView(null);
+             }
+            CGYMPokerApp.getApplication().show(serverView);
         }
-        //TO DO sa se conecteze si sa obtina un obiect de tipul Server
-        this.setVisible(false);
-        if (serverView == null) {
-           serverView = new CGYMServerView(null);
-         }
-        CGYMPokerApp.getApplication().show(serverView);
-        
 }//GEN-LAST:event_createAccountButtonMouseClicked
     
     /**
