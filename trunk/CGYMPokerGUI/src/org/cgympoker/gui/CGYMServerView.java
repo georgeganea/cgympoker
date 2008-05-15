@@ -29,6 +29,7 @@ import org.cgympoker.gui.test.CGYMServerViewTest;
 public class CGYMServerView extends javax.swing.JFrame {
     private final Server server;
     private Object[][] tournaments;
+    private List<Tournament> tournamentList;
     /** Creates new form CGYMServerView */
     public CGYMServerView(Server server) {
         this.server = CGYMServerViewTest.createTestServer();//server;
@@ -62,6 +63,7 @@ public class CGYMServerView extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setName("Form"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(org.cgympoker.gui.CGYMPokerApp.class).getContext().getResourceMap(CGYMServerView.class);
@@ -71,9 +73,11 @@ public class CGYMServerView extends javax.swing.JFrame {
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         tournamentsTable.setModel(new javax.swing.table.DefaultTableModel(tournaments, new String [] {"ID", "Status", "Start Time"}));
+        tournamentsTable.setColumnSelectionAllowed(true);
         tournamentsTable.setName("tournamentsTable"); // NOI18N
         tournamentsTable.setShowVerticalLines(false);
         jScrollPane1.setViewportView(tournamentsTable);
+        tournamentsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
@@ -120,9 +124,11 @@ public class CGYMServerView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablesTable.setColumnSelectionAllowed(true);
         tablesTable.setName("tablesTable"); // NOI18N
         tablesTable.setShowVerticalLines(false);
         jScrollPane2.setViewportView(tablesTable);
+        tablesTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         javax.swing.GroupLayout tablesPanelLayout = new javax.swing.GroupLayout(tablesPanel);
         tablesPanel.setLayout(tablesPanelLayout);
@@ -184,9 +190,11 @@ public class CGYMServerView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        playersTable.setColumnSelectionAllowed(true);
         playersTable.setName("playersTable"); // NOI18N
         playersTable.setShowVerticalLines(false);
         jScrollPane3.setViewportView(playersTable);
+        playersTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
         jButton4.setName("jButton4"); // NOI18N
@@ -278,7 +286,7 @@ public class CGYMServerView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initTournaments() {
-        List<Tournament> tournamentList = server.getAllTournaments();
+        tournamentList = server.getAllTournaments();
         tournaments = new Object[tournamentList.size()][3];
         Iterator<Tournament> iterator = tournamentList.iterator();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
