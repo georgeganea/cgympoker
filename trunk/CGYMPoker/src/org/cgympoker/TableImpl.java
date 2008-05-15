@@ -23,7 +23,7 @@ public class TableImpl implements Table {
 	}
 
 	@Override
-	public Player getPlayers() {
+	public List<Player> getPlayers() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -57,4 +57,12 @@ public class TableImpl implements Table {
 	private void advanceState() {
 		// TODO
 	}
+
+        public String getBlinds() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
+    public Integer getAveragePot() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
