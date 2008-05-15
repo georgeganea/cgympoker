@@ -3,6 +3,9 @@
 <Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+      <Color id="Default Cursor"/>
+    </Property>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
   </Properties>
   <SyntheticProperties>
@@ -78,7 +81,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="1" pref="248" max="32767" attributes="1"/>
+              <Component id="jScrollPane1" alignment="1" pref="248" max="32767" attributes="2"/>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="120" max="-2" attributes="1"/>
@@ -113,8 +116,9 @@
                   <Connection code="new javax.swing.table.DefaultTableModel(tournaments, new String [] {&quot;ID&quot;, &quot;Status&quot;, &quot;Start Time&quot;})" type="code"/>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                  <TableColumnModel selectionModel="0"/>
+                  <TableColumnModel selectionModel="2"/>
                 </Property>
+                <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                 <Property name="name" type="java.lang.String" value="tournamentsTable" noResource="true"/>
                 <Property name="showVerticalLines" type="boolean" value="false"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -183,7 +187,7 @@
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                  <TableColumnModel selectionModel="0">
+                  <TableColumnModel selectionModel="1">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -206,6 +210,7 @@
                     </Column>
                   </TableColumnModel>
                 </Property>
+                <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                 <Property name="name" type="java.lang.String" value="tablesTable" noResource="true"/>
                 <Property name="showVerticalLines" type="boolean" value="false"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -313,7 +318,7 @@
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                  <TableColumnModel selectionModel="0">
+                  <TableColumnModel selectionModel="1">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -331,6 +336,7 @@
                     </Column>
                   </TableColumnModel>
                 </Property>
+                <Property name="columnSelectionAllowed" type="boolean" value="true"/>
                 <Property name="name" type="java.lang.String" value="playersTable" noResource="true"/>
                 <Property name="showVerticalLines" type="boolean" value="false"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
