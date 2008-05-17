@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import org.cgympoker.Server;
 import org.cgympoker.Table;
 import org.cgympoker.Tournament;
@@ -27,11 +28,13 @@ public class CGYMServerView extends javax.swing.JFrame {
     private List<Tournament> tournamentList;
     private DefaultListSelectionModel listSelectionModel;
     private List<Table> tablesList;
+    private DefaultTableModel tablesModel;
    
     /** Creates new form CGYMServerView */
     public CGYMServerView(Server server) {
         this.server = CGYMServerViewTest.createTestServer();//server;
         initListeners();
+        initModels();
         initTournaments();
         initComponents();
     }
@@ -103,7 +106,7 @@ public class CGYMServerView extends javax.swing.JFrame {
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
-        tablesTable.setModel(new javax.swing.table.DefaultTableModel(tables, new String [] {"Status", "Blinds", "Players", "Avg Pot"}));
+        tablesTable.setModel(tablesModel);
         tablesTable.setColumnSelectionAllowed(true);
         tablesTable.setName("tablesTable"); // NOI18N
         tablesTable.setShowVerticalLines(false);
@@ -275,6 +278,10 @@ public class CGYMServerView extends javax.swing.JFrame {
                 }
             }
         });
+    }
+
+    private void initModels() {
+        tablesModel = new DefaultTableModel(tables, new String [] {"Status", "Blinds", "Players", "Avg Pot"});
     }
     // End of variables declaration
 
