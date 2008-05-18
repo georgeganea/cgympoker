@@ -93,7 +93,42 @@ public class CGYMServerViewTest{
                 Tournament t2 = new Tournament() {
 
                     public List<Table> getTables() {
-                        throw new UnsupportedOperationException("Not supported yet.");
+                        System.out.println("se apeleaza get tables");
+                        List <Table> tableList = new ArrayList<Table>();
+                        Table t1 = new Table() {
+
+                            public Status getStatus() {
+                                return Status.DEAL;
+                            }
+
+                            public List<Player> getPlayers() {
+                                List<Player> playerList = new ArrayList<Player>();
+                                playerList.add(new PlayerImpl());
+                                return playerList;
+                            }
+
+                            public Player getActivePlayer() {
+                                throw new UnsupportedOperationException("Not supported yet.");
+                            }
+
+                            public Player getDealer() {
+                                throw new UnsupportedOperationException("Not supported yet.");
+                            }
+
+                            public List<Card> getCards() {
+                                throw new UnsupportedOperationException("Not supported yet.");
+                            }
+
+                            public String getBlinds() {
+                                return "2/4";
+                            }
+
+                            public Integer getAveragePot() {
+                                return 20;
+                            }
+                        };
+                        tableList.add(t1);
+                        return tableList;
                     }
 
                     public List<Player> getPlayers() {
