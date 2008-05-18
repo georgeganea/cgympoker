@@ -52,7 +52,7 @@ public class CGYMServerView extends javax.swing.JFrame {
         tournamentsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tournamentsTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        joinTournamentButton = new javax.swing.JButton();
         tablesPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablesTable = new javax.swing.JTable();
@@ -80,8 +80,13 @@ public class CGYMServerView extends javax.swing.JFrame {
         tournamentsTable.setShowVerticalLines(false);
         jScrollPane1.setViewportView(tournamentsTable);
 
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
+        joinTournamentButton.setText(resourceMap.getString("joinTournamentButton.text")); // NOI18N
+        joinTournamentButton.setName("joinTournamentButton"); // NOI18N
+        joinTournamentButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                joinTournamentButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout tournamentsPanelLayout = new javax.swing.GroupLayout(tournamentsPanel);
         tournamentsPanel.setLayout(tournamentsPanelLayout);
@@ -89,8 +94,8 @@ public class CGYMServerView extends javax.swing.JFrame {
             tournamentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tournamentsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(124, Short.MAX_VALUE)
+                .addComponent(joinTournamentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         tournamentsPanelLayout.setVerticalGroup(
             tournamentsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +103,7 @@ public class CGYMServerView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(joinTournamentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         tablesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, resourceMap.getString("tablesPanel.border.title"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), resourceMap.getColor("tablesPanel.border.titleColor"))); // NOI18N
@@ -239,6 +244,12 @@ public class CGYMServerView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void joinTournamentButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_joinTournamentButtonMouseClicked
+        int currentSelection = tournamentsTable.getSelectedRow();
+        if (currentSelection!=-1)
+            System.out.println("S-a facut join pentru turneul:"+tournamentList.get(currentSelection).getID());
+}//GEN-LAST:event_joinTournamentButtonMouseClicked
     
     /**
      * @param args the command line arguments
@@ -252,7 +263,6 @@ public class CGYMServerView extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel3;
@@ -260,6 +270,7 @@ public class CGYMServerView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton joinTournamentButton;
     private javax.swing.JPanel playersPanel;
     private javax.swing.JTable playersTable;
     private javax.swing.JPanel tablesPanel;

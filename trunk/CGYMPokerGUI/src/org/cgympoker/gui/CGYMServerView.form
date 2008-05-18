@@ -83,8 +83,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jScrollPane1" alignment="1" pref="248" max="32767" attributes="2"/>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="120" max="-2" attributes="1"/>
+                  <EmptySpace pref="124" max="32767" attributes="0"/>
+                  <Component id="joinTournamentButton" min="-2" pref="124" max="-2" attributes="1"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -94,7 +94,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" pref="265" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="joinTournamentButton" min="-2" pref="23" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -130,11 +130,14 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="joinTournamentButton">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jButton1.text"/>
-            <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="joinTournamentButton.text"/>
+            <Property name="name" type="java.lang.String" value="joinTournamentButton" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="joinTournamentButtonMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
