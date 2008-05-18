@@ -288,8 +288,10 @@ public class CGYMServerView extends javax.swing.JFrame {
     private void updateTablesTable(Tournament tournament) {
         System.out.println("Se va face update la tabela pentru turneul:"+tournament.getID());
         tablesList = tournament.getTables();
+        System.out.println(tournament.getTables().size());
         tables = new Object[tablesList.size()][4];
         Iterator<Table> iterator = tablesList.iterator();
+        tablesModel.setRowCount(0);
         int i = 0;
         while(iterator.hasNext()){
             Table table = iterator.next();
@@ -297,6 +299,7 @@ public class CGYMServerView extends javax.swing.JFrame {
             tables[i][1] = table.getBlinds();
             tables[i][2] = table.getPlayers().size();
             tables[i][3] = table.getAveragePot();
+            tablesModel.addRow(tables[i]);
             i++;
         }
         //To do:repaint the table
