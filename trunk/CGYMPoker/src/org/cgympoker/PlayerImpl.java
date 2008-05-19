@@ -44,4 +44,8 @@ public class PlayerImpl implements Player {
 		// TODO
 	}
 
+        public Integer getMoney() {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+
 }
