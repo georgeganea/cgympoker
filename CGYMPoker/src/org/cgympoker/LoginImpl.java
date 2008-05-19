@@ -1,16 +1,27 @@
 package org.cgympoker;
 
-import java.rmi.RemoteException;
+
+import org.cgympoker.users.UserFile;
 
 public class LoginImpl implements Login{
 
     public Server login(String user, String pass)  {
         System.out.println("am apelat o metoda de pe server");
-        return new ServerImpl();
+        //System.out.println(UserFile.checkPass(user, pass));
+        if (UserFile.checkPass(user, pass)){
+            System.out.println("iese pe aici");
+            return new ServerImpl();
+        }
+        
+        else {
+            System.out.println("e false");
+            return null;
+        }
     }
 
-    public Server createAccount(String user, String pass, String firstName, String lastName, String eMail) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Server createAccount(String user, String pass, String firstName, String lastName, String eMail){
+        UserFile.createUserFile(user, pass);
+        return new ServerImpl();
     }
 
    
