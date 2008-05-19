@@ -6,7 +6,11 @@
 
 package org.cgympoker.gui;
 
+import java.rmi.Remote;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.Arrays;
+import org.cgympoker.Login;
 
 /**
  *
@@ -281,6 +285,22 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
     private void createAccountButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAccountButtonMouseClicked
         if (checkData()==true){
             System.out.println("Se va conecta la server");
+            try {
+            String name = "CgymPokerLogin";
+            System.out.println("Trying to connect");
+            Registry registry = LocateRegistry.getRegistry("192.168.1.162");
+            System.out.println("1");
+            Remote  login = (Remote) registry.lookup(name);
+            System.out.println("2");
+            //login.login();
+            Login log = (Login) login;
+            System.out.println("3");
+            log.createAccount(username,new String(passwordtextField.getPassword()),"","","");
+           // System.out.println("login to string "+log.toString());
+        } catch (Exception e) {
+            System.err.println("CgymPokerLogin exception:");
+            e.printStackTrace();
+        }
             //TO DO sa se conecteze si sa obtina un obiect de tipul Server
             this.setVisible(false);
             if (serverView == null) {
