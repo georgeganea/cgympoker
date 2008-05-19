@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import org.cgympoker.Card;
 import org.cgympoker.Felix;
 import org.cgympoker.Player;
-import org.cgympoker.PlayerImpl;
 import org.cgympoker.Server;
 import org.cgympoker.Table;
 import org.cgympoker.Tournament;
@@ -33,7 +32,66 @@ public class CGYMServerViewTest{
 
                             public List<Player> getPlayers() {
                                 List<Player> playerList = new ArrayList<Player>();
-                                playerList.add(new PlayerImpl());
+                                playerList.add(new Player() {
+
+                                    public String getName() {
+                                        return "Ioana";
+                                    }
+
+                                    public int getChipCount() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public int getNumberOfCards() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public int getStateOfCards() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public List<Card> getCards() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public boolean getState() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public Integer getMoney() {
+                                        return 100;
+                                    }
+                                });
+                                playerList.add(new Player() {
+
+                                    public String getName() {
+                                       return "Carmen";
+                                    }
+
+                                    public int getChipCount() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public int getNumberOfCards() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public int getStateOfCards() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public List<Card> getCards() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public boolean getState() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public Integer getMoney() {
+                                        return 20;
+                                    }
+                                });
                                 return playerList;
                             }
 
@@ -103,7 +161,37 @@ public class CGYMServerViewTest{
 
                             public List<Player> getPlayers() {
                                 List<Player> playerList = new ArrayList<Player>();
-                                playerList.add(new PlayerImpl());
+                                playerList.add(new Player(){
+
+                                    public String getName() {
+                                        return "George";
+                                    }
+
+                                    public int getChipCount() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public int getNumberOfCards() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public int getStateOfCards() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public List<Card> getCards() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public boolean getState() {
+                                        throw new UnsupportedOperationException("Not supported yet.");
+                                    }
+
+                                    public Integer getMoney() {
+                                        return 50;
+                                    }
+                                    
+                                });
                                 return playerList;
                             }
 
