@@ -224,7 +224,8 @@ public class CGYMServerView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-958)/2, (screenSize.height-480)/2, 958, 480);
     }// </editor-fold>//GEN-END:initComponents
 
     private void joinTournamentButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_joinTournamentButtonMouseClicked
