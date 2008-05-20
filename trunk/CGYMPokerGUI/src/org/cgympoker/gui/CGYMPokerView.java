@@ -35,7 +35,7 @@ import org.cgympoker.Login;
  */
 public class CGYMPokerView extends FrameView {
     private CGYMServerView serverView = null;
-    private CGYMPokerCreateAccount createAccountView = null;
+    private CGYMCreateAccount createAccountView = null;
     private Server server;
 
     public CGYMPokerView(SingleFrameApplication app) {
@@ -140,7 +140,7 @@ public class CGYMPokerView extends FrameView {
             CGYMPokerUtil.showErrorMessage(mainPanel,"Password cannot be left empty");
             return null;
         }
-        saveUsernamePassword(passwordCheckBox.isSelected(), username, password);
+        CGYMPokerUtil.saveUsernamePassword(passwordCheckBox.isSelected(), username, password);
         return checkData(username, password);
     }
     
@@ -335,7 +335,7 @@ public class CGYMPokerView extends FrameView {
     private void createAccountButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAccountButtonMouseClicked
         this.getFrame().setVisible(false);
         if (createAccountView == null) {
-                createAccountView = new CGYMPokerCreateAccount();
+                createAccountView = new CGYMCreateAccount();
             }
             CGYMPokerApp.getApplication().show(createAccountView);
 }//GEN-LAST:event_createAccountButtonMouseClicked
@@ -396,18 +396,5 @@ public class CGYMPokerView extends FrameView {
      * b = false - save only the username
      * b = true - save the password also
      */
-    private void saveUsernamePassword(boolean b, String username, String password) {
-        try{
-            BufferedWriter output = new BufferedWriter(new FileWriter(new File("pass.cgym")));
-            output.write(username);
-            output.newLine();
-            if (b){
-                output.write(password);
-            }
-            output.close();
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-    }
+   
 }

@@ -1,5 +1,5 @@
 /*
- * CGYMPokerCreateAccount.java
+ * CGYMCreateAccount.java
  *
  * Created on May 14, 2008, 7:09 PM
  */
@@ -17,7 +17,7 @@ import org.cgympoker.Server;
  *
  * @author  Ioana
  */
-public class CGYMPokerCreateAccount extends javax.swing.JFrame {
+public class CGYMCreateAccount extends javax.swing.JFrame {
     private String firstName;
     private String lastName;
     private String email;
@@ -25,8 +25,8 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
     private CGYMServerView serverView = null;
     private Server server;
     
-    /** Creates new form CGYMPokerCreateAccount */
-    public CGYMPokerCreateAccount() {
+    /** Creates new form CGYMCreateAccount */
+    public CGYMCreateAccount() {
         initComponents();
     }
 
@@ -69,6 +69,7 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
             return false;
         }
         Arrays.fill(pass, '0');
+        CGYMPokerUtil.saveUsernamePassword(passwordCheckBox.isSelected(), username, password);
         return true;
     }
     
@@ -97,13 +98,14 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         passwordtextField = new javax.swing.JPasswordField();
         rePasswordTextField = new javax.swing.JPasswordField();
+        passwordCheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
 
         mainPanel.setName("mainPanel"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(org.cgympoker.gui.CGYMPokerApp.class).getContext().getResourceMap(CGYMPokerCreateAccount.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(org.cgympoker.gui.CGYMPokerApp.class).getContext().getResourceMap(CGYMCreateAccount.class);
         infoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("infoPanel.border.title"))); // NOI18N
         infoPanel.setName("infoPanel"); // NOI18N
 
@@ -209,6 +211,9 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
         rePasswordTextField.setText(resourceMap.getString("rePasswordTextField.text")); // NOI18N
         rePasswordTextField.setName("rePasswordTextField"); // NOI18N
 
+        passwordCheckBox.setText(resourceMap.getString("passwordCheckBox.text")); // NOI18N
+        passwordCheckBox.setName("passwordCheckBox"); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -216,17 +221,19 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(28, 28, 28)
-                        .addComponent(rePasswordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(26, 26, 26)
                         .addComponent(passwordtextField, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(passwordCheckBox)
+                            .addComponent(rePasswordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))))
                 .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
@@ -243,19 +250,20 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rePasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(passwordCheckBox))
         );
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+            .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(infoPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
@@ -264,10 +272,9 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -316,7 +323,7 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CGYMPokerCreateAccount().setVisible(true);
+                new CGYMCreateAccount().setVisible(true);
             }
         });
     }
@@ -336,6 +343,7 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField lastNameTextField;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JCheckBox passwordCheckBox;
     private javax.swing.JPasswordField passwordtextField;
     private javax.swing.JPasswordField rePasswordTextField;
     private javax.swing.JTextField usernameTextField;
