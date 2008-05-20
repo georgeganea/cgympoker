@@ -11,6 +11,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Arrays;
 import org.cgympoker.Login;
+import org.cgympoker.Server;
 
 /**
  *
@@ -22,6 +23,7 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
     private String email;
     private String username;
     private CGYMServerView serverView = null;
+    private Server server;
     
     /** Creates new form CGYMPokerCreateAccount */
     public CGYMPokerCreateAccount() {
@@ -292,21 +294,19 @@ public class CGYMPokerCreateAccount extends javax.swing.JFrame {
             System.out.println("1");
             Remote  login = (Remote) registry.lookup(name);
             System.out.println("2");
-            //login.login();
             Login log = (Login) login;
-            System.out.println("3");
-            log.createAccount(username,new String(passwordtextField.getPassword()),"","","");
-           // System.out.println("login to string "+log.toString());
-        } catch (Exception e) {
-            System.err.println("CgymPokerLogin exception:");
-            e.printStackTrace();
-        }
-            //TO DO sa se conecteze si sa obtina un obiect de tipul Server
-            this.setVisible(false);
-            if (serverView == null) {
-               serverView = new CGYMServerView(null);
-             }
-            CGYMPokerApp.getApplication().show(serverView);
+            server = log.createAccount(username,new String(passwordtextField.getPassword()),"","","");
+            if (server!=null){
+                this.setVisible(false);
+                if (serverView == null) {
+                    serverView = new CGYMServerView(server);
+                }
+                CGYMPokerApp.getApplication().show(serverView);
+            }
+            } catch (Exception e) {
+                System.err.println("CgymPokerLogin exception:");
+                e.printStackTrace();
+            }
         }
 }//GEN-LAST:event_createAccountButtonMouseClicked
     
