@@ -24,6 +24,7 @@ public class CGYMCreateAccount extends javax.swing.JFrame {
     private String username;
     private CGYMServerView serverView = null;
     private Server server;
+    private String password;
     
     /** Creates new form CGYMCreateAccount */
     public CGYMCreateAccount() {
@@ -57,7 +58,7 @@ public class CGYMCreateAccount extends javax.swing.JFrame {
             return false;
         }
         char[] pass = passwordtextField.getPassword();
-        String password = new String(pass);
+        password = new String(pass);
         if (password.trim().compareTo("") == 0) {
             CGYMPokerUtil.showErrorMessage(mainPanel,"Password cannot be left empty");
             return false;
@@ -69,7 +70,6 @@ public class CGYMCreateAccount extends javax.swing.JFrame {
             return false;
         }
         Arrays.fill(pass, '0');
-        CGYMPokerUtil.saveUsernamePassword(passwordCheckBox.isSelected(), username, password);
         return true;
     }
     
@@ -304,6 +304,7 @@ public class CGYMCreateAccount extends javax.swing.JFrame {
             Login log = (Login) login;
             server = log.createAccount(username,new String(passwordtextField.getPassword()),"","","");
             if (server!=null){
+                CGYMPokerUtil.saveUsernamePassword(passwordCheckBox.isSelected(), username, password);
                 this.setVisible(false);
                 if (serverView == null) {
                     serverView = new CGYMServerView(server);
