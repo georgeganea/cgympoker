@@ -27,7 +27,6 @@ public class UserFile {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(user+".cgym"));
             String password = reader.readLine();
-            System.out.println("|"+password+"=="+pass+"|"+password.compareTo(pass));
             return (password.compareTo(pass) == 0);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -36,10 +35,7 @@ public class UserFile {
             e.printStackTrace();
             return false;
         }
-    
-}
-
-
+    }
  }
                
            

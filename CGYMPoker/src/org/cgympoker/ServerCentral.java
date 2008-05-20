@@ -1,4 +1,5 @@
 package org.cgympoker;
+import java.io.File;
 import java.io.IOException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -68,8 +69,10 @@ public class ServerCentral {
             /* if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
             }*/
-            
-            new ClassFileServer(2009, "D:\\NetBeans\\CGYMPoker\\build\\classes");
+            File file = new File("config.cgym");
+            String classPath = file.getCanonicalPath().replace("config.cgym", "");
+            classPath = classPath+"build" + File.separator + "classes";
+            new ClassFileServer(2001, classPath);
         } catch (IOException ex) {
             Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,11 +81,8 @@ public class ServerCentral {
             String name = "CgymPokerLogin";
             LoginImpl server = new LoginImpl() ;
             Login stub = (Login) UnicastRemoteObject.exportObject(server, 0);
-           Registry registry = LocateRegistry.getRegistry();
-            
+            Registry registry = LocateRegistry.getRegistry();
             registry.rebind(name, stub);
-        //Naming.rebind(name, stub);
-            
             System.out.println("CgymPokerLogin");
         } catch (Exception e) {
             System.err.println("ComputeEngine exception:");
