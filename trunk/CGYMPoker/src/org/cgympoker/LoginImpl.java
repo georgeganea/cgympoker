@@ -7,7 +7,6 @@ public class LoginImpl implements Login{
 
     public Server login(String user, String pass)  {
         System.out.println("am apelat o metoda de pe server");
-        //System.out.println(UserFile.checkPass(user, pass));
         if (UserFile.checkPass(user, pass)){
             System.out.println("iese pe aici");
             return new ServerImpl();
@@ -20,7 +19,7 @@ public class LoginImpl implements Login{
     }
 
     public Server createAccount(String user, String pass, String firstName, String lastName, String eMail){
-        UserFile.createUserFile(user, pass);
+        UserFile.createUserFile(user, pass, firstName, lastName, eMail);
         return new ServerImpl();
     }
 
