@@ -12,12 +12,7 @@ import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.Timer;
 import javax.swing.Icon;
@@ -112,8 +107,8 @@ public class CGYMPokerView extends FrameView {
     private Server checkData(String username, String password) {
         try {
             String name = "CgymPokerLogin";
-            System.out.println("Trying to connect");
-            Registry registry = LocateRegistry.getRegistry("127.0.0.1");
+            System.out.println("Trying to connect to:"+CGYMPokerUtil.getServerAddress());
+            Registry registry = LocateRegistry.getRegistry(CGYMPokerUtil.getServerAddress());
             System.out.println("1-"+registry);
             Remote  login = (Remote) registry.lookup(name);
             System.out.println("2");
@@ -323,7 +318,6 @@ public class CGYMPokerView extends FrameView {
 
     private void jLoginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLoginButtonMouseClicked
         server = checkInfo();
-        System.out.println(server == null);
         if (server != null) {
             this.getFrame().setVisible(false);
             if (serverView == null) {
