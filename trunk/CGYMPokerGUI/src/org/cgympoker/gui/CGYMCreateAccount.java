@@ -296,8 +296,8 @@ public class CGYMCreateAccount extends javax.swing.JFrame {
             System.out.println("Se va conecta la server");
             try {
             String name = "CgymPokerLogin";
-            System.out.println("Trying to connect");
-            Registry registry = LocateRegistry.getRegistry("127.0.0.1");
+            System.out.println("Trying to connect to:"+CGYMPokerUtil.getServerAddress());
+            Registry registry = LocateRegistry.getRegistry(CGYMPokerUtil.getServerAddress());
             System.out.println("1");
             Remote  login = (Remote) registry.lookup(name);
             System.out.println("2");
