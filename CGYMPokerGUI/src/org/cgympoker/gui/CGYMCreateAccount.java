@@ -297,7 +297,7 @@ public class CGYMCreateAccount extends javax.swing.JFrame {
             try {
             String name = "CgymPokerLogin";
             System.out.println("Trying to connect");
-            Registry registry = LocateRegistry.getRegistry("192.168.1.162");
+            Registry registry = LocateRegistry.getRegistry("127.0.0.1");
             System.out.println("1");
             Remote  login = (Remote) registry.lookup(name);
             System.out.println("2");

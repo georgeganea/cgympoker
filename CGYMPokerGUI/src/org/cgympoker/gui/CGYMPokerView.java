@@ -113,7 +113,7 @@ public class CGYMPokerView extends FrameView {
         try {
             String name = "CgymPokerLogin";
             System.out.println("Trying to connect");
-            Registry registry = LocateRegistry.getRegistry("192.168.1.162");
+            Registry registry = LocateRegistry.getRegistry("127.0.0.1");
             System.out.println("1-"+registry);
             Remote  login = (Remote) registry.lookup(name);
             System.out.println("2");
@@ -323,6 +323,7 @@ public class CGYMPokerView extends FrameView {
 
     private void jLoginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLoginButtonMouseClicked
         server = checkInfo();
+        System.out.println(server == null);
         if (server != null) {
             this.getFrame().setVisible(false);
             if (serverView == null) {
