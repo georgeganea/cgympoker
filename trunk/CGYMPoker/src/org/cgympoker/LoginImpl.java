@@ -11,7 +11,6 @@ public class LoginImpl implements Login{
             System.out.println("iese pe aici");
             return new ServerImpl();
         }
-        
         else {
             System.out.println("e false");
             return null;
