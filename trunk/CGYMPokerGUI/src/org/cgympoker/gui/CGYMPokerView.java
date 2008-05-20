@@ -11,6 +11,14 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
@@ -34,7 +42,7 @@ public class CGYMPokerView extends FrameView {
         super(app);
 
         initComponents();
-
+        readUsernameAndPassword();
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
@@ -102,7 +110,6 @@ public class CGYMPokerView extends FrameView {
 
     //TODO : check username and password
     private Server checkData(String username, String password) {
-        
         try {
             String name = "CgymPokerLogin";
             System.out.println("Trying to connect");
@@ -110,11 +117,9 @@ public class CGYMPokerView extends FrameView {
             System.out.println("1-"+registry);
             Remote  login = (Remote) registry.lookup(name);
             System.out.println("2");
-            //login.login();
             Login log = (Login) login;
             System.out.println("3");
-         return   log.login(username,password);
-           // System.out.println("login to string "+log.toString());
+            return   log.login(username,password);
         } catch (Exception e) {
             System.err.println("CgymPokerLogin exception:");
             e.printStackTrace();
@@ -135,6 +140,7 @@ public class CGYMPokerView extends FrameView {
             CGYMPokerUtil.showErrorMessage(mainPanel,"Password cannot be left empty");
             return null;
         }
+        saveUsernamePassword(passwordCheckBox.isSelected(), username, password);
         return checkData(username, password);
     }
     
@@ -154,7 +160,7 @@ public class CGYMPokerView extends FrameView {
         passwordField = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox = new javax.swing.JCheckBox();
+        passwordCheckBox = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         createAccountButton = new javax.swing.JButton();
         jExitButton = new javax.swing.JButton();
@@ -193,7 +199,7 @@ public class CGYMPokerView extends FrameView {
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
 
-        jCheckBox.setName("jCheckBox"); // NOI18N
+        passwordCheckBox.setName("passwordCheckBox"); // NOI18N
 
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
@@ -210,7 +216,7 @@ public class CGYMPokerView extends FrameView {
                 .addGap(35, 35, 35)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addComponent(jCheckBox)
+                        .addComponent(passwordCheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3))
                     .addComponent(passwordField)
@@ -230,7 +236,7 @@ public class CGYMPokerView extends FrameView {
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCheckBox)
+                    .addComponent(passwordCheckBox)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)))
         );
 
@@ -336,7 +342,6 @@ public class CGYMPokerView extends FrameView {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createAccountButton;
-    private javax.swing.JCheckBox jCheckBox;
     private javax.swing.JButton jExitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -345,6 +350,7 @@ public class CGYMPokerView extends FrameView {
     private javax.swing.JButton jLoginButton;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JCheckBox passwordCheckBox;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JLabel statusAnimationLabel;
@@ -360,4 +366,48 @@ public class CGYMPokerView extends FrameView {
     private int busyIconIndex = 0;
 
     private JDialog aboutBox;
+
+    /**
+     * read the saved username and the password and write the username and password text fields
+     *
+     */
+    private void readUsernameAndPassword() {
+           try{
+            BufferedReader input = new BufferedReader(new FileReader("pass.cgym"));
+            String line = input.readLine();
+            if (line != null){
+                usernameTextField.setText(line);
+                line = input.readLine();
+                if (line != null){
+                    passwordField.setText(line);
+                    passwordCheckBox.setSelected(true);
+                }
+            }
+            input.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 
+     * @param b boolean
+     * b = false - save only the username
+     * b = true - save the password also
+     */
+    private void saveUsernamePassword(boolean b, String username, String password) {
+        try{
+            BufferedWriter output = new BufferedWriter(new FileWriter(new File("pass.cgym")));
+            output.write(username);
+            output.newLine();
+            if (b){
+                output.write(password);
+            }
+            output.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 }
