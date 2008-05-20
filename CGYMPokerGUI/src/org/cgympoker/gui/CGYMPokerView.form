@@ -91,7 +91,7 @@
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jCheckBox" min="-2" max="-2" attributes="0"/>
+                              <Component id="passwordCheckBox" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -117,7 +117,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jCheckBox" min="-2" max="-2" attributes="0"/>
+                          <Component id="passwordCheckBox" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" pref="22" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -149,9 +149,9 @@
                 <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="jCheckBox">
+            <Component class="javax.swing.JCheckBox" name="passwordCheckBox">
               <Properties>
-                <Property name="name" type="java.lang.String" value="jCheckBox" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="passwordCheckBox" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
