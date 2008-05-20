@@ -69,7 +69,7 @@ public class ServerCentral {
             System.setSecurityManager(new SecurityManager());
             }*/
             
-            new ClassFileServer(2009, "/home/george/NetBeansProjects/trunk/CGYMPoker/build/classes");
+            new ClassFileServer(2009, "D:\\NetBeans\\CGYMPoker\\build\\classes");
         } catch (IOException ex) {
             Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
         }
