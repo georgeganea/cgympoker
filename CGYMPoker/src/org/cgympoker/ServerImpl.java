@@ -1,5 +1,9 @@
 package org.cgympoker;
 
+import org.cgympoker.common.Felix;
+import org.cgympoker.common.Player;
+import org.cgympoker.common.Server;
+import org.cgympoker.common.Tournament;
 import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;

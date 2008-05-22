@@ -1,5 +1,8 @@
 package org.cgympoker;
 
+import org.cgympoker.common.Table;
+import org.cgympoker.common.Player;
+import org.cgympoker.common.Tournament;
 import java.util.Date;
 import java.util.List;
 

@@ -1,5 +1,8 @@
 package org.cgympoker;
 
+import org.cgympoker.common.Felix;
+import org.cgympoker.common.Tournament;
+
 public class FelixImpl implements Felix {
 
 	@Override

@@ -1,4 +1,9 @@
 package org.cgympoker;
+import org.cgympoker.common.Felix;
+import org.cgympoker.common.Login;
+import org.cgympoker.common.Player;
+import org.cgympoker.common.Tournament;
+import org.cgympoker.common.Server;
 import java.io.File;
 import java.io.IOException;
 import java.rmi.registry.LocateRegistry;
@@ -65,15 +70,19 @@ public class ServerCentral {
 	}
         
         public static void main(String[] args) {
-        try {
-            /* if (System.getSecurityManager() == null) {
-            System.setSecurityManager(new SecurityManager());
-            }*/
-            File file = new File("config.cgym");
-            String classPath = file.getCanonicalPath().replace("config.cgym", "");
-            classPath = classPath+"build" + File.separator + "classes";
-            System.out.println(classPath);
-            new ClassFileServer(2001, classPath);
+            try {
+                File file = new File("config.cgym");
+                String classPath = file.getCanonicalPath().replace("config.cgym", "");
+                classPath = classPath.replace("CGYMPoker", "CGYMPokerCommon");
+                classPath = classPath+"build" + File.separator + "classes";
+        
+                if (System.getSecurityManager() == null) {
+                    System.setSecurityManager(new SecurityManager());
+                }
+           
+                System.out.println(">>>"+classPath);
+                System.out.println(classPath);
+                new ClassFileServer(2001, classPath);
         } catch (IOException ex) {
             ex.printStackTrace();
             Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);

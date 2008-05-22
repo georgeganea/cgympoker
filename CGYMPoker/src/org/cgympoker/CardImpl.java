@@ -1,5 +1,7 @@
 package org.cgympoker;
 
+import org.cgympoker.common.Card;
+
 public class CardImpl implements Card {
 
 	@Override
