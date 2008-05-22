@@ -1,6 +1,8 @@
 package org.cgympoker;
 
 
+import org.cgympoker.common.Login;
+import org.cgympoker.common.Server;
 import org.cgympoker.users.UserFile;
 
 public class LoginImpl implements Login{

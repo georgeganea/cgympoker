@@ -1,5 +1,7 @@
 package org.cgympoker;
 
+import org.cgympoker.common.Player;
+import org.cgympoker.common.Card;
 import java.util.List;
 
 public class PlayerImpl implements Player {
