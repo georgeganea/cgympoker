@@ -10,8 +10,8 @@ import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Arrays;
-import org.cgympoker.Login;
-import org.cgympoker.Server;
+import org.cgympoker.common.Login;
+import org.cgympoker.common.Server;
 
 /**
  *

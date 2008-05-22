@@ -21,11 +21,11 @@ import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import org.cgympoker.Server;
+import org.cgympoker.common.Server;
 import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import org.cgympoker.Login;
+import org.cgympoker.common.Login;
 
 
 /**

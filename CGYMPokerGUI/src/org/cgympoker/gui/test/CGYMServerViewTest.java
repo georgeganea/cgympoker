@@ -8,12 +8,12 @@ package org.cgympoker.gui.test;
 import java.rmi.RemoteException;
 import java.util.*;
 import java.util.ArrayList;
-import org.cgympoker.Card;
-import org.cgympoker.Felix;
-import org.cgympoker.Player;
-import org.cgympoker.Server;
-import org.cgympoker.Table;
-import org.cgympoker.Tournament;
+import org.cgympoker.common.Card;
+import org.cgympoker.common.Felix;
+import org.cgympoker.common.Player;
+import org.cgympoker.common.Server;
+import org.cgympoker.common.Table;
+import org.cgympoker.common.Tournament;
 import org.cgympoker.remoteobserver.Subscriber;
 
 public class CGYMServerViewTest{
