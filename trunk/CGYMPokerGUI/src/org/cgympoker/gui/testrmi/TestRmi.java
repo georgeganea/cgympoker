@@ -9,7 +9,7 @@ package org.cgympoker.gui.testrmi;
 import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import org.cgympoker.Login;
+import org.cgympoker.common.Login;
 
 
 /**

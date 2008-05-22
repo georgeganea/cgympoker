@@ -15,10 +15,10 @@ import javax.swing.DefaultListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import org.cgympoker.Player;
-import org.cgympoker.Server;
-import org.cgympoker.Table;
-import org.cgympoker.Tournament;
+import org.cgympoker.common.Player;
+import org.cgympoker.common.Server;
+import org.cgympoker.common.Table;
+import org.cgympoker.common.Tournament;
 import org.cgympoker.gui.test.CGYMServerViewTest;
 import org.cgympoker.remoteobserver.Subscriber;
 

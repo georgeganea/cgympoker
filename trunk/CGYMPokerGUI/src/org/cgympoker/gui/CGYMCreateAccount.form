@@ -97,7 +97,7 @@
                           </Group>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -173,7 +173,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
                       <Component id="createAccountButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="170" max="32767" attributes="0"/>
+                      <EmptySpace pref="183" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -223,7 +223,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="1"/>
-                              <EmptySpace pref="34" max="32767" attributes="0"/>
+                              <EmptySpace pref="36" max="32767" attributes="0"/>
                               <Component id="usernameTextField" min="-2" pref="226" max="-2" attributes="1"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -231,7 +231,7 @@
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="passwordCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rePasswordTextField" alignment="0" pref="226" max="32767" attributes="0"/>
+                                  <Component id="rePasswordTextField" alignment="0" pref="227" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -256,7 +256,7 @@
                           <Component id="rePasswordTextField" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="14" max="32767" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                       <Component id="passwordCheckBox" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
