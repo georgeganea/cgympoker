@@ -113,6 +113,7 @@ public class CGYMPokerView extends FrameView {
             System.out.println("Trying to connect to:"+CGYMPokerUtil.getServerAddress());
             Registry registry = LocateRegistry.getRegistry(CGYMPokerUtil.getServerAddress());
             System.out.println("1-"+registry);
+            System.out.println(registry.lookup(name));
             Remote  login = (Remote) registry.lookup(name);
             System.out.println("2");
             Login log = (Login) login;
