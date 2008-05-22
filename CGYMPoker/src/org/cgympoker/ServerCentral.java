@@ -70,16 +70,14 @@ public class ServerCentral {
 	}
         
         public static void main(String[] args) {
+            System.setProperty("java.security.policy", "policy");
             try {
                 File file = new File("config.cgym");
                 String classPath = file.getCanonicalPath().replace("config.cgym", "");
-                //classPath = classPath.replace("CGYMPoker", "CGYMPokerCommon");
                 classPath = classPath+"build" + File.separator + "classes";
-        
                 if (System.getSecurityManager() == null) {
                     System.setSecurityManager(new SecurityManager());
                 }
-           
                 System.out.println(">>>"+classPath);
                 System.out.println(classPath);
                 new ClassFileServer(2001, classPath);
