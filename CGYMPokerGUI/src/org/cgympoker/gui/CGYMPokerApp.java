@@ -39,9 +39,10 @@ public class CGYMPokerApp extends SingleFrameApplication {
      * Main method launching the application.
      */
     public static void main(String[] args) {
-         if (System.getSecurityManager() == null) {
-                    System.setSecurityManager(new SecurityManager());
-                }
+        System.setProperty("java.security.policy", "policy");
+        if (System.getSecurityManager() == null) {
+            System.setSecurityManager(new SecurityManager());
+        }
         launch(CGYMPokerApp.class, args);
     }
 }
