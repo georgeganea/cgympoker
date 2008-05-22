@@ -2,9 +2,15 @@ package org.cgympoker;
 
 import java.io.Serializable;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class ServerImpl implements Remote, Server,Serializable{
+import org.cgympoker.remoteobserver.Subscriber;
+
+public class ServerImpl implements  Server,Serializable{
+    
+    
 
 	@Override
 	public void disconnect() {
@@ -41,6 +47,19 @@ public class ServerImpl implements Remote, Server,Serializable{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+    public void addSubscriber(Subscriber s) throws RemoteException {
+       System.out.println("ceva subscriber adaugat ");
+        // throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void removeSubscriber(Subscriber s) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void removeAllSubscribers() throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 	
 	
 
