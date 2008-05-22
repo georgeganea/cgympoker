@@ -73,7 +73,7 @@ public class ServerCentral {
             try {
                 File file = new File("config.cgym");
                 String classPath = file.getCanonicalPath().replace("config.cgym", "");
-                classPath = classPath.replace("CGYMPoker", "CGYMPokerCommon");
+                //classPath = classPath.replace("CGYMPoker", "CGYMPokerCommon");
                 classPath = classPath+"build" + File.separator + "classes";
         
                 if (System.getSecurityManager() == null) {
