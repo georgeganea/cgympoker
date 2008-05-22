@@ -6,7 +6,9 @@
 
 package org.cgympoker.gui;
 
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultListSelectionModel;
@@ -18,12 +20,13 @@ import org.cgympoker.Server;
 import org.cgympoker.Table;
 import org.cgympoker.Tournament;
 import org.cgympoker.gui.test.CGYMServerViewTest;
+import org.cgympoker.remoteobserver.Subscriber;
 
 /**
  *
  * @author  Mihai
  */
-public class CGYMServerView extends javax.swing.JFrame {
+public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
     private final Server server;
     private Object[][] tournaments, tables, players;
     private List<Tournament> tournamentList;
@@ -329,6 +332,11 @@ public class CGYMServerView extends javax.swing.JFrame {
         }
     }
     
+    
+    private void updateTournaments(ArrayList tournaments){
+    System.out.println(tournaments);
+    }
+    
     private void updatePlayersTable(Table table) {
         playersList = table.getPlayers();
         players = new Object[playersList.size()][2];
@@ -357,6 +365,10 @@ public class CGYMServerView extends javax.swing.JFrame {
             tournaments[i][2] = sdf.format(tournament.getStartTime());
             i++;
         }
+    }
+
+    public void update(Object pub, Object code) throws RemoteException {
+        updateTournaments((ArrayList)code);
     }
     
 }

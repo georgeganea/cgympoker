@@ -4,6 +4,9 @@
 
 package org.cgympoker.gui;
 
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -114,6 +117,7 @@ public class CGYMPokerView extends FrameView {
             System.out.println("2");
             Login log = (Login) login;
             System.out.println("3");
+            
             return   log.login(username,password);
         } catch (Exception e) {
             System.err.println("CgymPokerLogin exception:");
@@ -318,11 +322,19 @@ public class CGYMPokerView extends FrameView {
 
     private void jLoginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLoginButtonMouseClicked
         server = checkInfo();
+        
         if (server != null) {
             this.getFrame().setVisible(false);
             if (serverView == null) {
                 serverView = new CGYMServerView(server);
+                try {
+                    server.addSubscriber(serverView);
+                } catch (RemoteException ex) {
+                    ex.printStackTrace();
+                    Logger.getLogger(CGYMPokerView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+            
             CGYMPokerApp.getApplication().show(serverView);
         }
 }//GEN-LAST:event_jLoginButtonMouseClicked

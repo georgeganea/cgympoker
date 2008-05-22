@@ -5,6 +5,7 @@
 
 package org.cgympoker.gui.test;
 
+import java.rmi.RemoteException;
 import java.util.*;
 import java.util.ArrayList;
 import org.cgympoker.Card;
@@ -13,6 +14,7 @@ import org.cgympoker.Player;
 import org.cgympoker.Server;
 import org.cgympoker.Table;
 import org.cgympoker.Tournament;
+import org.cgympoker.remoteobserver.Subscriber;
 
 public class CGYMServerViewTest{
     public static Server createTestServer(){
@@ -269,6 +271,18 @@ public class CGYMServerViewTest{
             }
 
             public void disconnect() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void addSubscriber(Subscriber s) throws RemoteException {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void removeSubscriber(Subscriber s) throws RemoteException {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void removeAllSubscribers() throws RemoteException {
                 throw new UnsupportedOperationException("Not supported yet.");
             }
         };
