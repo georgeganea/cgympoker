@@ -72,17 +72,25 @@ public class ServerCentral {
             File file = new File("config.cgym");
             String classPath = file.getCanonicalPath().replace("config.cgym", "");
             classPath = classPath+"build" + File.separator + "classes";
+            System.out.println(classPath);
             new ClassFileServer(2001, classPath);
         } catch (IOException ex) {
+            ex.printStackTrace();
             Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
         }
             
         try {     
+            
             String name = "CgymPokerLogin";
             LoginImpl server = new LoginImpl() ;
+         
+            
             Login stub = (Login) UnicastRemoteObject.exportObject(server, 0);
+            
             Registry registry = LocateRegistry.getRegistry();
+            
             registry.rebind(name, stub);
+            
             System.out.println("CgymPokerLogin");
         } catch (Exception e) {
             System.err.println("ComputeEngine exception:");
