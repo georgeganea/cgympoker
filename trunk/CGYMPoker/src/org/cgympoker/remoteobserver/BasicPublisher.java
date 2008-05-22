@@ -3,8 +3,9 @@
  * and open the template in the editor.
  */
 
-package org.cgympoker;
+package org.cgympoker.remoteobserver;
 
+import org.cgympoker.*;
 import java.util.Enumeration;
 import java.util.Vector;
 
