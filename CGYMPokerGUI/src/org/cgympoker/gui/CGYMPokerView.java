@@ -328,12 +328,14 @@ public class CGYMPokerView extends FrameView {
             this.getFrame().setVisible(false);
             if (serverView == null) {
                 serverView = new CGYMServerView(server);
+                /*
                 try {
                     server.addSubscriber(serverView);
                 } catch (RemoteException ex) {
                     ex.printStackTrace();
                     Logger.getLogger(CGYMPokerView.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                 */
             }
             
             CGYMPokerApp.getApplication().show(serverView);
