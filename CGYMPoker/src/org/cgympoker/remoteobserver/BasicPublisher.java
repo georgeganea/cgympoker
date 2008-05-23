@@ -11,7 +11,7 @@ import java.util.Vector;
 
 /**
  *
- * @author carmen
+ * @author george
  */
 public class BasicPublisher implements Publisher { 
   protected Vector subscribers = new Vector(2); 

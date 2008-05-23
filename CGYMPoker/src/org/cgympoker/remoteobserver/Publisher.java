@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
 
 /**
  *
- * @author carmen
+ * @author george
  */
 public interface Publisher extends Remote {  
   public void addSubscriber(Subscriber s)  

@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 
 /**
  *
- * @author carmen
+ * @author george
  */
 public interface Subscriber extends Remote {  
   public void update(Object pub, Object code)  
