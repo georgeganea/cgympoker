@@ -35,14 +35,15 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
     private DefaultTableModel tablesModel, playersModel;
     private List<Player> playersList;
     private DefaultListSelectionModel tablesSelectionModel;
+    private DefaultTableModel tournamentsModel;
    
     /** Creates new form CGYMServerView */
     public CGYMServerView(Server server) {
         this.server = CGYMServerViewTest.createTestServer();//server;
         initListeners();
         initModels();
-        initTournaments();
         initComponents();
+        initTournaments();
     }
     
 
@@ -80,7 +81,7 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        tournamentsTable.setModel(new javax.swing.table.DefaultTableModel(tournaments, new String [] {"ID", "Status", "Start Time"}));
+        tournamentsTable.setModel(tournamentsModel);
         tournamentsTable.setName("tournamentsTable"); // NOI18N
         tournamentsTable.setSelectionModel(tournamentsSelectionModel);
         tournamentsTable.setShowVerticalLines(false);
@@ -309,6 +310,7 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
     }
 
     private void initModels() {
+        tournamentsModel = new DefaultTableModel(tournaments, new String [] {"ID", "Status", "Start Time"});
         tablesModel = new DefaultTableModel(tables, new String [] {"Status", "Blinds", "Players", "Avg Pot"});
         playersModel = new DefaultTableModel(players, new String [] {"Player", "Money"});
     }
@@ -332,10 +334,7 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
         }
     }
     
-    
-    private void updateTournaments(ArrayList tournaments){
-    System.out.println(tournaments);
-    }
+   
     
     private void updatePlayersTable(Table table) {
         playersList = table.getPlayers();
@@ -351,6 +350,24 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
             i++;
         }
     }
+
+    private void updateTournamentsTable(ArrayList list){
+        System.out.println("Update pentru tournaments table");
+        tournamentList = server.getAllTournaments();
+        tournaments = new Object[tournamentList.size()][3];
+        Iterator<Tournament> iterator = tournamentList.iterator();
+        tournamentsModel.setRowCount(0);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        int i = 0;
+        while(iterator.hasNext()){
+            Tournament tournament = iterator.next();
+            tournaments[i][0] = tournament.getID();
+            tournaments[i][1] = tournament.getStatus();
+            tournaments[i][2] = sdf.format(tournament.getStartTime());
+            tournamentsModel.addRow(tournaments[i]);
+            i++;
+        }
+    }
     
     private void initTournaments() {
         tournamentList = server.getAllTournaments();
@@ -363,12 +380,13 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
             tournaments[i][0] = tournament.getID();
             tournaments[i][1] = tournament.getStatus();
             tournaments[i][2] = sdf.format(tournament.getStartTime());
+            tournamentsModel.addRow(tournaments[i]);
             i++;
         }
     }
 
     public void update(Object pub, Object code) throws RemoteException {
-        updateTournaments((ArrayList)code);
+        updateTournamentsTable((ArrayList)code);
     }
     
 }
