@@ -5,6 +5,7 @@
 
 package org.cgympoker.remoteobserver;
 
+import java.io.Serializable;
 import org.cgympoker.*;
 import java.util.Enumeration;
 import java.util.Vector;
@@ -13,7 +14,7 @@ import java.util.Vector;
  *
  * @author carmen
  */
-public class BasicPublisher implements Publisher { 
+public class BasicPublisher implements Publisher,Serializable { 
   protected Vector subscribers = new Vector(2); 
 
   public void addSubscriber(Subscriber s) { 
