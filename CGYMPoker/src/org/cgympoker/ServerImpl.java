@@ -62,7 +62,7 @@ public class ServerImpl implements  Server,Serializable{
 	}
 
     public void addSubscriber(Subscriber s) throws RemoteException {
-       System.out.println("ceva subscriber adaugat ");
+        System.out.println("ceva subscriber adaugat ");
         publisher.addSubscriber(s);
     }
 
