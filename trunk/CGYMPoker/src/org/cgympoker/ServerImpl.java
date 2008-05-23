@@ -1,11 +1,12 @@
 package org.cgympoker;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.cgympoker.common.Felix;
 import org.cgympoker.common.Player;
 import org.cgympoker.common.Server;
 import org.cgympoker.common.Tournament;
 import java.io.Serializable;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -13,41 +14,47 @@ import java.util.List;
 import org.cgympoker.remoteobserver.Subscriber;
 
 public class ServerImpl implements  Server,Serializable{
-    
+    public ServerImpl() {
+        try {
+            UnicastRemoteObject.exportObject(this, 0);
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(ServerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 
-	@Override
-	public void disconnect() {
+	public void disconnect() throws RemoteException{
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public List<Tournament> getAllTournaments() {
+
+	public List<Tournament> getAllTournaments() throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Felix getFelix() {
+
+	public Felix getFelix() throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public List<Tournament> getOpenTournaments() {
+
+	public List<Tournament> getOpenTournaments() throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public List<Player> getPlayers() {
+
+	public List<Player> getPlayers() throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public List<Tournament> getStartedTournaments() {
+
+	public List<Tournament> getStartedTournaments() throws RemoteException{
 		// TODO Auto-generated method stub
 		return null;
 	}
