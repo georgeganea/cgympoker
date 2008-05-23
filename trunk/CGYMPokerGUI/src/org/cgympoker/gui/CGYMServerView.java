@@ -7,6 +7,7 @@
 package org.cgympoker.gui;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,6 +28,26 @@ import org.cgympoker.remoteobserver.Subscriber;
  * @author  Mihai
  */
 public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
+    private class ViewSubscriber implements Subscriber{
+        
+        public ViewSubscriber(){
+            
+            try {
+            UnicastRemoteObject.exportObject(this,0);
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
+        }
+            
+        }
+        public void update(Object pub, Object code) throws RemoteException {
+            throw new UnsupportedOperationException("Not supported yet.");
+        }
+    }
+    
+    private Subscriber subscriber = new ViewSubscriber();
+    public Subscriber getSubscriber(){
+      return subscriber;
+    }
     private final Server server;
     private Object[][] tournaments, tables, players;
     private List<Tournament> tournamentList;

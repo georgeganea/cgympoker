@@ -20,7 +20,7 @@
                           <Component id="jExitButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="283" max="32767" attributes="0"/>
+                          <EmptySpace pref="265" max="32767" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -48,7 +48,7 @@
                       <Component id="jLoginButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jExitButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="8" max="32767" attributes="0"/>
+                  <EmptySpace pref="17" max="32767" attributes="0"/>
                   <Component id="jLabel4" min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
           </Group>
