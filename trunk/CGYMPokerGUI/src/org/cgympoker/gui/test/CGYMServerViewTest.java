@@ -285,6 +285,10 @@ public class CGYMServerViewTest{
             public void removeAllSubscribers() throws RemoteException {
                 throw new UnsupportedOperationException("Not supported yet.");
             }
+
+            public void update(ArrayList<Tournament> tournaments) throws RemoteException {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
         };
     }
 }
