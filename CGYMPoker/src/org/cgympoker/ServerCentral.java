@@ -1,4 +1,5 @@
 package org.cgympoker;
+import java.rmi.RemoteException;
 import org.cgympoker.common.Felix;
 import org.cgympoker.common.Login;
 import org.cgympoker.common.Player;
@@ -11,6 +12,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,12 +23,41 @@ public class ServerCentral {
 	private ServerCentral(){
 	}
 	
-	private ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
-	
-	public Tournament createTournament(int maxPlayers, Date startTime , Date stopTime){
+	private static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
+	private static ArrayList<Server> servers = new ArrayList<Server>();
+        public static void addServer(Server serv){
+        servers.add(serv);
+        }
+	public static Tournament createTournament(int maxPlayers, Date startTime , Date stopTime){
+            tournaments.add(new TournamentImpl());
 		//TODO de impl cu ceva timer sa se apeleze start tournament
-		return null;
+		
+           Iterator<Server> it = servers.iterator();
+           while (it.hasNext()){
+               Server s = it.next();
+            try {
+                s.update(tournaments);
+            } catch (RemoteException ex) {
+                Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           }
+           return null;
+               
 	}
+        
+        private static void removeOneTournament(){
+            tournaments.remove(0);
+            Iterator<Server> it = servers.iterator();
+           while (it.hasNext()){
+               Server s = it.next();
+            try {
+                s.update(tournaments);
+            } catch (RemoteException ex) {
+                Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           }
+        }
+        
 	public void startTournament(Tournament tour){
 		
 	}
@@ -42,14 +73,12 @@ public class ServerCentral {
 	}
 	
 	public Server createServerInstance(String user){
-		//TODO
-		return null; 
+		return new ServerImpl();
 	}
     
 
 
 	public List<Tournament> getAllTournaments() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -87,10 +116,8 @@ public class ServerCentral {
         }
             
         try {     
-            
             String name = "CgymPokerLogin";
             LoginImpl server = new LoginImpl() ;
-         
             
             Login stub = (Login) UnicastRemoteObject.exportObject(server, 0);
             
@@ -99,12 +126,17 @@ public class ServerCentral {
             registry.rebind(name, stub);
             
             System.out.println("CgymPokerLogin");
+            for (int i = 0 ; i< 1000;i++){
+            Thread.sleep(1000);
+            ServerCentral.createTournament(1, new Date(),new Date());
+            Thread.sleep(1000);
+            ServerCentral.removeOneTournament();
+            System.out.println("i="+i);
+            }
+            
         } catch (Exception e) {
             System.err.println("ComputeEngine exception:");
             e.printStackTrace();
         }
     }
-
-        
-
 }
