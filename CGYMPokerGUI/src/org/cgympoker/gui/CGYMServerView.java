@@ -12,6 +12,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -278,8 +280,12 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
     }//GEN-LAST:event_observeTableButtonMouseClicked
 
     private void disconnectButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disconnectButtonMouseClicked
-        server.disconnect();
-    }//GEN-LAST:event_disconnectButtonMouseClicked
+        try {
+            server.disconnect();//GEN-LAST:event_disconnectButtonMouseClicked
+        } catch (RemoteException ex) {
+            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }                                             
     
     /**
      * @param args the command line arguments
@@ -374,36 +380,44 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
     }
 
     private void updateTournamentsTable(ArrayList list){
-        System.out.println("Update pentru tournaments table");
-        tournamentList = server.getAllTournaments();
-        tournaments = new Object[tournamentList.size()][3];
-        Iterator<Tournament> iterator = tournamentList.iterator();
-        tournamentsModel.setRowCount(0);
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        int i = 0;
-        while(iterator.hasNext()){
-            Tournament tournament = iterator.next();
-            tournaments[i][0] = tournament.getID();
-            tournaments[i][1] = tournament.getStatus();
-            tournaments[i][2] = sdf.format(tournament.getStartTime());
-            tournamentsModel.addRow(tournaments[i]);
-            i++;
+        try {
+            System.out.println("Update pentru tournaments table");
+            tournamentList = server.getAllTournaments();
+            tournaments = new Object[tournamentList.size()][3];
+            Iterator<Tournament> iterator = tournamentList.iterator();
+            tournamentsModel.setRowCount(0);
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            int i = 0;
+            while (iterator.hasNext()) {
+                Tournament tournament = iterator.next();
+                tournaments[i][0] = tournament.getID();
+                tournaments[i][1] = tournament.getStatus();
+                tournaments[i][2] = sdf.format(tournament.getStartTime());
+                tournamentsModel.addRow(tournaments[i]);
+                i++;
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     private void initTournaments() {
-        tournamentList = server.getAllTournaments();
-        tournaments = new Object[tournamentList.size()][3];
-        Iterator<Tournament> iterator = tournamentList.iterator();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        int i = 0;
-        while(iterator.hasNext()){
-            Tournament tournament = iterator.next();
-            tournaments[i][0] = tournament.getID();
-            tournaments[i][1] = tournament.getStatus();
-            tournaments[i][2] = sdf.format(tournament.getStartTime());
-            tournamentsModel.addRow(tournaments[i]);
-            i++;
+        try {
+            tournamentList = server.getAllTournaments();
+            tournaments = new Object[tournamentList.size()][3];
+            Iterator<Tournament> iterator = tournamentList.iterator();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            int i = 0;
+            while (iterator.hasNext()) {
+                Tournament tournament = iterator.next();
+                tournaments[i][0] = tournament.getID();
+                tournaments[i][1] = tournament.getStatus();
+                tournaments[i][2] = sdf.format(tournament.getStartTime());
+                tournamentsModel.addRow(tournaments[i]);
+                i++;
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
