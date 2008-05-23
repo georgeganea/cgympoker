@@ -40,7 +40,8 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
             
         }
         public void update(Object pub, Object code) throws RemoteException {
-            throw new UnsupportedOperationException("Not supported yet.");
+            System.out.println(((ArrayList)pub).size());
+           
         }
     }
     
