@@ -6,12 +6,15 @@ import org.cgympoker.common.Server;
 import org.cgympoker.users.UserFile;
 
 public class LoginImpl implements Login{
-
+    public  ServerImpl server;
+    
     public Server login(String user, String pass)  {
+        server = new ServerImpl();
+        ServerCentral.INSTANCE.addServer(server);
         System.out.println("am apelat o metoda de pe server");
         if (UserFile.checkPass(user, pass)){
             System.out.println("iese pe aici");
-            return new ServerImpl();
+            return server;
         }
         else {
             System.out.println("e false");
@@ -23,7 +26,4 @@ public class LoginImpl implements Login{
         UserFile.createUserFile(user, pass, firstName, lastName, eMail);
         return new ServerImpl();
     }
-
-   
-
 }

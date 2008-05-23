@@ -1,5 +1,6 @@
 package org.cgympoker;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.cgympoker.common.Felix;
@@ -11,9 +12,11 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import org.cgympoker.remoteobserver.BasicPublisher;
 import org.cgympoker.remoteobserver.Subscriber;
 
 public class ServerImpl implements  Server,Serializable{
+    private BasicPublisher publisher = new BasicPublisher();
     public ServerImpl() {
         try {
             UnicastRemoteObject.exportObject(this, 0);
@@ -55,13 +58,12 @@ public class ServerImpl implements  Server,Serializable{
 
 
 	public List<Tournament> getStartedTournaments() throws RemoteException{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
     public void addSubscriber(Subscriber s) throws RemoteException {
        System.out.println("ceva subscriber adaugat ");
-        // throw new UnsupportedOperationException("Not supported yet.");
+        publisher.addSubscriber(s);
     }
 
     public void removeSubscriber(Subscriber s) throws RemoteException {
@@ -70,6 +72,11 @@ public class ServerImpl implements  Server,Serializable{
 
     public void removeAllSubscribers() throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void update(ArrayList<Tournament> tournaments) throws RemoteException{
+        publisher.notifySubscribers(tournaments);
+        
     }
 	
 	

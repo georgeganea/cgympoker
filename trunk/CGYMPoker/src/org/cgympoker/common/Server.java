@@ -1,5 +1,6 @@
 package org.cgympoker.common;
 
+import java.util.ArrayList;
 import org.cgympoker.common.*;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -13,5 +14,7 @@ public interface Server extends Publisher {
 	public List<Player> getPlayers()throws RemoteException;
 	public Felix getFelix()throws RemoteException;
 	public void disconnect()throws RemoteException;
+
+    public void update(ArrayList<Tournament> tournaments) throws RemoteException;
 }
 
