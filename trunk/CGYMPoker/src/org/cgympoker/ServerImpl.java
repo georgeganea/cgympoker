@@ -34,8 +34,7 @@ public class ServerImpl implements  Server,Serializable{
 
 
 	public List<Tournament> getAllTournaments() throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
+		return ServerCentral.INSTANCE.getAllTournaments();
 	}
 
 

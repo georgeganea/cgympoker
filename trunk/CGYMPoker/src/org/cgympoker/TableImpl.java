@@ -1,11 +1,12 @@
 package org.cgympoker;
 
+import java.io.Serializable;
 import org.cgympoker.common.Table;
 import org.cgympoker.common.Player;
 import org.cgympoker.common.Card;
 import java.util.List;
 
-public class TableImpl implements Table {
+public class TableImpl implements Table,Serializable {
 
 	@Override
 	public Player getActivePlayer() {
