@@ -43,6 +43,7 @@ public class BasicPublisher implements Publisher {
         deadSubs.addElement(s);// must be dead 
       } 
       catch (java.rmi.RemoteException re) { 
+          re.printStackTrace();
         /*might recover?*/ 
       } 
     } 
