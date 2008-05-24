@@ -29,21 +29,19 @@ import org.cgympoker.remoteobserver.Subscriber;
  *
  * @author  Mihai
  */
-public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
-    private class ViewSubscriber implements Subscriber{
-        
-        public ViewSubscriber(){
-            
+public class CGYMServerView extends javax.swing.JFrame {
+     private class ViewSubscriber implements Subscriber {
+
+        public ViewSubscriber() {
             try {
-            UnicastRemoteObject.exportObject(this,0);
-        } catch (RemoteException ex) {
-            ex.printStackTrace();
+                UnicastRemoteObject.exportObject(this, 0);
+            } catch (RemoteException ex) {
+                ex.printStackTrace();
+            }
         }
-            
-        }
+
         public void update(Object pub, Object code) throws RemoteException {
-            System.out.println(((ArrayList)pub).size());
-           
+            updateTournamentsTable((ArrayList)pub);
         }
     }
     
@@ -63,7 +61,7 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
    
     /** Creates new form CGYMServerView */
     public CGYMServerView(Server server) {
-        this.server = CGYMServerViewTest.createTestServer();//server;
+        this.server = server;
         initListeners();
         initModels();
         initComponents();
@@ -379,28 +377,25 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
         }
     }
 
-    private void updateTournamentsTable(ArrayList list){
-        try {
-            System.out.println("Update pentru tournaments table");
-            tournamentList = server.getAllTournaments();
-            tournaments = new Object[tournamentList.size()][3];
-            Iterator<Tournament> iterator = tournamentList.iterator();
-            tournamentsModel.setRowCount(0);
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-            int i = 0;
-            while (iterator.hasNext()) {
-                Tournament tournament = iterator.next();
-                tournaments[i][0] = tournament.getID();
-                tournaments[i][1] = tournament.getStatus();
-                tournaments[i][2] = sdf.format(tournament.getStartTime());
-                tournamentsModel.addRow(tournaments[i]);
-                i++;
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+    private void updateTournamentsTable(ArrayList list) {
+        System.out.println("Update pentru tournaments table");
+        tournamentList = list;
+        tournaments = new Object[list.size()][3];
+        Iterator<Tournament> iterator = list.iterator();
+        tournamentsModel.setRowCount(0);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        int i = 0;
+        while (iterator.hasNext()) {
+            Tournament tournament = iterator.next();
+            tournaments[i][0] = tournament.getID();
+            tournaments[i][1] = tournament.getStatus();
+            tournaments[i][2] = sdf.format(tournament.getStartTime());
+            tournamentsModel.addRow(tournaments[i]);
+            i++;
         }
+
     }
-    
+
     private void initTournaments() {
         try {
             tournamentList = server.getAllTournaments();
@@ -421,8 +416,4 @@ public class CGYMServerView extends javax.swing.JFrame implements Subscriber {
         }
     }
 
-    public void update(Object pub, Object code) throws RemoteException {
-        updateTournamentsTable((ArrayList)code);
-    }
-    
 }
