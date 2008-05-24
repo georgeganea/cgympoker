@@ -34,11 +34,25 @@ public class ServerCentral {
         servers.add(serv);
     }
 
-    public static void createTournament(int maxPlayers, Date startTime, Date stopTime) {
+        /*
+ * For testing purposes only
+ */
+    private static Tournament createDummyTournament(){
         Date date = Calendar.getInstance().getTime();
         Tournament t = new TournamentImpl("T1", date, date);
-        t.createTable(new TableImpl(Status.ANTE, "10", new ArrayList<Player>(), 4));
-        tournaments.add(t);
+        TableImpl table1 = new TableImpl(Status.ANTE, "10", new ArrayList<Player>(), new Integer(4));
+        ArrayList<Player> playerList = new ArrayList<Player>();
+        playerList.add(new PlayerImpl("Ioana", 100));
+        playerList.add(new PlayerImpl("George", 30));
+        TableImpl table2 = new TableImpl(Status.BET, "20", playerList, 5);
+        t.createTable(table1);
+        t.createTable(table2);
+        return t;
+    }
+    
+    public static void createTournament(int maxPlayers, Date startTime, Date stopTime) {
+        
+        tournaments.add(createDummyTournament());
         //TODO de impl cu ceva timer sa se apeleze start tournament
         Iterator<Server> it = servers.iterator();
         while (it.hasNext()) {
