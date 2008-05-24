@@ -12,11 +12,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.cgympoker.common.Table.Status;
 import org.cgympoker.test.CGYMServerTest;
 
 public class ServerCentral {
@@ -33,7 +35,10 @@ public class ServerCentral {
     }
 
     public static void createTournament(int maxPlayers, Date startTime, Date stopTime) {
-        tournaments.add(new TournamentImpl());
+        Date date = Calendar.getInstance().getTime();
+        Tournament t = new TournamentImpl("T1", date, date);
+        t.createTable(new TableImpl(Status.ANTE, "10", new ArrayList<Player>(), 4));
+        tournaments.add(t);
         //TODO de impl cu ceva timer sa se apeleze start tournament
         Iterator<Server> it = servers.iterator();
         while (it.hasNext()) {

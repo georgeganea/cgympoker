@@ -11,6 +11,19 @@ import java.util.List;
 
 public class TournamentImpl implements Tournament,Serializable {
 
+        private String ID;
+        private String status;
+        private Date startTime;
+        private Date stopTime;
+        private ArrayList<Table> tablesList = new ArrayList<Table>();
+        
+        public TournamentImpl(String ID,Date startDate,Date stopDate){
+               this.ID = ID;
+               this.status = "WAITING TO START";
+               this.startTime = startDate;
+               this.stopTime = stopDate;
+        }
+        
 	@Override
 	public List<Player> getActivePlayers() {
 		// TODO Auto-generated method stub
@@ -31,18 +44,22 @@ public class TournamentImpl implements Tournament,Serializable {
 
 	@Override
 	public Date getStartTime() {
-            return Calendar.getInstance().getTime();
+            return startTime;
 	}
 
 	@Override
 	public Date getStopTime() {
-            return Calendar.getInstance().getTime();
+            return stopTime;
 	}
 
 	@Override
 	public List<Table> getTables() {
-            return new ArrayList<Table>();
+            return tablesList;
 	}
+        
+        public void addTable(Table table){
+            tablesList.add(table);
+        }
 	
 	
 	public void start() {
@@ -61,11 +78,15 @@ public class TournamentImpl implements Tournament,Serializable {
 
     public String getID() {
        //TO DO returneaza un identificator al turneului
-        return "ID";
+        return ID;
     }
 
     public String getStatus() {
         return "Started";
+    }
+
+    public void createTable(TableImpl tableImpl) {
+        tablesList.add(tableImpl);
     }
 
 }

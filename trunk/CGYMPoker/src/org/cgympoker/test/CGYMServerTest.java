@@ -17,6 +17,7 @@ import org.cgympoker.common.Tournament;
 import org.cgympoker.remoteobserver.Subscriber;
 
 public class CGYMServerTest{
+    /*
     public static Server createTestServer(){
         return new Server() {
 
@@ -291,4 +292,5 @@ public class CGYMServerTest{
             }
         };
     }
+     * */
 }
