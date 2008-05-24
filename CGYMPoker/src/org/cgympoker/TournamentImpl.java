@@ -1,6 +1,8 @@
 package org.cgympoker;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
 import org.cgympoker.common.Table;
 import org.cgympoker.common.Player;
 import org.cgympoker.common.Tournament;
@@ -29,20 +31,17 @@ public class TournamentImpl implements Tournament,Serializable {
 
 	@Override
 	public Date getStartTime() {
-		// TODO Auto-generated method stub
-		return null;
+            return Calendar.getInstance().getTime();
 	}
 
 	@Override
 	public Date getStopTime() {
-		// TODO Auto-generated method stub
-		return null;
+            return Calendar.getInstance().getTime();
 	}
 
 	@Override
 	public List<Table> getTables() {
-		// TODO Auto-generated method stub
-		return null;
+            return new ArrayList<Table>();
 	}
 	
 	
@@ -62,7 +61,7 @@ public class TournamentImpl implements Tournament,Serializable {
 
     public String getID() {
        //TO DO returneaza un identificator al turneului
-        return "";
+        return "ID";
     }
 
     public String getStatus() {

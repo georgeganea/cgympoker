@@ -1,4 +1,5 @@
 package org.cgympoker;
+
 import java.rmi.RemoteException;
 import org.cgympoker.common.Felix;
 import org.cgympoker.common.Login;
@@ -16,124 +17,125 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.cgympoker.test.CGYMServerTest;
 
 public class ServerCentral {
-	//singleton
-	public static final ServerCentral INSTANCE = new ServerCentral();
-	private ServerCentral(){
-	}
-	
-	private static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
-	private static ArrayList<Server> servers = new ArrayList<Server>();
-        public static void addServer(Server serv){
+    //singleton
+    public static final ServerCentral INSTANCE = new ServerCentral();
+
+    private ServerCentral() {
+    }
+    private static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
+    private static ArrayList<Server> servers = new ArrayList<Server>();
+
+    public static void addServer(Server serv) {
         servers.add(serv);
-        }
-	public static Tournament createTournament(int maxPlayers, Date startTime , Date stopTime){
-            tournaments.add(new TournamentImpl());
-		//TODO de impl cu ceva timer sa se apeleze start tournament
-		
-           Iterator<Server> it = servers.iterator();
-           while (it.hasNext()){
-               Server s = it.next();
+    }
+
+    public static void createTournament(int maxPlayers, Date startTime, Date stopTime) {
+        tournaments.add(new TournamentImpl());
+        //TODO de impl cu ceva timer sa se apeleze start tournament
+        Iterator<Server> it = servers.iterator();
+        while (it.hasNext()) {
+            Server s = it.next();
             try {
                 s.update(tournaments);
             } catch (RemoteException ex) {
                 Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
             }
-           }
-           return null;
-               
-	}
-        
-        private static void removeOneTournament(){
-            tournaments.remove(0);
-            Iterator<Server> it = servers.iterator();
-           while (it.hasNext()){
-               Server s = it.next();
+        }
+    }
+
+    private static void removeOneTournament() {
+        tournaments.remove(0);
+        Iterator<Server> it = servers.iterator();
+        while (it.hasNext()) {
+            Server s = it.next();
             try {
                 s.update(tournaments);
             } catch (RemoteException ex) {
                 Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
             }
-           }
         }
-        
-	public void startTournament(Tournament tour){
-		
-	}
-	
-	public void joinTournament (Felix felix, Tournament tour){
-		//TODO
-	}
-	public void leaveTournament(Felix felix, Tournament tour){
-		//TODO
-	}
-	public void disconnectPlayer(Felix felix){
-		
-	}
-	
-	public Server createServerInstance(String user){
-		return new ServerImpl();
-	}
-    
+    }
 
+    public void startTournament(Tournament tour) {
 
-	public List<Tournament> getAllTournaments() {
-		return null;
-	}
+    }
 
+    public void joinTournament(Felix felix, Tournament tour) {
+    //TODO
+    }
 
-	public List<Tournament> getOpenTournaments() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void leaveTournament(Felix felix, Tournament tour) {
+    //TODO
+    }
 
-	public List<Player> getPlayers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void disconnectPlayer(Felix felix) {
 
-	public List<Tournament> getStartedTournaments() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-        
-        public static void main(String[] args) {
-            System.setProperty("java.security.policy", "policy");
-            try {
-                File file = new File("config.cgym");
-                String classPath = file.getCanonicalPath().replace("config.cgym", "");
-                classPath = classPath+"build" + File.separator + "classes";
-                if (System.getSecurityManager() == null) {
-                    System.setSecurityManager(new SecurityManager());
-                }
-                System.out.println(">>>"+classPath);
-                System.out.println(classPath);
-                new ClassFileServer(2001, classPath);
+    }
+
+    public Server createServerInstance(String user) {
+        return new ServerImpl();
+    }
+
+    public List<Tournament> getAllTournaments() {
+       return new ArrayList<Tournament>();
+    }
+
+    public List<Tournament> getOpenTournaments() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public List<Player> getPlayers() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public List<Tournament> getStartedTournaments() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public static void main(String[] args) {
+        System.setProperty("java.security.policy", "policy");
+        try {
+            File file = new File("config.cgym");
+            String classPath = file.getCanonicalPath().replace("config.cgym", "");
+            classPath = classPath + "build" + File.separator + "classes";
+            if (System.getSecurityManager() == null) {
+                System.setSecurityManager(new SecurityManager());
+            }
+            System.out.println(">>>" + classPath);
+            System.out.println(classPath);
+            new ClassFileServer(2001, classPath);
         } catch (IOException ex) {
             ex.printStackTrace();
             Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-        try {     
+
+        try {
             String name = "CgymPokerLogin";
-            LoginImpl server = new LoginImpl() ;
-            
+            LoginImpl server = new LoginImpl();
+
             Login stub = (Login) UnicastRemoteObject.exportObject(server, 0);
-            
+
             Registry registry = LocateRegistry.getRegistry();
-            
+
             registry.rebind(name, stub);
-            
+
             System.out.println("CgymPokerLogin");
-            for (int i = 0 ; i< 1000;i++){
-            Thread.sleep(1000);
-            ServerCentral.createTournament(1, new Date(),new Date());
-            Thread.sleep(1000);
-            ServerCentral.removeOneTournament();
-            System.out.println("i="+i);
+            for (int i = 0; i < 1000; i++) {
+                Thread.sleep(2000);
+                ServerCentral.createTournament(1, new Date(), new Date());
+                Thread.sleep(2000);
+                ServerCentral.createTournament(1, new Date(), new Date());
+                Thread.sleep(2000);
+                ServerCentral.removeOneTournament();
+                System.out.println("i=" + i);
             }
-            
+
         } catch (Exception e) {
             System.err.println("ComputeEngine exception:");
             e.printStackTrace();
