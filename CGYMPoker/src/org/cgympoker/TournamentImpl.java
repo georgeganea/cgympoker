@@ -1,12 +1,13 @@
 package org.cgympoker;
 
+import java.io.Serializable;
 import org.cgympoker.common.Table;
 import org.cgympoker.common.Player;
 import org.cgympoker.common.Tournament;
 import java.util.Date;
 import java.util.List;
 
-public class TournamentImpl implements Tournament {
+public class TournamentImpl implements Tournament,Serializable {
 
 	@Override
 	public List<Player> getActivePlayers() {
