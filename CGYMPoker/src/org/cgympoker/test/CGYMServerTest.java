@@ -5,18 +5,18 @@
 
 package org.cgympoker.test;
 
-import java.rmi.RemoteException;
 import java.util.*;
 import java.util.ArrayList;
-import org.cgympoker.common.Card;
-import org.cgympoker.common.Felix;
+import org.cgympoker.PlayerImpl;
+import org.cgympoker.Table.Status;
+import org.cgympoker.TournamentImpl;
+import org.cgympoker.TableImpl;
 import org.cgympoker.common.Player;
-import org.cgympoker.common.Server;
-import org.cgympoker.common.Table;
 import org.cgympoker.common.Tournament;
-import org.cgympoker.remoteobserver.Subscriber;
 
 public class CGYMServerTest{
+    
+
     /*
     public static Server createTestServer(){
         return new Server() {
