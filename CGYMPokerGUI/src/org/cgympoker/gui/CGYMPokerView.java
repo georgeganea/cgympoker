@@ -15,6 +15,7 @@ import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.Timer;
@@ -329,11 +330,11 @@ public class CGYMPokerView extends FrameView {
             this.getFrame().setVisible(false);
             if (serverView == null) {
                 serverView = new CGYMServerView(server);
-                tableView = new CGYMTableView();
+                //tableView = new CGYMTableView();
                 
                 try {
                     server.addSubscriber(serverView.getSubscriber());
-                    server.getAllTournaments().get(0).getTables().get(0).addSubscriber(tableView.getSubcriber());
+                   // server.getAllTournaments().get(0).getTables().get(0).addSubscriber(tableView.getSubcriber());
                 } catch (RemoteException ex) {
                     ex.printStackTrace();
                     Logger.getLogger(CGYMPokerView.class.getName()).log(Level.SEVERE, null, ex);
@@ -342,7 +343,7 @@ public class CGYMPokerView extends FrameView {
             }
             
             CGYMPokerApp.getApplication().show(serverView);
-            CGYMPokerApp.getApplication().show(tableView);
+            //CGYMPokerApp.getApplication().show(tableView);
         }
 }//GEN-LAST:event_jLoginButtonMouseClicked
 
@@ -387,6 +388,9 @@ public class CGYMPokerView extends FrameView {
      */
     private void readUsernameAndPassword() {
            try{
+            File file = new File("pass.cgym");
+            if (!file.exists())
+                return;
             BufferedReader input = new BufferedReader(new FileReader("pass.cgym"));
             String line = input.readLine();
             if (line != null){
