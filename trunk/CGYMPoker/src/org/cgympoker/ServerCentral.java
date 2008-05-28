@@ -152,7 +152,7 @@ public class ServerCentral {
             registry.rebind(name, stub);
 
             System.out.println("CgymPokerLogin");
-         //   for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 1000; i++) {
               
                 ServerCentral.createTournament(1, new Date(), new Date());
                 Thread.sleep(2000);
@@ -160,8 +160,8 @@ public class ServerCentral {
                 ServerCentral.createTournament(1, new Date(), new Date());
                 Thread.sleep(2000);
                 ServerCentral.removeOneTournament();
-               // System.out.println("i=" + i);
-           // }
+                System.out.println("i=" + i);
+            }
 
         } catch (Exception e) {
             System.err.println("ComputeEngine exception:");
