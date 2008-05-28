@@ -23,7 +23,11 @@ public class LoginImpl implements Login{
     }
 
     public Server createAccount(String user, String pass, String firstName, String lastName, String eMail){
-        UserFile.createUserFile(user, pass, firstName, lastName, eMail);
-        return new ServerImpl();
+        server = new ServerImpl();
+        ServerCentral.INSTANCE.addServer(server);
+        System.out.println("am apelat o metoda de pe server");
+        if (UserFile.createUserFile(user, pass, firstName, lastName, eMail) == false)
+            return null;
+        return server;
     }
 }

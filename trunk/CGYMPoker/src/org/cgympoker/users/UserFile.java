@@ -1,6 +1,7 @@
 package org.cgympoker.users;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -9,17 +10,23 @@ import java.io.PrintStream;
 
 public class UserFile {
 
-    public static void createUserFile(String user, String pass,String firstName, String lastName, String eMail) {
+    public static boolean createUserFile(String user, String pass,String firstName, String lastName, String eMail) {
         try { 
+            File file = new File(user+".cgym");
+            if (file.exists()){
+                return false;
+            }
             PrintStream outStream = new PrintStream(new FileOutputStream(user+".cgym"));
             outStream.println(pass); 
             outStream.println(firstName);
             outStream.println(lastName);
             outStream.println(eMail);
-            outStream.close(); 
+            outStream.close();
+            return true;
         }
         catch (Exception e) { 
             e.printStackTrace(); 
+            return false;
         }
     } 
     
