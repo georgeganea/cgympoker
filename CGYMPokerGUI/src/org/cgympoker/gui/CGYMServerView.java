@@ -41,6 +41,7 @@ public class CGYMServerView extends javax.swing.JFrame {
         }
 
         public void update(Object pub, Object code) throws RemoteException {
+            System.out.println("Se va face un update");
             updateTournamentsTable((ArrayList)pub);
         }
     }
