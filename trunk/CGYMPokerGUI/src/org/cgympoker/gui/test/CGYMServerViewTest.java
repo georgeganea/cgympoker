@@ -148,6 +148,10 @@ public class CGYMServerViewTest{
                     public String getStatus() {
                         return "Started";
                     }
+
+                    public void createTable(Table tableImpl) throws RemoteException {
+                        throw new UnsupportedOperationException("Not supported yet.");
+                    }
                 };
                 list.add(t1);
                 Tournament t2 = new Tournament() {
@@ -247,6 +251,10 @@ public class CGYMServerViewTest{
 
                     public String getStatus() {
                         return "Started";
+                    }
+
+                    public void createTable(Table tableImpl) throws RemoteException {
+                        throw new UnsupportedOperationException("Not supported yet.");
                     }
                 };
                 list.add(t2);
