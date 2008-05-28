@@ -268,7 +268,11 @@ public class CGYMServerView extends javax.swing.JFrame {
     private void joinTournamentButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_joinTournamentButtonMouseClicked
         int currentSelection = tournamentsTable.getSelectedRow();
         if (currentSelection!=-1)
-            System.out.println("S-a facut join pentru turneul:"+tournamentList.get(currentSelection).getID());
+            try {
+            System.out.println("S-a facut join pentru turneul:" + tournamentList.get(currentSelection).getID());
+        } catch (RemoteException ex) {
+            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+        }
 }//GEN-LAST:event_joinTournamentButtonMouseClicked
 
     private void observeTableButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_observeTableButtonMouseClicked
@@ -343,8 +347,13 @@ public class CGYMServerView extends javax.swing.JFrame {
     // End of variables declaration
 
     private void updateTablesTable(Tournament tournament) {
-        tablesList = tournament.getTables();
+        try {
+            tablesList = tournament.getTables();
         System.out.println(tournament.getTables().size());
+        } catch (RemoteException ex) {
+            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         tables = new Object[tablesList.size()][4];
         Iterator<Table> iterator = tablesList.iterator();
         tablesModel.setRowCount(0);
@@ -387,9 +396,14 @@ public class CGYMServerView extends javax.swing.JFrame {
         int i = 0;
         while (iterator.hasNext()) {
             Tournament tournament = iterator.next();
-            tournaments[i][0] = tournament.getID();
-            tournaments[i][1] = tournament.getStatus();
+            try {
+                tournaments[i][0] = tournament.getID();
+                tournaments[i][1] = tournament.getStatus();
             tournaments[i][2] = sdf.format(tournament.getStartTime());
+            } catch (RemoteException ex) {
+                Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             tournamentsModel.addRow(tournaments[i]);
             i++;
         }
