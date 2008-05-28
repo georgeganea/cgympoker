@@ -331,14 +331,14 @@ public class CGYMPokerView extends FrameView {
                 serverView = new CGYMServerView(server);
                 tableView = new CGYMTableView();
                 
-             try {
+                try {
                     server.addSubscriber(serverView.getSubscriber());
                     server.getAllTournaments().get(0).getTables().get(0).addSubscriber(tableView.getSubcriber());
                 } catch (RemoteException ex) {
                     ex.printStackTrace();
                     Logger.getLogger(CGYMPokerView.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                 
+
             }
             
             CGYMPokerApp.getApplication().show(serverView);

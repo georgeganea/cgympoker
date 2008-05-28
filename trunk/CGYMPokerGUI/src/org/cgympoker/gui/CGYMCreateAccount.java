@@ -7,9 +7,12 @@
 package org.cgympoker.gui;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.cgympoker.common.Login;
 import org.cgympoker.common.Server;
 
@@ -295,19 +298,27 @@ public class CGYMCreateAccount extends javax.swing.JFrame {
         if (checkData()==true){
             System.out.println("Se va conecta la server");
             try {
-            String name = "CgymPokerLogin";
+             String name = "CgymPokerLogin";
             System.out.println("Trying to connect to:"+CGYMPokerUtil.getServerAddress());
             Registry registry = LocateRegistry.getRegistry(CGYMPokerUtil.getServerAddress());
-            System.out.println("1");
+            System.out.println("1-"+registry);
+            System.out.println(registry.lookup(name));
             Remote  login = (Remote) registry.lookup(name);
             System.out.println("2");
             Login log = (Login) login;
-            server = log.createAccount(username,new String(passwordtextField.getPassword()),"","","");
+            System.out.println("3");
+            server = log.createAccount(username,new String(passwordtextField.getPassword()),firstName,lastName,email);
             if (server!=null){
                 CGYMPokerUtil.saveUsernamePassword(passwordCheckBox.isSelected(), username, password);
                 this.setVisible(false);
                 if (serverView == null) {
                     serverView = new CGYMServerView(server);
+                    try {
+                        server.addSubscriber(serverView.getSubscriber());
+                    } catch (RemoteException ex) {
+                        ex.printStackTrace();
+                        Logger.getLogger(CGYMPokerView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 CGYMPokerApp.getApplication().show(serverView);
             }
