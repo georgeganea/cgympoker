@@ -116,6 +116,18 @@ public class CGYMServerViewTest{
                             public Integer getAveragePot() {
                                 return 10;
                             }
+
+                            public void addSubscriber(Subscriber s) throws RemoteException {
+                                throw new UnsupportedOperationException("Not supported yet.");
+                            }
+
+                            public void removeSubscriber(Subscriber s) throws RemoteException {
+                                throw new UnsupportedOperationException("Not supported yet.");
+                            }
+
+                            public void removeAllSubscribers() throws RemoteException {
+                                throw new UnsupportedOperationException("Not supported yet.");
+                            }
                         };
                         tableList.add(t1);
                         return tableList;
@@ -219,6 +231,18 @@ public class CGYMServerViewTest{
 
                             public Integer getAveragePot() {
                                 return 20;
+                            }
+
+                            public void addSubscriber(Subscriber s) throws RemoteException {
+                                throw new UnsupportedOperationException("Not supported yet.");
+                            }
+
+                            public void removeSubscriber(Subscriber s) throws RemoteException {
+                                throw new UnsupportedOperationException("Not supported yet.");
+                            }
+
+                            public void removeAllSubscribers() throws RemoteException {
+                                throw new UnsupportedOperationException("Not supported yet.");
                             }
                         };
                         tableList.add(t1);

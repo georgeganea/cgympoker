@@ -278,7 +278,11 @@ public class CGYMServerView extends javax.swing.JFrame {
     private void observeTableButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_observeTableButtonMouseClicked
         int currentSelection = tablesTable.getSelectedRow();
         if (currentSelection!=-1)
-            System.out.println("Observe pentru masa:"+tablesList.get(currentSelection).getStatus());
+            try {
+            System.out.println("Observe pentru masa:" + tablesList.get(currentSelection).getStatus());
+        } catch (RemoteException ex) {
+            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_observeTableButtonMouseClicked
 
     private void disconnectButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disconnectButtonMouseClicked
@@ -360,10 +364,15 @@ public class CGYMServerView extends javax.swing.JFrame {
         int i = 0;
         while(iterator.hasNext()){
             Table table = iterator.next();
-            tables[i][0] = table.getStatus();
-            tables[i][1] = table.getBlinds();
+            try {
+                tables[i][0] = table.getStatus();
+                tables[i][1] = table.getBlinds();
             tables[i][2] = table.getPlayers().size();
             tables[i][3] = table.getAveragePot();
+            } catch (RemoteException ex) {
+                Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             tablesModel.addRow(tables[i]);
             i++;
         }
@@ -372,7 +381,11 @@ public class CGYMServerView extends javax.swing.JFrame {
    
     
     private void updatePlayersTable(Table table) {
-        playersList = table.getPlayers();
+        try {
+            playersList = table.getPlayers();
+        } catch (RemoteException ex) {
+            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         players = new Object[playersList.size()][2];
         Iterator<Player> iterator = playersList.iterator();
         playersModel.setRowCount(0);
