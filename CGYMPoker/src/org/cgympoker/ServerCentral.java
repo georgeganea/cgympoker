@@ -37,10 +37,11 @@ public class ServerCentral {
         /*
  * For testing purposes only
  */
+    private static TableImpl table1;
     private static Tournament createDummyTournament(){
         Date date = Calendar.getInstance().getTime();
         Tournament t = new TournamentImpl("T1", date, date);
-        TableImpl table1 = new TableImpl(Status.ANTE, "10", new ArrayList<Player>(), new Integer(4));
+        table1 = new TableImpl(Status.ANTE, "10", new ArrayList<Player>(), new Integer(4));
         ArrayList<Player> playerList = new ArrayList<Player>();
         playerList.add(new PlayerImpl("Ioana", 100));
         playerList.add(new PlayerImpl("George", 30));
@@ -105,7 +106,7 @@ public class ServerCentral {
     }
 
     public List<Tournament> getAllTournaments() {
-       return new ArrayList<Tournament>();
+       return tournaments;
     }
 
     public List<Tournament> getOpenTournaments() {
@@ -151,15 +152,16 @@ public class ServerCentral {
             registry.rebind(name, stub);
 
             System.out.println("CgymPokerLogin");
-            for (int i = 0; i < 1000; i++) {
-                Thread.sleep(2000);
+         //   for (int i = 0; i < 1000; i++) {
+              
                 ServerCentral.createTournament(1, new Date(), new Date());
                 Thread.sleep(2000);
+                ((TableImpl)ServerCentral.tournaments.get(0).getTables().get(0)).reset();
                 ServerCentral.createTournament(1, new Date(), new Date());
                 Thread.sleep(2000);
                 ServerCentral.removeOneTournament();
-                System.out.println("i=" + i);
-            }
+               // System.out.println("i=" + i);
+           // }
 
         } catch (Exception e) {
             System.err.println("ComputeEngine exception:");
