@@ -45,8 +45,14 @@ public class ServerCentral {
         playerList.add(new PlayerImpl("Ioana", 100));
         playerList.add(new PlayerImpl("George", 30));
         TableImpl table2 = new TableImpl(Status.BET, "20", playerList, 5);
-        t.createTable(table1);
-        t.createTable(table2);
+        try {
+            t.createTable(table1);
+             t.createTable(table2);
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
         return t;
     }
     

@@ -2,7 +2,6 @@ package org.cgympoker;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import org.cgympoker.Table.Status;
 import org.cgympoker.common.Table;
 import org.cgympoker.common.Player;
 import org.cgympoker.common.Card;
