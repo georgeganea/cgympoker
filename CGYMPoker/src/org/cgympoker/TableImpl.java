@@ -62,6 +62,7 @@ public class TableImpl implements Table, Serializable {
     }
 
     public void reset() {
+/*
         while(true){
             try {
                 Thread.sleep(1000);
@@ -75,6 +76,7 @@ public class TableImpl implements Table, Serializable {
             }
    
         }
+ */
     }
 
     public void addPlayer(Player p) {
