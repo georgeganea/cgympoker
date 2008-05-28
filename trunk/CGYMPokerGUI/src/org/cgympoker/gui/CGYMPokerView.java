@@ -35,6 +35,7 @@ public class CGYMPokerView extends FrameView {
     private CGYMServerView serverView = null;
     private CGYMCreateAccount createAccountView = null;
     private Server server;
+    private CGYMTableView tableView;
 
     public CGYMPokerView(SingleFrameApplication app) {
         super(app);
@@ -328,9 +329,11 @@ public class CGYMPokerView extends FrameView {
             this.getFrame().setVisible(false);
             if (serverView == null) {
                 serverView = new CGYMServerView(server);
+                tableView = new CGYMTableView();
                 
              try {
                     server.addSubscriber(serverView.getSubscriber());
+                    server.getAllTournaments().get(0).getTables().get(0).addSubscriber(tableView.getSubcriber());
                 } catch (RemoteException ex) {
                     ex.printStackTrace();
                     Logger.getLogger(CGYMPokerView.class.getName()).log(Level.SEVERE, null, ex);
@@ -339,6 +342,7 @@ public class CGYMPokerView extends FrameView {
             }
             
             CGYMPokerApp.getApplication().show(serverView);
+            CGYMPokerApp.getApplication().show(tableView);
         }
 }//GEN-LAST:event_jLoginButtonMouseClicked
 
