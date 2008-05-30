@@ -1,6 +1,5 @@
 package org.cgympoker.common;
 
-import org.cgympoker.common.*;
 import java.util.List;
 
 public interface Player {
