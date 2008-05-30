@@ -8,12 +8,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h2>Hello World!</h2>
-    </body>
-</html>
+<html><head><body>
+<form action="validateuser.jsp" method="POST">
+username - <input type="text" name="userName">
+password - <input type="password" name="passWord">
+<input type="submit" value="Submit">
+
+<input type="reset" value="Reset">
+</form></body></html>
