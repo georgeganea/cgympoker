@@ -18,15 +18,22 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.cgympoker.common.ServerCentral;
 import org.cgympoker.common.Table.Status;
-import org.cgympoker.test.CGYMServerTest;
 
-public class ServerCentral {
+public class ServerCentralImpl implements ServerCentral{
     //singleton
-    public static final ServerCentral INSTANCE = new ServerCentral();
+    public static final ServerCentralImpl INSTANCE = new ServerCentralImpl();
 
-    private ServerCentral() {
+    private ServerCentralImpl() {
+        try {
+            UnicastRemoteObject.exportObject(this, 0);
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(ServerCentralImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+    
     private static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
     private static ArrayList<Server> servers = new ArrayList<Server>();
 
@@ -51,7 +58,7 @@ public class ServerCentral {
              t.createTable(table2);
         } catch (RemoteException ex) {
             ex.printStackTrace();
-            Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServerCentralImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
        
         return t;
@@ -67,7 +74,7 @@ public class ServerCentral {
             try {
                 s.update(tournaments);
             } catch (RemoteException ex) {
-                Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServerCentralImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -80,7 +87,7 @@ public class ServerCentral {
             try {
                 s.update(tournaments);
             } catch (RemoteException ex) {
-                Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServerCentralImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -138,7 +145,7 @@ public class ServerCentral {
             new ClassFileServer(2001, classPath);
         } catch (IOException ex) {
             ex.printStackTrace();
-            Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServerCentralImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         try {
@@ -154,12 +161,12 @@ public class ServerCentral {
             System.out.println("CgymPokerLogin");
             for (int i = 0; i < 1000; i++) {
               
-                ServerCentral.createTournament(1, new Date(), new Date());
+                ServerCentralImpl.createTournament(1, new Date(), new Date());
                 Thread.sleep(2000);
-                ((TableImpl)ServerCentral.tournaments.get(0).getTables().get(0)).reset();
-                ServerCentral.createTournament(1, new Date(), new Date());
+                ((TableImpl)ServerCentralImpl.tournaments.get(0).getTables().get(0)).reset();
+                ServerCentralImpl.createTournament(1, new Date(), new Date());
                 Thread.sleep(2000);
-                ServerCentral.removeOneTournament();
+                ServerCentralImpl.removeOneTournament();
                 System.out.println("i=" + i);
             }
 
@@ -167,5 +174,9 @@ public class ServerCentral {
             System.err.println("ComputeEngine exception:");
             e.printStackTrace();
         }
+    }
+
+    public void createTournament(Date startTime, Date stopTime) throws RemoteException {
+        System.out.println("Create tournament");
     }
 }

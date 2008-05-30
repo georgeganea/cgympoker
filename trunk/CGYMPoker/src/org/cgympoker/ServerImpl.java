@@ -34,7 +34,7 @@ public class ServerImpl implements  Server,Serializable{
 
 
 	public List<Tournament> getAllTournaments() throws RemoteException{
-		return ServerCentral.INSTANCE.getAllTournaments();
+		return ServerCentralImpl.INSTANCE.getAllTournaments();
 	}
 
 
