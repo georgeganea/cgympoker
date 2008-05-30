@@ -27,6 +27,7 @@ import java.rmi.Remote;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import org.cgympoker.common.Login;
+import org.cgympoker.common.ServerCentral;
 
 
 /**
@@ -120,7 +121,6 @@ public class CGYMPokerView extends FrameView {
             System.out.println("2");
             Login log = (Login) login;
             System.out.println("3");
-            
             return   log.login(username,password);
         } catch (Exception e) {
             System.err.println("CgymPokerLogin exception:");
