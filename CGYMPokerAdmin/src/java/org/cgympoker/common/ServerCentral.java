@@ -15,6 +15,6 @@ import java.util.List;
  * @author Ioana
  */
 public interface ServerCentral extends Remote{
-    public void createTournament(Date startTime, Date stopTime) throws RemoteException;
+    public void createTournament(int nrMaxplayers,Date startTime, Date stopTime) throws RemoteException;
     public List<Tournament> getAllTournaments() throws RemoteException;
 }
