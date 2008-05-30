@@ -1,6 +1,8 @@
 package org.cgympoker;
 
 import java.rmi.RemoteException;
+import java.util.Collection;
+import java.util.ListIterator;
 import org.cgympoker.common.Felix;
 import org.cgympoker.common.Login;
 import org.cgympoker.common.Player;
@@ -45,9 +47,9 @@ public class ServerCentralImpl implements ServerCentral{
  * For testing purposes only
  */
     private static TableImpl table1;
-    private static Tournament createDummyTournament(){
+    private static Tournament createDummyTournament( Date startTime, Date stopTime){
         Date date = Calendar.getInstance().getTime();
-        Tournament t = new TournamentImpl("T1", date, date);
+        Tournament t = new TournamentImpl("T1", startTime, stopTime);
         table1 = new TableImpl(Status.ANTE, "10", new ArrayList<Player>(), new Integer(4));
         ArrayList<Player> playerList = new ArrayList<Player>();
         playerList.add(new PlayerImpl("Ioana", 100));
@@ -64,9 +66,9 @@ public class ServerCentralImpl implements ServerCentral{
         return t;
     }
     
-    public static void createTournament(int maxPlayers, Date startTime, Date stopTime) {
+    public void createTournament(int maxPlayers, Date startTime, Date stopTime) {
         
-        tournaments.add(createDummyTournament());
+        tournaments.add(createDummyTournament(startTime,stopTime));
         //TODO de impl cu ceva timer sa se apeleze start tournament
         Iterator<Server> it = servers.iterator();
         while (it.hasNext()) {
@@ -161,10 +163,10 @@ public class ServerCentralImpl implements ServerCentral{
             System.out.println("CgymPokerLogin");
             for (int i = 0; i < 1000; i++) {
               
-                ServerCentralImpl.createTournament(1, new Date(), new Date());
+                ServerCentralImpl.INSTANCE.createTournament(1, new Date(), new Date());
                 Thread.sleep(2000);
                 ((TableImpl)ServerCentralImpl.tournaments.get(0).getTables().get(0)).reset();
-                ServerCentralImpl.createTournament(1, new Date(), new Date());
+                ServerCentralImpl.INSTANCE.createTournament(1, new Date(), new Date());
                 Thread.sleep(2000);
                 ServerCentralImpl.removeOneTournament();
                 System.out.println("i=" + i);
@@ -175,8 +177,27 @@ public class ServerCentralImpl implements ServerCentral{
             e.printStackTrace();
         }
     }
+  
+    public ArrayList<File> getFileList(String directory) {
 
-    public void createTournament(Date startTime, Date stopTime) throws RemoteException {
-        System.out.println("Create tournament");
+    
+        File folder = new File(directory+"/");
+        File[] listOfFiles = folder.listFiles();
+        ArrayList<File> templist=new ArrayList<File>() ;
+
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                System.out.println("File " + listOfFiles[i].getName());
+                templist.add(listOfFiles[i]);
+            } 
+        }
+        return templist;
     }
+
+   
+
+
+/*    public void createTournament(Date startTime, Date stopTime) throws RemoteException {
+        System.out.println("Create tournament");
+    } */
 }
