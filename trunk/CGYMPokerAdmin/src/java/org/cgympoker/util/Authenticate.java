@@ -4,12 +4,7 @@
  */
 package org.cgympoker.util;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.rmi.Remote;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.logging.Level;
@@ -31,7 +26,6 @@ public class Authenticate {
     public ServerCentral authenticate(String user, String pass) {
         try {
             String name = "CgymPokerLogin";
-            File f = new File(".");
             Registry registry = LocateRegistry.getRegistry(CGYMPokerUtil.getServerAddress());
             System.out.println(registry.lookup(name));
             Remote login = (Remote) registry.lookup(name);
