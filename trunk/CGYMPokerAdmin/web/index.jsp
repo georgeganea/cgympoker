@@ -8,11 +8,18 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
-<html><head><body>
-<form action="validateuser.jsp" method="POST">
-username - <input type="text" name="userName">
-password - <input type="password" name="passWord">
-<input type="submit" value="Submit">
+<html>
+<head>
+  <title>Autentification</title>
+</head>
+  <h1>CGYMPoker Admin</h1>
+<form  action=validateuser.jsp method="get">
+ <p> Username: <input type="text" name="userName" size="25" />
+  <br/>
+     Password: <input type="password" name="passWord" size="15" />
+  <br/>
+  </p>
+  <p><input type="submit" value="Login"/>
+</form>
+</html>
 
-<input type="reset" value="Reset">
-</form></body></html>
