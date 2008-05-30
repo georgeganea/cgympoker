@@ -15,12 +15,16 @@
     </HEAD>
 
     <BODY>
+        <FORM NAME="back" ACTION="welcome.jsp" METHOD="POST">
+            <INPUT TYPE="submit" VALUE="BackToTournaments" />
+        </form>   
         <% 
             //if(request.getParameter("buttonName") != null) {
             if(request.getParameterNames() != null) {
         %>
-            You clicked 
-            <%= request.getParameter("listUsers") %>
+        
+            TODO:List of Users
+            
         <%
             }
         %>

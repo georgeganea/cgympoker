@@ -27,7 +27,7 @@
           <%
           ServerCentral server=serverC.getServer();
          
-          if(request.getParameter("tournamentName")!=null){
+          if(request.getParameterNames()!=null){
               String tname=request.getParameter("tournamentName");
               String startIn=request.getParameter("tstart");
               String stopIn=request.getParameter("tstop");

@@ -1,9 +1,12 @@
-<!-- 
-    Document   : TournamentForm
-    Created on : May 30, 2008, 3:36:04 PM
+<%-- 
+    Document   : TornamentFrom
+    Created on : May 31, 2008, 2:43:46 AM
     Author     : carmen
--->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+--%>
+
+<%@page contentType="text/html" ListUserspageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
     <title>TournamentForm</title>
@@ -28,3 +31,4 @@
      </form>           
     </body>
 </html>
+
