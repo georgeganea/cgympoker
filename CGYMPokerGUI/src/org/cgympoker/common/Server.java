@@ -7,6 +7,9 @@ import org.cgympoker.remoteobserver.Publisher;
 
 public interface Server extends Publisher {
 	public List<Tournament> getAllTournaments() throws RemoteException;
+
+        public Integer getMoney() throws RemoteException;
+        public String getName()throws RemoteException;
 	public List<Tournament> getStartedTournaments() throws RemoteException;
 	public List<Tournament> getOpenTournaments()throws RemoteException;
 	public List<Player> getPlayers()throws RemoteException;
