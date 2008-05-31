@@ -207,7 +207,7 @@ public class ServerCentralImpl implements ServerCentral{
         File[] listOfFiles = folder.listFiles();
         ArrayList<String> templist=new ArrayList<String>();
         for (int i = 0; i< listOfFiles.length ; i++) {
-            if (listOfFiles[i].isFile()&&(listOfFiles[i].getName().contains(".cgym"))) {
+            if (listOfFiles[i].isFile()&&(listOfFiles[i].getName().endsWith(".cgym"))) {
                 templist. add(listOfFiles[i].getName());
             } 
         }
@@ -228,7 +228,7 @@ public class ServerCentralImpl implements ServerCentral{
         String temp; 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(username));
-            info.add(username);
+            info.add(username.replace(".cgym", ""));
             while((temp=reader.readLine())!=null){
                 info.add(temp);
             }
