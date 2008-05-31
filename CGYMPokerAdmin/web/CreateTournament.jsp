@@ -14,17 +14,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-         <% String tname=null,startIn=null,stopIn=null;
+         <% String tname=null;
             tname=request.getParameter("tname");
-            startIn=request.getParameter("start");
-            stopIn=request.getParameter("stop");
           
-            if ((tname!=null)&&(startIn!=null)&&(stopIn!=null)){
+            if (tname!=null){
           %>
           <jsp:forward page="welcome.jsp">
-            <jsp:param name="tournamentName" value="<%=tname%>" />
-            <jsp:param name="tstart" value="<%=startIn%>" />
-            <jsp:param name="tstop" value="<%=stopIn%>" />
+            <jsp:param name="tournamentName" value="<%=tname%>"/>
           </jsp:forward>
          <%}else{ %>
               <jsp:forward page="retry.jsp"/>
