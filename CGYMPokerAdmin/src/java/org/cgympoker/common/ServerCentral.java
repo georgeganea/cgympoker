@@ -19,7 +19,7 @@ import java.util.List;
  * @author Ioana
  */
 public interface ServerCentral extends Remote{
-    public void createTournament(int nrMaxplayers,Date startTime, Date stopTime) throws RemoteException;
+    public void createTournament(String ID, Date startTime, Date stopTime) throws RemoteException;
     public List<Tournament> getAllTournaments() throws RemoteException;
     public ArrayList<String> getUserList()throws RemoteException;
     public void deleteUser(String username)throws RemoteException;
