@@ -190,7 +190,14 @@ public class ServerCentralImpl implements ServerCentral{
     }
 
     public boolean startTournament(String ID) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Iterator<Tournament> iterator = tournaments.iterator();
+        while (iterator.hasNext()){
+            Tournament tournament = iterator.next();
+            if (tournament.getID().compareTo(ID) == 0)
+                ((TournamentImpl)tournament).start();
+                return true;
+        }
+        return false;
     }
 
 /*    public void createTournament(Date startTime, Date stopTime) throws RemoteException {
