@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import org.cgympoker.common.Table;
 import org.cgympoker.common.Player;
 import org.cgympoker.common.Tournament;
-import java.util.Date;
 import java.util.List;
 
 public class TournamentImpl implements Tournament {
@@ -21,7 +20,7 @@ public class TournamentImpl implements Tournament {
 
     public TournamentImpl(String ID) {
         this.ID = ID;
-        this.status = "WAITING TO START";
+        this.status = "JOIN OPEN";
         try {
             UnicastRemoteObject.exportObject((Remote) this, 0);
         } catch (RemoteException ex) {
@@ -77,7 +76,7 @@ public class TournamentImpl implements Tournament {
     }
 
     public String getStatus() throws RemoteException {
-        return "Started";
+        return status;
     }
 
     public void createTable(Table tableImpl) throws RemoteException {
