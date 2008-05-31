@@ -15,12 +15,13 @@ import java.util.List;
 public class TournamentImpl implements Tournament {
 
     private String ID;
-    private String status;
     private ArrayList<Table> tablesList = new ArrayList<Table>();
+    private enum Status {JOIN_OPEN,STARTED};
+    private Status status;
 
     public TournamentImpl(String ID) {
         this.ID = ID;
-        this.status = "JOIN OPEN";
+        this.status = Status.JOIN_OPEN;
         try {
             UnicastRemoteObject.exportObject((Remote) this, 0);
         } catch (RemoteException ex) {
@@ -48,7 +49,6 @@ public class TournamentImpl implements Tournament {
 
     @Override
     public List<Table> getTables() throws RemoteException {
-
         return tablesList;
     }
 
@@ -76,7 +76,7 @@ public class TournamentImpl implements Tournament {
     }
 
     public String getStatus() throws RemoteException {
-        return status;
+        return status.toString();
     }
 
     public void createTable(Table tableImpl) throws RemoteException {
