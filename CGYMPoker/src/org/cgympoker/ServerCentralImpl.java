@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.cgympoker.common.ServerCentral;
-import org.cgympoker.common.Table.Status;
 
 public class ServerCentralImpl implements ServerCentral{
     //singleton
@@ -51,9 +50,9 @@ public class ServerCentralImpl implements ServerCentral{
  */
     private static TableImpl table1;
     
-    public void createTournament(String ID, Date startTime, Date stopTime) {
+    public void createTournament(String ID) {
         
-        tournaments.add(new TournamentImpl(ID, startTime, stopTime));
+        tournaments.add(new TournamentImpl(ID));
         Iterator<Server> it = servers.iterator();
         while (it.hasNext()) {
             Server s = it.next();
@@ -188,6 +187,10 @@ public class ServerCentralImpl implements ServerCentral{
             e.printStackTrace();
         }
         return info;
+    }
+
+    public boolean startTournament(String ID) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 /*    public void createTournament(Date startTime, Date stopTime) throws RemoteException {

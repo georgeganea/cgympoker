@@ -17,15 +17,11 @@ public class TournamentImpl implements Tournament {
 
     private String ID;
     private String status;
-    private Date startTime;
-    private Date stopTime;
     private ArrayList<Table> tablesList = new ArrayList<Table>();
 
-    public TournamentImpl(String ID, Date startDate, Date stopDate) {
+    public TournamentImpl(String ID) {
         this.ID = ID;
         this.status = "WAITING TO START";
-        this.startTime = startDate;
-        this.stopTime = stopDate;
         try {
             UnicastRemoteObject.exportObject((Remote) this, 0);
         } catch (RemoteException ex) {
@@ -49,16 +45,6 @@ public class TournamentImpl implements Tournament {
     public List<Player> getPlayers() throws RemoteException {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    @Override
-    public Date getStartTime() throws RemoteException {
-        return startTime;
-    }
-
-    @Override
-    public Date getStopTime() throws RemoteException {
-        return stopTime;
     }
 
     @Override
