@@ -1,5 +1,6 @@
 package org.cgympoker;
 
+import java.io.BufferedReader;
 import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.ListIterator;
@@ -9,6 +10,8 @@ import org.cgympoker.common.Player;
 import org.cgympoker.common.Tournament;
 import org.cgympoker.common.Server;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -38,7 +41,7 @@ public class ServerCentralImpl implements ServerCentral{
     
     private static ArrayList<Tournament> tournaments = new ArrayList<Tournament>();
     private static ArrayList<Server> servers = new ArrayList<Server>();
-
+    private static String rootdir="."; //the path where we put the userfiles
     public static void addServer(Server serv) {
         servers.add(serv);
     }
@@ -161,6 +164,14 @@ public class ServerCentralImpl implements ServerCentral{
             registry.rebind(name, stub);
 
             System.out.println("CgymPokerLogin");
+            System.out.println("UsersList:"+ServerCentralImpl.INSTANCE.getUserList().size());
+            for(int i=0;i<ServerCentralImpl.INSTANCE.getUserList().size();i++){
+                System.out.println("USER:"+ServerCentralImpl.INSTANCE.getUserList().get(i));
+            }
+            System.out.println("Deleted!");
+            for(int i=0;i<ServerCentralImpl.INSTANCE.getUserList().size();i++){
+                System.out.println("USER:"+ServerCentralImpl.INSTANCE.getUserList().get(i));
+            }
             for (int i = 0; i < 1000; i++) {
               
                 ServerCentralImpl.INSTANCE.createTournament(1, new Date(), new Date());
@@ -177,25 +188,58 @@ public class ServerCentralImpl implements ServerCentral{
             e.printStackTrace();
         }
     }
-  
-    public ArrayList<File> getFileList(String directory) {
-
     
+    public File getUserFile(String username,String directory){
         File folder = new File(directory+"/");
         File[] listOfFiles = folder.listFiles();
-        ArrayList<File> templist=new ArrayList<File>() ;
-
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile()) {
-                System.out.println("File " + listOfFiles[i].getName());
-                templist.add(listOfFiles[i]);
+                if(listOfFiles[i].getName().compareTo(username+".cgym")==0)
+                    return listOfFiles[i];
+            } 
+        }
+        return null;
+
+    }
+    public ArrayList<String> getUserList() {
+        String directory=rootdir;
+        File folder = new File(".");
+        File[] listOfFiles = folder.listFiles();
+        ArrayList<String> templist=new ArrayList<String>();
+        for (int i = 0; i< listOfFiles.length ; i++) {
+            if (listOfFiles[i].isFile()&&(listOfFiles[i].getName().contains(".cgym"))) {
+                templist. add(listOfFiles[i].getName());
             } 
         }
         return templist;
     }
+    
 
-   
+    public void deleteUser(String username){
+        File file=ServerCentralImpl.INSTANCE.getUserFile(username, rootdir);
+        if(file!=null){
+            file.delete();
+        }
+    }
 
+    public ArrayList<String> getUserInfo(String username)throws FileNotFoundException,IOException{
+        ArrayList info=new ArrayList<String>();
+        File file=ServerCentralImpl.INSTANCE.getUserFile(username, rootdir);
+        String temp; 
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(username));
+            info.add(username);
+            while((temp=reader.readLine())!=null){
+                info.add(temp);
+            }
+            
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return info;
+    }
 
 /*    public void createTournament(Date startTime, Date stopTime) throws RemoteException {
         System.out.println("Create tournament");
