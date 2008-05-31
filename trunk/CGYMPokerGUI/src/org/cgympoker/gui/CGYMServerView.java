@@ -266,11 +266,13 @@ public class CGYMServerView extends javax.swing.JFrame {
 
     private void joinTournamentButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_joinTournamentButtonMouseClicked
         int currentSelection = tournamentsTable.getSelectedRow();
-        if (currentSelection!=-1)
+        if (currentSelection != -1) {
             try {
-            System.out.println("S-a facut join pentru turneul:" + tournamentList.get(currentSelection).getID());
-        } catch (RemoteException ex) {
-            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+                Tournament tournament = tournamentList.get(currentSelection);
+                tournament.join(server);
+            } catch (RemoteException ex) {
+                Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 }//GEN-LAST:event_joinTournamentButtonMouseClicked
 
@@ -390,11 +392,15 @@ public class CGYMServerView extends javax.swing.JFrame {
         playersModel.setRowCount(0);
         int i = 0;
         while(iterator.hasNext()){
-            Player player = iterator.next();
-            players[i][0] = player.getName();
-            players[i][1] = player.getMoney();
-            playersModel.addRow(players[i]);
-            i++;
+            try {
+                Player player = iterator.next();
+                players[i][0] = player.getName();
+                players[i][1] = player.getMoney();
+                playersModel.addRow(players[i]);
+                i++;
+            } catch (RemoteException ex) {
+                Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
