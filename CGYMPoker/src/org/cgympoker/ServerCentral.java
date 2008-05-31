@@ -37,30 +37,10 @@ public class ServerCentral {
         /*
  * For testing purposes only
  */
-    private static TableImpl table1;
-    private static Tournament createDummyTournament(){
-        Date date = Calendar.getInstance().getTime();
-        Tournament t = new TournamentImpl("T1", date, date);
-        table1 = new TableImpl(Status.ANTE, "10", new ArrayList<Player>(), new Integer(4));
-        ArrayList<Player> playerList = new ArrayList<Player>();
-        playerList.add(new PlayerImpl("Ioana", 100));
-        playerList.add(new PlayerImpl("George", 30));
-        TableImpl table2 = new TableImpl(Status.BET, "20", playerList, 5);
-        try {
-            t.createTable(table1);
-             t.createTable(table2);
-        } catch (RemoteException ex) {
-            ex.printStackTrace();
-            Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
-        return t;
-    }
     
-    public static void createTournament(int maxPlayers, Date startTime, Date stopTime) {
+    public static void createTournament(String ID, Date startTime, Date stopTime) {
         
-        tournaments.add(createDummyTournament());
-        //TODO de impl cu ceva timer sa se apeleze start tournament
+        tournaments.add(new TournamentImpl(ID, startTime, stopTime));
         Iterator<Server> it = servers.iterator();
         while (it.hasNext()) {
             Server s = it.next();
@@ -152,17 +132,6 @@ public class ServerCentral {
             registry.rebind(name, stub);
 
             System.out.println("CgymPokerLogin");
-            for (int i = 0; i < 1000; i++) {
-              
-                ServerCentral.createTournament(1, new Date(), new Date());
-                Thread.sleep(2000);
-                ((TableImpl)ServerCentral.tournaments.get(0).getTables().get(0)).reset();
-                ServerCentral.createTournament(1, new Date(), new Date());
-                Thread.sleep(2000);
-                ServerCentral.removeOneTournament();
-                System.out.println("i=" + i);
-            }
-
         } catch (Exception e) {
             System.err.println("ComputeEngine exception:");
             e.printStackTrace();
