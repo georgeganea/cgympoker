@@ -2,8 +2,6 @@ package org.cgympoker.common;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import org.cgympoker.common.*;
-import java.util.Date;
 import java.util.List;
 
 public interface Tournament extends Remote {
@@ -14,9 +12,6 @@ public interface Tournament extends Remote {
 	public List<Player> getActivePlayers()throws RemoteException;
 	public List<Player> getEliminatedPlayers()throws RemoteException;
 	public String getID()throws RemoteException;
-	public Date getStartTime()throws RemoteException;
-	public Date getStopTime()throws RemoteException;
-        
        /**
         * 
         * @return the status of the Tournament:STARTED,...
