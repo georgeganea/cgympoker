@@ -40,7 +40,7 @@
                 stop.setTime(start.getTime()+Long.parseLong(stopIn)*60000);
                 Date date = new Date();
         
-                server.createTournament(10,start,stop);
+                server.createTournament(tname,start,stop);
        
             } 
         }
