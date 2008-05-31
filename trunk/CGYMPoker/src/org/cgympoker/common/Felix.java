@@ -1,7 +1,5 @@
 package org.cgympoker.common;
 
-import org.cgympoker.common.*;
-
 public interface Felix {
 	public void joinTournament(Tournament t);
 	public void leaveTournamnent();
