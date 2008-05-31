@@ -41,9 +41,10 @@
                 ArrayList<String> userlist=new ArrayList(server.getUserList());
                 ArrayList<String> user=new ArrayList<String>();
                 if(n>0){ %>
+                <br>
                    <TABLE border="1" summary="This table lists the CGYMPoker users.">
                     <br>
-                    <CAPTION><EM>CGYMPoker Users</EM></CAPTION>
+                    <CAPTION><EM><B>CGYMPoker Users</B></EM></CAPTION>
                     <TR><TH rowspan="1">UserName
                     <TH rowspan="1">Score
                     <%
