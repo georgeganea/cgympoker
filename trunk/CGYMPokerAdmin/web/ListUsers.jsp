@@ -20,19 +20,29 @@
     </HEAD>
 
     <BODY>
-        <FORM NAME="back" ACTION="welcome.jsp" METHOD="POST">
-            <INPUT TYPE="submit" VALUE="BackToTournaments" />
+        <FORM NAME="deleteuser"  ACTION="ListUsers.jsp"  METHOD="POST">
+            <INPUT TYPE="submit" VALUE="DeleteUser"/>
+            <input type="text" name="username" size="15"/>
         </form>   
+        <br>
+        <FORM NAME="back"  ACTION="welcome.jsp"  METHOD="POST">
+            <INPUT TYPE="submit" VALUE="BackToTournaments"/>
+        </form>  
+       
         <% 
              ServerCentral server=serverC.getServer();
             //if(request.getParameter("buttonName") != null) {
             if(request.getParameterNames() != null) {
-        
+                String username=request.getParameter("username");
+                if(username!=null){
+                    server.deleteUser(username);
+                }
                 int n=server.getUserList().size();
                 ArrayList<String> userlist=new ArrayList(server.getUserList());
                 ArrayList<String> user=new ArrayList<String>();
                 if(n>0){ %>
                    <TABLE border="1" summary="This table lists the CGYMPoker users.">
+                    <br>
                     <CAPTION><EM>CGYMPoker Users</EM></CAPTION>
                     <TR><TH rowspan="1">UserName
                     <TH rowspan="1">Score
