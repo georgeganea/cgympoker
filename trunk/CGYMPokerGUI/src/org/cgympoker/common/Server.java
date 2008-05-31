@@ -15,3 +15,4 @@ public interface Server extends Publisher {
 
         public void update(ArrayList<Tournament> tournaments) throws RemoteException;
 }
+
