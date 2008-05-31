@@ -52,19 +52,6 @@ public class ServerCentral {
         }
     }
 
-    private static void removeOneTournament() {
-        tournaments.remove(0);
-        Iterator<Server> it = servers.iterator();
-        while (it.hasNext()) {
-            Server s = it.next();
-            try {
-                s.update(tournaments);
-            } catch (RemoteException ex) {
-                Logger.getLogger(ServerCentral.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
     public void startTournament(Tournament tour) {
 
     }
