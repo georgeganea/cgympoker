@@ -5,8 +5,12 @@
 
 package org.cgympoker.common;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,4 +21,7 @@ import java.util.List;
 public interface ServerCentral extends Remote{
     public void createTournament(int nrMaxplayers,Date startTime, Date stopTime) throws RemoteException;
     public List<Tournament> getAllTournaments() throws RemoteException;
+    public ArrayList<String> getUserList()throws RemoteException;
+    public void deleteUser(String username)throws RemoteException;
+    public ArrayList<String> getUserInfo(String username)throws FileNotFoundException,IOException,RemoteException;
 }
