@@ -57,6 +57,7 @@ public class TournamentImpl implements Tournament {
     }
 
     public void start() throws RemoteException {
+        this.status = Status.STARTED;
     // TODO porneste turneul
 		/*
      * 1. creeaza mesele de joc
