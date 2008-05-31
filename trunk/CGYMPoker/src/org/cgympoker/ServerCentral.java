@@ -40,7 +40,7 @@ public class ServerCentral {
     
     public static void createTournament(String ID, Date startTime, Date stopTime) {
         
-        tournaments.add(new TournamentImpl(ID, startTime, stopTime));
+        tournaments.add(new TournamentImpl(ID));
         Iterator<Server> it = servers.iterator();
         while (it.hasNext()) {
             Server s = it.next();
