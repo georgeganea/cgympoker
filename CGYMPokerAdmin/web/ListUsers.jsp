@@ -29,10 +29,10 @@
             if(request.getParameterNames() != null) {
         
                 int n=server.getUserList().size();
-                ArrayList<String> userlist=server.getUserList();
+                ArrayList<String> userlist=new ArrayList(server.getUserList());
                 ArrayList<String> user=new ArrayList<String>();
                 if(n>0){ %>
-                    <TABLE border="1" summary="This table lists the CGYMPoker users.">
+                   <TABLE border="1" summary="This table lists the CGYMPoker users.">
                     <CAPTION><EM>CGYMPoker Users</EM></CAPTION>
                     <TR><TH rowspan="1">UserName
                     <TH rowspan="1">Score
@@ -42,10 +42,8 @@
                     %>
                         <TR><TD><%=user.get(0)%><TD><%=user.get(1)%>
                     <%}%>    
-                  </TABLE>
+                  </TABLE> 
         <%}%>
-            TODO:List of Users
-            
         <%
             }
         %>
@@ -55,7 +53,6 @@
             <INPUT TYPE="BUTTON" VALUE="DeleteUser" ONCLICK="deleteUser()">
         </FORM> --%>
         <script type="text/javascript">
-            document.write("Hello World!")
         </script>           
       </BODY>
 </HTML>
