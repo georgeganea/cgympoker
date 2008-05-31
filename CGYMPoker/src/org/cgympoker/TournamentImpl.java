@@ -43,8 +43,7 @@ public class TournamentImpl implements Tournament {
 
     @Override
     public List<Player> getPlayers() throws RemoteException {
-        // TODO Auto-generated method stub
-        return null;
+       return new ArrayList<Player>();
     }
 
     @Override
