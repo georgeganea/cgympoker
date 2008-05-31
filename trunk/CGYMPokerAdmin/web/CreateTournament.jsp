@@ -27,7 +27,6 @@
         <% }
              
           %>        
-        <h2>Tournament created!</h2>
-        <>
+     
     </body>
 </html>

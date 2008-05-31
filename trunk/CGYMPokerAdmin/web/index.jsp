@@ -16,7 +16,7 @@
 <form  action=validateuser.jsp method="get">
  <p> Username: <input type="text" name="userName" size="25" />
   <br/>
-     Password: <input type="password" name="passWord" size="15" />
+     Password:  <input type="password" name="passWord" size="15" />
   <br/>
   </p>
   <p><input type="submit" value="Login"/>

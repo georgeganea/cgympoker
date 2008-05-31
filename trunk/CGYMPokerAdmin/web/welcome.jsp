@@ -30,7 +30,7 @@
           if(request.getParameterNames()!=null){
               String id_t=request.getParameter("tournamentName");
              
-             if (id_t!=null){
+             if ((id_t!=null)&&(id_t.length()>0)){
                  if(request.getParameter("create")!=null){
                     server.createTournament(id_t);
                  }
@@ -44,13 +44,18 @@
          if(n>0){ %>
          <br><br>
             <TABLE border="1" summary="This table lists the current tournaments.">
-                <CAPTION><EM>Tournaments</EM></CAPTION>
+                <CAPTION><EM><B>Tournaments</B></EM></CAPTION>
                 <TR><TH rowspan="1">Turnament<br>Name
                 <TH rowspan="1">Status
+                <TH rowspan="1">Players
+                </TR>
                 <%
                 for(int i=0;i<n;i++){
+                   
                 %>
-                  <TR><TD><%=list.get(i).getID() %><TD><%=list.get(i).getStatus()%>
+                <TR><TD><%=list.get(i).getID() %></TD><TD><%=list.get(i).getStatus()%></TD><TD><%=list.get(i).getPlayers().size()%></TD>
+                </TR>
+                  
                 <%}%>    
             </TABLE>
         <%}%>
