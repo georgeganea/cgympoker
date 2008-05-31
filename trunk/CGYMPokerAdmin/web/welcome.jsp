@@ -31,13 +31,18 @@
               String id_t=request.getParameter("tournamentName");
              
              if (id_t!=null){
-                server.createTournament(id_t);
-       
+                 if(request.getParameter("create")!=null){
+                    server.createTournament(id_t);
+                 }
+                 if(request.getParameter("start")!=null){
+                    server.startTournament(id_t);
+                 }
             } 
         }
          int n=server.getAllTournaments().size();
          List<Tournament> list=server.getAllTournaments();
          if(n>0){ %>
+         <br><br>
             <TABLE border="1" summary="This table lists the current tournaments.">
                 <CAPTION><EM>Tournaments</EM></CAPTION>
                 <TR><TH rowspan="1">Turnament<br>Name
