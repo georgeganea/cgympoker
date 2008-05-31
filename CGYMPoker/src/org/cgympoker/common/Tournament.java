@@ -7,6 +7,7 @@ import java.util.List;
 public interface Tournament extends Remote {
 
         public void createTable(Table tableImpl)throws RemoteException;
+        public Player join(Server server) throws RemoteException;
 	public List<Table> getTables()throws RemoteException;
 	public List<Player> getPlayers()throws RemoteException;
 	public List<Player> getActivePlayers()throws RemoteException;

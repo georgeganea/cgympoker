@@ -80,9 +80,6 @@ public class ServerCentralImpl implements ServerCentral{
 
     }
 
-    public Server createServerInstance(String user) {
-        return new ServerImpl();
-    }
 
     public List<Tournament> getAllTournaments() {
        return tournaments;
@@ -150,12 +147,11 @@ public class ServerCentralImpl implements ServerCentral{
 
     }
     public ArrayList<String> getUserList() {
-        String directory=rootdir;
         File folder = new File(".");
         File[] listOfFiles = folder.listFiles();
         ArrayList<String> templist=new ArrayList<String>();
         for (int i = 0; i< listOfFiles.length ; i++) {
-            if (listOfFiles[i].isFile()&&(listOfFiles[i].getName().endsWith(".cgym"))) {
+              if (listOfFiles[i].isFile()&&(listOfFiles[i].getName().endsWith(".cgym"))&&(listOfFiles[i].getName().compareTo("admin.cgym")!=0)) {
                 templist. add(listOfFiles[i].getName());
             } 
         }

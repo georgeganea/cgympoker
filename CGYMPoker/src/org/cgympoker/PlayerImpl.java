@@ -1,17 +1,31 @@
 package org.cgympoker;
 
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.cgympoker.common.Player;
 import org.cgympoker.common.Card;
 import java.util.List;
+import org.cgympoker.common.Server;
 
-public class PlayerImpl implements Player,Serializable {
-    private String name;
-    private Integer money;
+public class PlayerImpl implements Player{
+    private Server server;
+    
+    
 
-    public PlayerImpl(String name, Integer money){
-        this.name = name;
-        this.money = money;
+
+    public PlayerImpl(Server server) {
+       this.server = server;
+      
+        try {
+            UnicastRemoteObject.exportObject(this, 0);
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(PlayerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }
     
     @Override
@@ -28,7 +42,12 @@ public class PlayerImpl implements Player,Serializable {
 
     @Override
     public String getName() {
-        return name;
+        try {
+            return server.getName();
+        } catch (RemoteException ex) {
+            Logger.getLogger(PlayerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
     }
 
     @Override
@@ -54,6 +73,11 @@ public class PlayerImpl implements Player,Serializable {
     }
 
     public Integer getMoney() {
-        return money;
+        try {
+            return server.getMoney();
+        } catch (RemoteException ex) {
+            Logger.getLogger(PlayerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
 }

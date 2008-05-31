@@ -15,9 +15,15 @@ import java.util.List;
 import org.cgympoker.remoteobserver.BasicPublisher;
 import org.cgympoker.remoteobserver.Subscriber;
 
-public class ServerImpl implements  Server,Serializable{
+public class ServerImpl implements Server, Serializable {
+
     private BasicPublisher publisher = new BasicPublisher();
-    public ServerImpl() {
+    private String user;
+    private int money;
+
+    public ServerImpl(String user, int money) {
+        this.user = user;
+        this.money = money;
         try {
             UnicastRemoteObject.exportObject(this, 0);
         } catch (RemoteException ex) {
@@ -25,40 +31,34 @@ public class ServerImpl implements  Server,Serializable{
             Logger.getLogger(ServerImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
-	public void disconnect() throws RemoteException{
-		// TODO Auto-generated method stub
-		
-	}
+    public void disconnect() throws RemoteException {
+    // TODO Auto-generated method stub
 
+    }
 
-	public List<Tournament> getAllTournaments() throws RemoteException{
-		return ServerCentralImpl.INSTANCE.getAllTournaments();
-	}
+    public List<Tournament> getAllTournaments() throws RemoteException {
+        return ServerCentralImpl.INSTANCE.getAllTournaments();
+    }
 
+    public Felix getFelix() throws RemoteException {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public Felix getFelix() throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public List<Tournament> getOpenTournaments() throws RemoteException {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
+    public List<Player> getPlayers() throws RemoteException {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public List<Tournament> getOpenTournaments() throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public List<Player> getPlayers() throws RemoteException{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public List<Tournament> getStartedTournaments() throws RemoteException{
-		return null;
-	}
+    public List<Tournament> getStartedTournaments() throws RemoteException {
+        return null;
+    }
 
     public void addSubscriber(Subscriber s) throws RemoteException {
         System.out.println("ceva subscriber adaugat ");
@@ -73,11 +73,16 @@ public class ServerImpl implements  Server,Serializable{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void update(ArrayList<Tournament> tournaments) throws RemoteException{
+    public void update(ArrayList<Tournament> tournaments) throws RemoteException {
         publisher.notifySubscribers(tournaments);
-        
-    }
-	
-	
 
+    }
+
+    public Integer getMoney() throws RemoteException {
+        return money;
+    }
+
+    public String getName() throws RemoteException {
+        return user;
+    }
 }
