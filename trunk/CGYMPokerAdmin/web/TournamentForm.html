@@ -11,15 +11,16 @@
   </head>
   
   <body>
-      
-      <form name="tournform" action="CreateTournament.jsp"method="get">
-        <br><br>
-        TournamentName: <input type="text" name="tname" size="25" />
-        <input type="submit" value="Create"/>
-    </form>
-    
-     <FORM NAME="tournform2" ACTION="ListUsers.jsp" METHOD="POST">
-            <INPUT TYPE="submit" VALUE="ListUsers" />
+      <FORM NAME="tournform2" ACTION="ListUsers.jsp" METHOD="POST">
+        <INPUT TYPE="submit" VALUE="ListUsers" />
      </form>           
     </body>
+      <form name="tournform" action="CreateTournament.jsp"method="get">
+        <br>
+        TournamentName: <input type="text" name="tname" size="25" />
+        <input type="submit" name="create" value="Create"/>
+        <input type="submit" name="start" value="Start"/>
+    </form>
+    
+     
 </html>
