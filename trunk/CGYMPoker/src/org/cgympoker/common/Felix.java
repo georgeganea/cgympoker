@@ -1,11 +1,13 @@
 package org.cgympoker.common;
 
-public interface Felix {
-	public void joinTournament(Tournament t);
-	public void leaveTournamnent();
-	public void bet(int amount);
-	public void raise(int amount);
-	public void call();
-	public void check();
-	public void fold();
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface Felix extends Remote{
+	public void leaveTournamnent() throws RemoteException;
+	public void bet(int amount) throws RemoteException;
+	public void raise(int amount) throws RemoteException;
+	public void call() throws RemoteException;
+	public void check() throws RemoteException;
+	public void fold() throws RemoteException;
 }

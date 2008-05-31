@@ -1,10 +1,22 @@
 package org.cgympoker;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.cgympoker.common.Felix;
 import org.cgympoker.common.Tournament;
 
 public class FelixImpl implements Felix {
 
+        public FelixImpl(){
+        try {
+            UnicastRemoteObject.exportObject(this, 0);
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(FelixImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 	@Override
 	public void bet(int amount) {
 		// TODO Auto-generated method stub
@@ -25,12 +37,6 @@ public class FelixImpl implements Felix {
 
 	@Override
 	public void fold() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void joinTournament(Tournament t) {
 		// TODO Auto-generated method stub
 
 	}

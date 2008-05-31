@@ -5,8 +5,10 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.cgympoker.common.Server;
 import org.cgympoker.common.Table;
 import org.cgympoker.common.Player;
 import org.cgympoker.common.Tournament;
@@ -16,6 +18,7 @@ public class TournamentImpl implements Tournament {
 
     private String ID;
     private ArrayList<Table> tablesList = new ArrayList<Table>();
+    private ArrayList<Player> players = new ArrayList<Player>();
     private enum Status {JOIN_OPEN,STARTED};
     private Status status;
 
@@ -43,7 +46,7 @@ public class TournamentImpl implements Tournament {
 
     @Override
     public List<Player> getPlayers() throws RemoteException {
-       return new ArrayList<Player>();
+       return players;
     }
 
     @Override
@@ -57,6 +60,20 @@ public class TournamentImpl implements Tournament {
 
     public void start() throws RemoteException {
         this.status = Status.STARTED;
+        ArrayList<Player> tablePlayers = new ArrayList<Player>();
+        for(int i=0;i<players.size();i++){
+            if (i%8 == 0 && i!=0){
+                tablesList.add(new TableImpl(TableImpl.Status.ANTE, ID+(i/8), tablePlayers, 10));
+                tablePlayers = new ArrayList<Player>();
+            }
+            else{
+                tablePlayers.add(players.get(i));
+            }
+        }
+        if (tablePlayers.size() > 0)
+            tablesList.add(new TableImpl(TableImpl.Status.ANTE, ID+(players.size()/8), tablePlayers, 10));
+        System.out.println("Numarul de mese:"+tablesList.size());
+        System.out.println("Player-ii de la prima masa:"+tablesList.get(0).getPlayers());
     // TODO porneste turneul
 		/*
      * 1. creeaza mesele de joc
@@ -81,5 +98,24 @@ public class TournamentImpl implements Tournament {
 
     public void createTable(Table tableImpl) throws RemoteException {
         tablesList.add(tableImpl);
+    }
+
+    public Player join(Server server) throws RemoteException {
+        boolean exists = false;
+        Iterator<Player> iterator = players.iterator();
+        while (iterator.hasNext()){
+            Player player = iterator.next();
+            if (player.getName().compareTo(server.getName()) == 0){
+                    exists = true;
+                    break;
+            }
+        }
+        if (exists)
+            return null;
+        else {
+            PlayerImpl player = new PlayerImpl(server);
+            players.add(player);
+            return player;
+        }
     }
 }
