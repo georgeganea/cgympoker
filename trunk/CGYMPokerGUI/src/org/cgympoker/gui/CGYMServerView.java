@@ -8,7 +8,6 @@ package org.cgympoker.gui;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +21,6 @@ import org.cgympoker.common.Player;
 import org.cgympoker.common.Server;
 import org.cgympoker.common.Table;
 import org.cgympoker.common.Tournament;
-import org.cgympoker.gui.test.CGYMServerViewTest;
 import org.cgympoker.remoteobserver.Subscriber;
 
 /**
@@ -345,7 +343,7 @@ public class CGYMServerView extends javax.swing.JFrame {
     }
 
     private void initModels() {
-        tournamentsModel = new DefaultTableModel(tournaments, new String [] {"ID", "Status", "Start Time"});
+        tournamentsModel = new DefaultTableModel(tournaments, new String [] {"ID", "Status"});
         tablesModel = new DefaultTableModel(tables, new String [] {"Status", "Blinds", "Players", "Avg Pot"});
         playersModel = new DefaultTableModel(players, new String [] {"Player", "Money"});
     }
@@ -403,17 +401,15 @@ public class CGYMServerView extends javax.swing.JFrame {
     private void updateTournamentsTable(ArrayList list) {
         System.out.println("Update pentru tournaments table");
         tournamentList = list;
-        tournaments = new Object[list.size()][3];
+        tournaments = new Object[list.size()][2];
         Iterator<Tournament> iterator = list.iterator();
         tournamentsModel.setRowCount(0);
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         int i = 0;
         while (iterator.hasNext()) {
             Tournament tournament = iterator.next();
             try {
                 tournaments[i][0] = tournament.getID();
                 tournaments[i][1] = tournament.getStatus();
-            tournaments[i][2] = sdf.format(tournament.getStartTime());
             } catch (RemoteException ex) {
                 Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -427,15 +423,13 @@ public class CGYMServerView extends javax.swing.JFrame {
     private void initTournaments() {
         try {
             tournamentList = server.getAllTournaments();
-            tournaments = new Object[tournamentList.size()][3];
+            tournaments = new Object[tournamentList.size()][2];
             Iterator<Tournament> iterator = tournamentList.iterator();
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             int i = 0;
             while (iterator.hasNext()) {
                 Tournament tournament = iterator.next();
                 tournaments[i][0] = tournament.getID();
                 tournaments[i][1] = tournament.getStatus();
-                tournaments[i][2] = sdf.format(tournament.getStartTime());
                 tournamentsModel.addRow(tournaments[i]);
                 i++;
             }
