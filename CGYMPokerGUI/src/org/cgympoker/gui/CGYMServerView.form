@@ -60,7 +60,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="disconnectButton" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanel3" min="-2" pref="87" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -160,14 +160,17 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane2" alignment="1" pref="308" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" pref="308" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="279" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" pref="290" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -225,7 +228,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="statusLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="574" max="32767" attributes="0"/>
+                  <EmptySpace pref="594" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -264,21 +267,17 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="observeTableButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" alignment="1" min="-2" pref="215" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane3" min="-2" pref="215" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane3" pref="261" max="32767" attributes="0"/>
+                  <Component id="jScrollPane3" pref="279" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="observeTableButton" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -311,15 +310,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="observeTableButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="observeTableButton.text"/>
-            <Property name="name" type="java.lang.String" value="observeTableButton" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="observeTableButtonMouseClicked"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JButton" name="disconnectButton">

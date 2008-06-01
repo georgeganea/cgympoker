@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListSelectionModel;
-import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -70,9 +69,11 @@ public class CGYMServerView extends javax.swing.JFrame {
             //Table table = (Table) code;
             //System.out.println("player size|" + table.getPlayers().size());
             setStatusLabel("<html>\nLogged in as CGYMUser.<br/>\nYour game will begin shortly.Please wait to be redirected to the corresponding table<br/>\n</html>");
+            
             Felix felix = (Felix)pub;
             System.out.println("opponents:"+felix.getOponents());
-            getFrame().setVisible(false);
+            
+            //getFrame().setVisible(false);
             CGYMTableView tableView = new CGYMTableView(felix);
             CGYMPokerApp.getApplication().show(tableView);
         }
@@ -103,9 +104,6 @@ public class CGYMServerView extends javax.swing.JFrame {
         initTournaments();
         
     }
-    private JFrame getFrame(){
-        return this.getFrame();
-    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -126,7 +124,6 @@ public class CGYMServerView extends javax.swing.JFrame {
         playersPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         playersTable = new javax.swing.JTable();
-        observeTableButton = new javax.swing.JButton();
         disconnectButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -186,13 +183,15 @@ public class CGYMServerView extends javax.swing.JFrame {
         tablesPanel.setLayout(tablesPanelLayout);
         tablesPanelLayout.setHorizontalGroup(
             tablesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+            .addGroup(tablesPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addContainerGap())
         );
         tablesPanelLayout.setVerticalGroup(
             tablesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablesPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -209,7 +208,7 @@ public class CGYMServerView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusLabel)
-                .addContainerGap(574, Short.MAX_VALUE))
+                .addContainerGap(594, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,31 +227,20 @@ public class CGYMServerView extends javax.swing.JFrame {
         playersTable.setShowVerticalLines(false);
         jScrollPane3.setViewportView(playersTable);
 
-        observeTableButton.setText(resourceMap.getString("observeTableButton.text")); // NOI18N
-        observeTableButton.setName("observeTableButton"); // NOI18N
-        observeTableButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                observeTableButtonMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout playersPanelLayout = new javax.swing.GroupLayout(playersPanel);
         playersPanel.setLayout(playersPanelLayout);
         playersPanelLayout.setHorizontalGroup(
             playersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(playersPanelLayout.createSequentialGroup()
-                .addGroup(playersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(observeTableButton)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         playersPanelLayout.setVerticalGroup(
             playersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playersPanelLayout.createSequentialGroup()
+            .addGroup(playersPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(observeTableButton))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         disconnectButton.setText(resourceMap.getString("disconnectButton.text")); // NOI18N
@@ -314,17 +302,6 @@ public class CGYMServerView extends javax.swing.JFrame {
         }
 }//GEN-LAST:event_joinTournamentButtonMouseClicked
 
-    private void observeTableButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_observeTableButtonMouseClicked
-        int currentSelection = tablesTable.getSelectedRow();
-        if (currentSelection != -1) {
-            try {
-                System.out.println("Observe pentru masa:" + tablesList.get(currentSelection).getStatus());
-            } catch (RemoteException ex) {
-                Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_observeTableButtonMouseClicked
-
     private void disconnectButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disconnectButtonMouseClicked
         try {
             server.disconnect();//GEN-LAST:event_disconnectButtonMouseClicked
@@ -351,7 +328,6 @@ public class CGYMServerView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton joinTournamentButton;
-    private javax.swing.JButton observeTableButton;
     private javax.swing.JPanel playersPanel;
     private javax.swing.JTable playersTable;
     private javax.swing.JLabel statusLabel;
@@ -420,7 +396,6 @@ public class CGYMServerView extends javax.swing.JFrame {
     }
 
     private void updatePlayersTable(Table table) {
-        
         try {
             playersList = table.getPlayers();
         } catch (RemoteException ex) {
