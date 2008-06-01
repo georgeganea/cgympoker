@@ -100,7 +100,7 @@ public class TournamentImpl implements Tournament {
     }
 
     public String getID() throws RemoteException {
-        //TO DO returneaza un identificator al turneului
+      
         return ID;
     }
 

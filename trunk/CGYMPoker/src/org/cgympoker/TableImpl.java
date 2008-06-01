@@ -15,8 +15,9 @@ import java.util.logging.Logger;
 import org.cgympoker.remoteobserver.BasicPublisher;
 import org.cgympoker.remoteobserver.Subscriber;
 
-public class TableImpl implements Table, Serializable {
-
+public class TableImpl implements Table {
+    
+  
     private Status status;
     private String blinds;
     private ArrayList<Player> playerList;
@@ -51,7 +52,6 @@ public class TableImpl implements Table, Serializable {
 
     @Override
     public Player getDealer() {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -92,7 +92,13 @@ public class TableImpl implements Table, Serializable {
     }
 
     public void bet(Player p, int amount) {
-    // TODO
+        try {
+            publisher.notifySubscribers(p.getName() + " placed bet:" + amount);
+        } catch (RemoteException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(TableImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public void fold(Player p) {
@@ -100,7 +106,6 @@ public class TableImpl implements Table, Serializable {
     }
 
     private void advanceState() {
-    // TODO
     }
 
     public String getBlinds() {
