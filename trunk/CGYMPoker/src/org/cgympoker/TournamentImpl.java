@@ -75,8 +75,8 @@ public class TournamentImpl implements Tournament {
         }
         if (tablePlayers.size() > 0)
             tablesList.add(new TableImpl(TableImpl.Status.ANTE, ID+(players.size()/8), tablePlayers, 10));
-        System.out.println("Numarul de mese:"+tablesList.size());
-        System.out.println("Player-ii de la prima masa:"+tablesList.get(0).getPlayers());
+       // System.out.println("Numarul de mese:"+tablesList.size());
+       // System.out.println("Player-ii de la prima masa:"+tablesList.get(0).getPlayers());
     // TODO porneste turneul
 		/*
      * 1. creeaza mesele de joc
@@ -92,7 +92,7 @@ public class TournamentImpl implements Tournament {
             Iterator<Player> playerIt = table.getPlayers().iterator();
             while(playerIt.hasNext()){
                 Player player = playerIt.next();
-                subscriberHash.get(player).update(new FelixImpl(/*de adaugat stuff in constructor*/), table);
+                subscriberHash.get(player).update(new FelixImpl(player,table),null);
             }
         }
       
