@@ -90,6 +90,11 @@ public class CGYMTableView extends javax.swing.JFrame {
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
+        card0 = new javax.swing.JLabel();
+        card1 = new javax.swing.JLabel();
+        card2 = new javax.swing.JLabel();
+        card3 = new javax.swing.JLabel();
+        card4 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         felixCard1 = new javax.swing.JLabel();
         felixCard0 = new javax.swing.JLabel();
@@ -182,39 +187,74 @@ public class CGYMTableView extends javax.swing.JFrame {
         jLabel48.setText(resourceMap.getString("jLabel48.text")); // NOI18N
         jLabel48.setName("jLabel48"); // NOI18N
 
+        card0.setText(resourceMap.getString("card0.text")); // NOI18N
+        card0.setName("card0"); // NOI18N
+
+        card1.setText(resourceMap.getString("card1.text")); // NOI18N
+        card1.setName("card1"); // NOI18N
+
+        card2.setText(resourceMap.getString("card2.text")); // NOI18N
+        card2.setName("card2"); // NOI18N
+
+        card3.setText(resourceMap.getString("card3.text")); // NOI18N
+        card3.setName("card3"); // NOI18N
+
+        card4.setText(resourceMap.getString("card4.text")); // NOI18N
+        card4.setName("card4"); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(215, 215, 215)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel48)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel43)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel44)
+                        .addGap(185, 185, 185)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel48)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel43)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel44)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel45)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel46)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel47)))
-                .addGap(225, 225, 225))
+                        .addComponent(jLabel47))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(card0)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(card1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(card2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(card3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(card4)))
+                .addContainerGap(225, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(42, 42, 42)
+                .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel47)
                     .addComponent(jLabel46)
                     .addComponent(jLabel45)
                     .addComponent(jLabel43)
                     .addComponent(jLabel44))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(card0)
+                    .addComponent(card1)
+                    .addComponent(card2)
+                    .addComponent(card3)
+                    .addComponent(card4))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(resourceMap.getColor("jPanel4.background")); // NOI18N
@@ -644,7 +684,7 @@ public class CGYMTableView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -747,6 +787,11 @@ public class CGYMTableView extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel blindsLabel;
+    private javax.swing.JLabel card0;
+    private javax.swing.JLabel card1;
+    private javax.swing.JLabel card2;
+    private javax.swing.JLabel card3;
+    private javax.swing.JLabel card4;
     private javax.swing.JLabel cardLabel0;
     private javax.swing.JLabel cardLabel1;
     private javax.swing.JLabel felixCard0;
