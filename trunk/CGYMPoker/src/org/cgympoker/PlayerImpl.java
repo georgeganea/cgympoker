@@ -3,6 +3,7 @@ package org.cgympoker;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.cgympoker.common.Player;
@@ -12,7 +13,7 @@ import org.cgympoker.common.Server;
 
 public class PlayerImpl implements Player{
     private Server server;
-    
+    private ArrayList<Card> cards = new ArrayList<Card>();
     
 
 
@@ -28,10 +29,13 @@ public class PlayerImpl implements Player{
     
     }
     
+    public void setCards(ArrayList<Card> cards){
+        this.cards = cards;
+    }
+    
     @Override
     public List<Card> getCards() {
-        // TODO Auto-generated method stub
-        return null;
+        return cards;
     }
 
     @Override

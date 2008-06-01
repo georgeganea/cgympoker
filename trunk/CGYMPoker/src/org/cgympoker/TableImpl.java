@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Iterator;
 import org.cgympoker.common.Table;
 import org.cgympoker.common.Player;
 import org.cgympoker.common.Card;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.cgympoker.remoteobserver.BasicPublisher;
@@ -19,6 +21,7 @@ public class TableImpl implements Table, Serializable {
     private String blinds;
     private ArrayList<Player> playerList;
     private Integer averagePot;
+    private Random randomGenerator;
     
     public TableImpl(Status status, String blinds, ArrayList<Player> playerList, Integer averagePot) {
         this.status = status;
@@ -31,6 +34,7 @@ public class TableImpl implements Table, Serializable {
             ex.printStackTrace();
             Logger.getLogger(ServerImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+        dealCards();
     }
 
     @Override
@@ -120,5 +124,29 @@ public class TableImpl implements Table, Serializable {
 
     public void removeAllSubscribers() throws RemoteException {
         publisher.removeAllSubscribers();
+    }
+
+    private void dealCards() {
+        Iterator<Player> iterator = playerList.iterator();
+        randomGenerator = new Random();
+        while (iterator.hasNext()){
+            Player player = iterator.next();
+            giveCards(player);
+        }
+    }
+
+    private void giveCards(Player player) {
+        ArrayList<Card> cards = new ArrayList<Card>();
+        cards.add(generateCard());
+        cards.add(generateCard());
+        ((PlayerImpl)player).setCards(cards);
+    }
+    
+    private Card generateCard(){
+        int rank = randomGenerator.nextInt(13);
+        int suit = randomGenerator.nextInt(4);
+        Card.Suit cardSuit = Card.Suit.values()[suit];
+        Card.Rank cardRank = Card.Rank.values()[rank];
+        return new CardImpl(cardRank, cardSuit);
     }
 }
