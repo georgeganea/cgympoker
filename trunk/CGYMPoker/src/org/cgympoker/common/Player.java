@@ -13,4 +13,5 @@ public interface Player extends Remote{
 	public List<Card> getCards() throws RemoteException;
 	public boolean getState() throws RemoteException; // active, observer
         public Integer getMoney() throws RemoteException;
+        
 }

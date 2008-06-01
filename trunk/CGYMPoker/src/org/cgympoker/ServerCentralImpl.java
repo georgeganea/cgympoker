@@ -64,10 +64,6 @@ public class ServerCentralImpl implements ServerCentral{
         }
     }
 
-    public void startTournament(Tournament tour) {
-
-    }
-
     public void joinTournament(Felix felix, Tournament tour) {
     //TODO
     }
@@ -187,6 +183,7 @@ public class ServerCentralImpl implements ServerCentral{
 
     public boolean startTournament(String ID) throws RemoteException {
         Iterator<Tournament> iterator = tournaments.iterator();
+        System.out.println("Se va porni turneul:"+ID);
         while (iterator.hasNext()){
             Tournament tournament = iterator.next();
             if (tournament.getID().compareTo(ID) == 0)

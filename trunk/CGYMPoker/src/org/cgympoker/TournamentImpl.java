@@ -60,7 +60,13 @@ public class TournamentImpl implements Tournament {
     public void addTable(Table table) throws RemoteException {
         tablesList.add(table);
     }
-
+ // TODO porneste turneul
+		/*
+     * 1. creeaza mesele de joc
+     * 2. repartizeaza jucatorii
+     * 3. le da bani
+     * 4. reseteaza mesele
+     */
     public void start() throws RemoteException {
         this.status = Status.STARTED;
         ArrayList<Player> tablePlayers = new ArrayList<Player>();
@@ -75,17 +81,7 @@ public class TournamentImpl implements Tournament {
         }
         if (tablePlayers.size() > 0)
             tablesList.add(new TableImpl(TableImpl.Status.ANTE, ID+(players.size()/8), tablePlayers, 10));
-       // System.out.println("Numarul de mese:"+tablesList.size());
-       // System.out.println("Player-ii de la prima masa:"+tablesList.get(0).getPlayers());
-    // TODO porneste turneul
-		/*
-     * 1. creeaza mesele de joc
-     * 2. repartizeaza jucatorii
-     * 3. le da bani
-     * 4. reseteaza mesele
-     */
-        
-        //notificam masa cu masa, player cu player 
+         //notificam masa cu masa, player cu player 
         Iterator<Table> it = tablesList.iterator();
         while(it.hasNext()){
             Table table = it.next();
@@ -95,7 +91,6 @@ public class TournamentImpl implements Tournament {
                 subscriberHash.get(player).update(new FelixImpl(player,table),null);
             }
         }
-      
     }
 
     public void stop() throws RemoteException {
