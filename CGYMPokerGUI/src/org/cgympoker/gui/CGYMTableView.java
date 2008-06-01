@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.cgympoker.common.Felix;
 import org.cgympoker.remoteobserver.Subscriber;
 
 /**
@@ -19,6 +20,7 @@ import org.cgympoker.remoteobserver.Subscriber;
  */
 public class CGYMTableView extends javax.swing.JFrame {
     private TableSubscriber subscriber;
+    private Felix felix;
     public Subscriber getSubcriber(){
     return subscriber;
     }
@@ -39,9 +41,10 @@ public class CGYMTableView extends javax.swing.JFrame {
         }
     }
     /** Creates new form CGYMTableView */
-    public CGYMTableView() {
+    public CGYMTableView(Felix felix) {
         initComponents();
         this.subscriber = new TableSubscriber();
+        this.felix = felix;
     }
     
     /** This method is called from within the constructor to
@@ -804,7 +807,7 @@ public class CGYMTableView extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CGYMTableView().setVisible(true);
+                new CGYMTableView(null).setVisible(true);
             }
         });
     }

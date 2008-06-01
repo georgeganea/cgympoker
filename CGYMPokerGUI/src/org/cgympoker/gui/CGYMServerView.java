@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListSelectionModel;
+import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -66,11 +67,14 @@ public class CGYMServerView extends javax.swing.JFrame {
         public void update(Object pub, Object code) throws RemoteException {
             System.out.println("deschidem table view !");
             
-            Table table = (Table) code;
-            System.out.println("player size|" + table.getPlayers().size());
+            //Table table = (Table) code;
+            //System.out.println("player size|" + table.getPlayers().size());
             setStatusLabel("<html>\nLogged in as CGYMUser.<br/>\nYour game will begin shortly.Please wait to be redirected to the corresponding table<br/>\n</html>");
             Felix felix = (Felix)pub;
-            
+            System.out.println("opponents:"+felix.getOponents());
+            getFrame().setVisible(false);
+            CGYMTableView tableView = new CGYMTableView(felix);
+            CGYMPokerApp.getApplication().show(tableView);
         }
     }
     private Subscriber joinSubscriber = new JoinSubscriber();
@@ -99,7 +103,9 @@ public class CGYMServerView extends javax.swing.JFrame {
         initTournaments();
         
     }
-
+    private JFrame getFrame(){
+        return this.getFrame();
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -414,10 +420,11 @@ public class CGYMServerView extends javax.swing.JFrame {
     }
 
     private void updatePlayersTable(Table table) {
+        
         try {
             playersList = table.getPlayers();
         } catch (RemoteException ex) {
-            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         players = new Object[playersList.size()][2];
         Iterator<Player> iterator = playersList.iterator();
