@@ -12,4 +12,5 @@ public interface Card extends Remote{
     public Rank getRank() throws RemoteException;
     public Suit getSuit() throws RemoteException;
     public boolean isFlipped() throws RemoteException;
+    public String getImageName() throws RemoteException;
 }
