@@ -16,17 +16,22 @@
     <body>
          <% String tname=null;
             tname=request.getParameter("tname");
-          
-            if (tname!=null){
-          %>
-          <jsp:forward page="welcome.jsp">
-            <jsp:param name="tournamentName" value="<%=tname%>"/>
-          </jsp:forward>
-         <%}else{ %>
+           if ((tname!=null)&&(tname.length()>0)){
+                if(request.getParameter("create")!=null){%>
+                    <jsp:forward page="welcome.jsp">
+                    <jsp:param name="tournamentName" value="<%=tname%>"/>
+                    <jsp:param name="button" value="1"/>
+                    </jsp:forward>
+               <% }
+                else if(request.getParameter("start")!=null){ %>
+                        <jsp:forward page="welcome.jsp">
+                        <jsp:param name="tournamentName" value="<%=tname%>"/>
+                        <jsp:param name="button" value="2"/>
+                        </jsp:forward>
+               <% }
+         }else{ %>
               <jsp:forward page="retry.jsp"/>
-        <% }
-             
-          %>        
+        <% } %>        
      
     </body>
 </html>
