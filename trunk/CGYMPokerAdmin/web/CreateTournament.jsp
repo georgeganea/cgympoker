@@ -30,7 +30,7 @@
                         </jsp:forward>
                <% }
          }else{ %>
-              <jsp:forward page="retry.jsp"/>
+              <jsp:forward page="welcome.jsp"/>
         <% } %>        
      
     </body>
