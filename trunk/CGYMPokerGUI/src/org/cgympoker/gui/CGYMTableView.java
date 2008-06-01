@@ -7,12 +7,16 @@
 
 package org.cgympoker.gui;
 
+import java.awt.Component;
+import java.awt.Graphics;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import org.cgympoker.common.Card;
 import org.cgympoker.common.Felix;
 import org.cgympoker.remoteobserver.Subscriber;
@@ -52,12 +56,17 @@ public class CGYMTableView extends javax.swing.JFrame {
             felixLabel.setText(felix.getMySelf().getName());
             blindsLabel.setText(felix.getTable().getBlinds());
             List<Card> cards = felix.getMySelf().getCards();
-            
-            for (int i=0;i<cards.size();i++){
-                System.out.println(">>"+cards.get(i).getImageName());
-            }
+            System.out.println(cards.get(0).getImageName());
+           
+            ImageIcon icon = new ImageIcon(cards.get(0).getImageName());
+            cardLabel0.setIcon(icon);
+            icon = new ImageIcon(cards.get(1).getImageName());
+            cardLabel1.setIcon(icon);
         } catch (RemoteException ex) {
             Logger.getLogger(CGYMTableView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
     
