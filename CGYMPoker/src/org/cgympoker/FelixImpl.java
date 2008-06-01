@@ -29,8 +29,8 @@ public class FelixImpl implements Felix {
 
     @Override
     public void bet(int amount) {
-    // TODO Auto-generated method stub
-
+        ((TableImpl)table).bet(player, amount);
+        
     }
 
     @Override
