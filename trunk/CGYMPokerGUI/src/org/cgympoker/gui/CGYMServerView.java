@@ -16,6 +16,7 @@ import javax.swing.DefaultListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import org.cgympoker.common.Felix;
 import org.cgympoker.common.Player;
 import org.cgympoker.common.Server;
 import org.cgympoker.common.Table;
@@ -64,9 +65,12 @@ public class CGYMServerView extends javax.swing.JFrame {
 
         public void update(Object pub, Object code) throws RemoteException {
             System.out.println("deschidem table view !");
+            
             Table table = (Table) code;
             System.out.println("player size|" + table.getPlayers().size());
             setStatusLabel("<html>\nLogged in as CGYMUser.<br/>\nYour game will begin shortly.Please wait to be redirected to the corresponding table<br/>\n</html>");
+            Felix felix = (Felix)pub;
+            
         }
     }
     private Subscriber joinSubscriber = new JoinSubscriber();
