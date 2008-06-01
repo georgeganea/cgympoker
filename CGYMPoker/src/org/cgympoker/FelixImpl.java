@@ -3,6 +3,7 @@ package org.cgympoker;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.cgympoker.common.Felix;
@@ -75,10 +76,18 @@ public class FelixImpl implements Felix {
     }
 
     public ArrayList<Player> getOponents() throws RemoteException {
-         return (ArrayList<Player>) table.getPlayers();
+        ArrayList<Player> returnList = new ArrayList<Player>();
+        Iterator<Player> iterator = table.getPlayers().iterator();
+        while (iterator.hasNext()){
+            Player p = iterator.next();
+            if (p.equals(player))
+                continue;
+            returnList.add(p);
+        }
+         return returnList;
     }
 
     public Table getTable() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet.");
+       return table;
     }
 }

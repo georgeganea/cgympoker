@@ -80,4 +80,12 @@ public class PlayerImpl implements Player{
         }
         return -1;
     }
+    public String toString(){
+        try {
+            return server.getName();
+        } catch (RemoteException ex) {
+            Logger.getLogger(PlayerImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "remote exception happened";
+    }
 }
