@@ -14,6 +14,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h2>Retry!</h2>
+        <h2>Incorrect user or password!<br>
+            Please, try again!</h2>
+        <FORM NAME="retry" ACTION="index.jsp" METHOD="POST">
+            <INPUT TYPE="submit" VALUE="Retry" />
+        </form>  
+        
+        
     </body>
 </html>
