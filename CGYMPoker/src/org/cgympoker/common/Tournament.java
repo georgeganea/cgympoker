@@ -1,13 +1,16 @@
 package org.cgympoker.common;
 
-import java.rmi.Remote;
+
 import java.rmi.RemoteException;
 import java.util.List;
+import org.cgympoker.remoteobserver.Publisher;
+import org.cgympoker.remoteobserver.Subscriber;
 
-public interface Tournament extends Remote {
+
+public interface Tournament extends Publisher {
 
         public void createTable(Table tableImpl)throws RemoteException;
-        public Player join(Server server) throws RemoteException;
+        public Player join(Server server,Subscriber subscriber) throws RemoteException;
 	public List<Table> getTables()throws RemoteException;
 	public List<Player> getPlayers()throws RemoteException;
 	public List<Player> getActivePlayers()throws RemoteException;

@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,9 +14,11 @@ import org.cgympoker.common.Table;
 import org.cgympoker.common.Player;
 import org.cgympoker.common.Tournament;
 import java.util.List;
+import org.cgympoker.remoteobserver.BasicPublisher;
+import org.cgympoker.remoteobserver.Subscriber;
 
 public class TournamentImpl implements Tournament {
-
+   
     private String ID;
     private ArrayList<Table> tablesList = new ArrayList<Table>();
     private ArrayList<Player> players = new ArrayList<Player>();
@@ -63,7 +66,7 @@ public class TournamentImpl implements Tournament {
         ArrayList<Player> tablePlayers = new ArrayList<Player>();
         for(int i=0;i<players.size();i++){
             if (i%8 == 0 && i!=0){
-                tablesList.add(new TableImpl(TableImpl.Status.ANTE, ID+(i/8), tablePlayers, 10));
+                tablesList.add(new TableImpl(TableImpl.Status.ANTE, "2/4", tablePlayers, 10));
                 tablePlayers = new ArrayList<Player>();
             }
             else{
@@ -81,6 +84,18 @@ public class TournamentImpl implements Tournament {
      * 3. le da bani
      * 4. reseteaza mesele
      */
+        
+        //notificam masa cu masa, player cu player 
+        Iterator<Table> it = tablesList.iterator();
+        while(it.hasNext()){
+            Table table = it.next();
+            Iterator<Player> playerIt = table.getPlayers().iterator();
+            while(playerIt.hasNext()){
+                Player player = playerIt.next();
+                subscriberHash.get(player).update(new FelixImpl(/*de adaugat stuff in constructor*/), table);
+            }
+        }
+      
     }
 
     public void stop() throws RemoteException {
@@ -99,8 +114,9 @@ public class TournamentImpl implements Tournament {
     public void createTable(Table tableImpl) throws RemoteException {
         tablesList.add(tableImpl);
     }
-
-    public Player join(Server server) throws RemoteException {
+    private HashMap<Player,Subscriber> subscriberHash = new HashMap<Player, Subscriber>();
+    
+    public Player join(Server server,Subscriber subscriber) throws RemoteException {
         boolean exists = false;
         Iterator<Player> iterator = players.iterator();
         while (iterator.hasNext()){
@@ -115,7 +131,21 @@ public class TournamentImpl implements Tournament {
         else {
             PlayerImpl player = new PlayerImpl(server);
             players.add(player);
+            subscriberHash.put(player, subscriber);
             return player;
         }
+    }
+
+    public void addSubscriber(Subscriber s) throws RemoteException {
+       // publisher.addSubscriber(s);
+    }
+
+    public void removeSubscriber(Subscriber s) throws RemoteException {
+        //publisher.removeSubscriber(s);
+    }
+
+    public void removeAllSubscribers() throws RemoteException {
+        //publisher.removeAllSubscribers(); 
+        //TODO trebuie scos Publisher de la Tournament !!
     }
 }
