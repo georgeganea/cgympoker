@@ -32,7 +32,7 @@ import org.cgympoker.remoteobserver.Subscriber;
 public class CGYMTableView extends javax.swing.JFrame {
     private TableSubscriber subscriber;
     private Felix felix;
-    private JLabel[] labelList = new JLabel[8];
+    private JLabel[] labelList = new JLabel[7];
             
     public Subscriber getSubcriber(){
         return subscriber;
@@ -59,6 +59,7 @@ public class CGYMTableView extends javax.swing.JFrame {
             initComponents();
             this.subscriber = new TableSubscriber();
             this.felix = felix;
+            felix.getTable().addSubscriber(subscriber);
             printOponentsInfo();
             felixLabel.setText(felix.getMySelf().getName());
             blindsLabel.setText(felix.getTable().getBlinds());
@@ -103,8 +104,8 @@ public class CGYMTableView extends javax.swing.JFrame {
             for(int i=0;i<opponents.size();i++){
                 labelList[i].setText(opponents.get(i).getName());
             }
-//            for (int i= opponents.size();i<labelList.length;i++)
-//                labelList[i].setText("");
+            for (int i= opponents.size();i<labelList.length;i++)
+                labelList[i].setText("");
         } catch (RemoteException ex) {
             Logger.getLogger(CGYMTableView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -226,19 +227,14 @@ public class CGYMTableView extends javax.swing.JFrame {
         jLabel48.setText(resourceMap.getString("jLabel48.text")); // NOI18N
         jLabel48.setName("jLabel48"); // NOI18N
 
-        card0.setText(resourceMap.getString("card0.text")); // NOI18N
         card0.setName("card0"); // NOI18N
 
-        card1.setText(resourceMap.getString("card1.text")); // NOI18N
         card1.setName("card1"); // NOI18N
 
-        card2.setText(resourceMap.getString("card2.text")); // NOI18N
         card2.setName("card2"); // NOI18N
 
-        card3.setText(resourceMap.getString("card3.text")); // NOI18N
         card3.setName("card3"); // NOI18N
 
-        card4.setText(resourceMap.getString("card4.text")); // NOI18N
         card4.setName("card4"); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -272,7 +268,7 @@ public class CGYMTableView extends javax.swing.JFrame {
                         .addComponent(card3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(card4)))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,12 +295,8 @@ public class CGYMTableView extends javax.swing.JFrame {
         jPanel7.setBackground(resourceMap.getColor("jPanel4.background")); // NOI18N
         jPanel7.setName("jPanel7"); // NOI18N
 
-        felixCard1.setIcon(resourceMap.getIcon("felixCard1.icon")); // NOI18N
-        felixCard1.setText(resourceMap.getString("felixCard1.text")); // NOI18N
         felixCard1.setName("felixCard1"); // NOI18N
 
-        felixCard0.setIcon(resourceMap.getIcon("felixCard0.icon")); // NOI18N
-        felixCard0.setText(resourceMap.getString("felixCard0.text")); // NOI18N
         felixCard0.setName("felixCard0"); // NOI18N
 
         felixLabel.setText(resourceMap.getString("felixLabel.text")); // NOI18N
@@ -622,6 +614,11 @@ public class CGYMTableView extends javax.swing.JFrame {
 
         jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
         jButton3.setName("jButton3"); // NOI18N
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jTextField1.setText(resourceMap.getString("jTextField1.text")); // NOI18N
         jTextField1.setName("jTextField1"); // NOI18N
@@ -643,17 +640,17 @@ public class CGYMTableView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3))
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel13Layout.setVerticalGroup(
@@ -698,7 +695,7 @@ public class CGYMTableView extends javax.swing.JFrame {
             jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel17Layout.setVerticalGroup(
@@ -706,7 +703,7 @@ public class CGYMTableView extends javax.swing.JFrame {
             .addGroup(jPanel17Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(6, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -789,7 +786,7 @@ public class CGYMTableView extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 639, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 645, Short.MAX_VALUE)
                                 .addComponent(blindsLabel)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -812,7 +809,20 @@ public class CGYMTableView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    try {
+            felix.bet(Integer.parseInt(jTextField1.getText()));                                     
+        } catch (RemoteException ex) {
+            Logger.getLogger(CGYMTableView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+}//GEN-LAST:event_jButton3MouseClicked
     
+    
+   
     /**
      * @param args the command line arguments
      */
