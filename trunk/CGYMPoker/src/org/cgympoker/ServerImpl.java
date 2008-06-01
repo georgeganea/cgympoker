@@ -15,7 +15,7 @@ import java.util.List;
 import org.cgympoker.remoteobserver.BasicPublisher;
 import org.cgympoker.remoteobserver.Subscriber;
 
-public class ServerImpl implements Server, Serializable {
+public class ServerImpl implements Server {
 
     private BasicPublisher publisher = new BasicPublisher();
     private String user;
