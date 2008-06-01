@@ -51,7 +51,7 @@
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="1">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="639" max="32767" attributes="0"/>
+                              <EmptySpace pref="645" max="32767" attributes="0"/>
                               <Component id="blindsLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -234,7 +234,7 @@
                               <Component id="card4" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="225" max="32767" attributes="0"/>
+                      <EmptySpace pref="228" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -298,31 +298,26 @@
             </Component>
             <Component class="javax.swing.JLabel" name="card0">
               <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="card0.text"/>
                 <Property name="name" type="java.lang.String" value="card0" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="card1">
               <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="card1.text"/>
                 <Property name="name" type="java.lang.String" value="card1" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="card2">
               <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="card2.text"/>
                 <Property name="name" type="java.lang.String" value="card2" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="card3">
               <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="card3.text"/>
                 <Property name="name" type="java.lang.String" value="card3" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="card4">
               <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="card4.text"/>
                 <Property name="name" type="java.lang.String" value="card4" noResource="true"/>
               </Properties>
             </Component>
@@ -382,15 +377,11 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="felixCard1">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" resourceKey="felixCard1.icon"/>
-                <Property name="text" type="java.lang.String" resourceKey="felixCard1.text"/>
                 <Property name="name" type="java.lang.String" value="felixCard1" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="felixCard0">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" resourceKey="felixCard0.icon"/>
-                <Property name="text" type="java.lang.String" resourceKey="felixCard0.text"/>
                 <Property name="name" type="java.lang.String" value="felixCard0" noResource="true"/>
               </Properties>
             </Component>
@@ -827,7 +818,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jTextField1" pref="57" max="32767" attributes="0"/>
+                              <Component id="jTextField1" pref="67" max="32767" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -835,11 +826,11 @@
                               <Component id="jButton2" alignment="0" max="32767" attributes="1"/>
                               <Component id="jButton1" alignment="0" max="32767" attributes="1"/>
                           </Group>
-                          <Component id="jButton8" alignment="0" pref="126" max="32767" attributes="0"/>
-                          <Component id="jButton4" alignment="0" pref="126" max="32767" attributes="0"/>
-                          <Component id="jButton5" alignment="0" pref="126" max="32767" attributes="0"/>
-                          <Component id="jButton6" alignment="0" pref="126" max="32767" attributes="0"/>
-                          <Component id="jButton7" alignment="0" pref="126" max="32767" attributes="1"/>
+                          <Component id="jButton8" alignment="0" pref="146" max="32767" attributes="0"/>
+                          <Component id="jButton4" alignment="0" pref="146" max="32767" attributes="0"/>
+                          <Component id="jButton5" alignment="0" pref="146" max="32767" attributes="0"/>
+                          <Component id="jButton6" alignment="0" pref="146" max="32767" attributes="0"/>
+                          <Component id="jButton7" alignment="0" pref="146" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -902,6 +893,9 @@
                 <Property name="text" type="java.lang.String" resourceKey="jButton3.text"/>
                 <Property name="name" type="java.lang.String" value="jButton3" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton3MouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField1">
               <Properties>
@@ -939,7 +933,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="759" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="823" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -949,7 +943,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="62" max="-2" attributes="0"/>
-                      <EmptySpace pref="6" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
