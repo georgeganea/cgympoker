@@ -31,14 +31,11 @@
              String id_t=request.getParameter("tournamentName");
              if ((id_t!=null)&&(id_t.length()>0)){
                  if(request.getParameter("button").equals("1")){
-                     server.createTournament(id_t);%>
-                  <h2>aici create</h2>   
-                <% }
+                     server.createTournament(id_t);
+                 }
                  if(request.getParameter("button").equals("2")){
-                     server.startTournament(id_t);%>
-                     <h2>aici start</h2>   
-                    
-               <% }
+                     server.startTournament(id_t);
+                 }
             } 
         }
          int n=server.getAllTournaments().size();
