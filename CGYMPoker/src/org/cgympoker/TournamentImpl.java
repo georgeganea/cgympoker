@@ -82,7 +82,7 @@ public class TournamentImpl implements Tournament {
             }
         }
         if (tablePlayers.size() > 0)
-            tablesList.add(new TableImpl(TableImpl.Status.ANTE, ID+(players.size()/8), tablePlayers, 10));
+            tablesList.add(new TableImpl(TableImpl.Status.ANTE, "2/4", tablePlayers, 10));
          //notificam masa cu masa, player cu player 
         Iterator<Table> it = tablesList.iterator();
         while(it.hasNext()){

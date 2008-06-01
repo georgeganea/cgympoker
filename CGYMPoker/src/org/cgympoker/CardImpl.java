@@ -7,7 +7,13 @@ import java.util.logging.Logger;
 import org.cgympoker.common.Card;
 
 public class CardImpl implements Card {
-    public CardImpl(){
+    private Rank rank;
+    private Suit suit;
+    private boolean isFlipped;
+    public CardImpl(Rank rank, Suit suit){
+        this.rank = rank;
+        this.suit = suit;
+        isFlipped = false;
         try {
             UnicastRemoteObject.exportObject(this, 0);
         } catch (RemoteException ex) {
@@ -18,20 +24,22 @@ public class CardImpl implements Card {
 
 	@Override
 	public Rank getRank() {
-		// TODO Auto-generated method stub
-		return null;
+             return rank;
 	}
 
 	@Override
 	public Suit getSuit() {
-		// TODO Auto-generated method stub
-		return null;
+            return suit;
 	}
 
 	@Override
 	public boolean isFlipped() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+            return isFlipped;
+        }
 
+    public String getImageName() throws RemoteException {
+       String name = "";
+       name += rank.toString()+suit.toString().toLowerCase().substring(0, 1)+".jpg"; 
+       return name;
+    }
 }
