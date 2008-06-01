@@ -3,7 +3,6 @@
  *
  * Created on 22 aprilie 2008, 00:10
  */
-
 package org.cgympoker.gui;
 
 import java.rmi.RemoteException;
@@ -28,7 +27,16 @@ import org.cgympoker.remoteobserver.Subscriber;
  * @author  Mihai
  */
 public class CGYMServerView extends javax.swing.JFrame {
-     private class ViewSubscriber implements Subscriber {
+
+    private void setStatusLabel(String statusLabelMessage) {
+        try {
+            statusLabel.setText(statusLabelMessage.replace("CGYMUser", server.getName()));
+        } catch (RemoteException ex) {
+            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private class ViewSubscriber implements Subscriber {
 
         public ViewSubscriber() {
             try {
@@ -40,35 +48,54 @@ public class CGYMServerView extends javax.swing.JFrame {
 
         public void update(Object pub, Object code) throws RemoteException {
             System.out.println("Se va face un update");
-            updateTournamentsTable((ArrayList)pub);
+            updateTournamentsTable((ArrayList) pub);
         }
     }
-    
+
+    private class JoinSubscriber implements Subscriber {
+
+        public JoinSubscriber() {
+            try {
+                UnicastRemoteObject.exportObject(this, 0);
+            } catch (RemoteException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        public void update(Object pub, Object code) throws RemoteException {
+            System.out.println("deschidem table view !");
+            Table table = (Table) code;
+            System.out.println("player size|" + table.getPlayers().size());
+            setStatusLabel("<html>\nLogged in as CGYMUser.<br/>\nYour game will begin shortly.Please wait to be redirected to the corresponding table<br/>\n</html>");
+        }
+    }
+    private Subscriber joinSubscriber = new JoinSubscriber();
     private Subscriber subscriber = new ViewSubscriber();
-    public Subscriber getSubscriber(){
-      return subscriber;
+
+    public Subscriber getSubscriber() {
+        return subscriber;
     }
     private final Server server;
-    private Object[][] tournaments, tables, players;
+    private Object[][] tournaments,  tables,  players;
     private List<Tournament> tournamentList;
     private DefaultListSelectionModel tournamentsSelectionModel;
     private List<Table> tablesList;
-    private DefaultTableModel tablesModel, playersModel;
+    private DefaultTableModel tablesModel,  playersModel;
     private List<Player> playersList;
     private DefaultListSelectionModel tablesSelectionModel;
     private DefaultTableModel tournamentsModel;
-   
+
     /** Creates new form CGYMServerView */
     public CGYMServerView(Server server) {
         this.server = server;
         initListeners();
         initModels();
         initComponents();
+        setStatusLabel("<html>\nLogged in as CGYMUser.<br/>\nNot playing in any tournaments.<br/>\n</html>");
         initTournaments();
+        
     }
-    
 
-    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -263,13 +290,14 @@ public class CGYMServerView extends javax.swing.JFrame {
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-885)/2, (screenSize.height-480)/2, 885, 480);
     }// </editor-fold>//GEN-END:initComponents
-
     private void joinTournamentButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_joinTournamentButtonMouseClicked
         int currentSelection = tournamentsTable.getSelectedRow();
         if (currentSelection != -1) {
             try {
                 Tournament tournament = tournamentList.get(currentSelection);
-                tournament.join(server);
+                Player mySelf = tournament.join(server, joinSubscriber);
+                tournament.addSubscriber(joinSubscriber);
+                setStatusLabel("<html>\nLogged in as CGYMUser.<br/>\nJoined tournament " + tournament.getID()+".<br/>\n</html>");
             } catch (RemoteException ex) {
                 Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -278,11 +306,12 @@ public class CGYMServerView extends javax.swing.JFrame {
 
     private void observeTableButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_observeTableButtonMouseClicked
         int currentSelection = tablesTable.getSelectedRow();
-        if (currentSelection!=-1)
+        if (currentSelection != -1) {
             try {
-            System.out.println("Observe pentru masa:" + tablesList.get(currentSelection).getStatus());
-        } catch (RemoteException ex) {
-            Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Observe pentru masa:" + tablesList.get(currentSelection).getStatus());
+            } catch (RemoteException ex) {
+                Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_observeTableButtonMouseClicked
 
@@ -292,19 +321,19 @@ public class CGYMServerView extends javax.swing.JFrame {
         } catch (RemoteException ex) {
             Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }                                             
-    
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new CGYMServerView(null).setVisible(true);
             }
         });
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton disconnectButton;
     private javax.swing.JPanel jPanel3;
@@ -321,66 +350,65 @@ public class CGYMServerView extends javax.swing.JFrame {
     private javax.swing.JPanel tournamentsPanel;
     private javax.swing.JTable tournamentsTable;
     // End of variables declaration//GEN-END:variables
-
     private void initListeners() {
-      tournamentsSelectionModel = new DefaultListSelectionModel();
-      tournamentsSelectionModel.addListSelectionListener(new ListSelectionListener() {
+        tournamentsSelectionModel = new DefaultListSelectionModel();
+        tournamentsSelectionModel.addListSelectionListener(new ListSelectionListener() {
+
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()){
-                    if (tournamentsTable.getSelectedRow() != -1)
+                if (!e.getValueIsAdjusting()) {
+                    if (tournamentsTable.getSelectedRow() != -1) {
                         updateTablesTable(tournamentList.get(tournamentsTable.getSelectedRow()));
+                    }
                 }
             }
         });
-        
-      tablesSelectionModel = new DefaultListSelectionModel();
-      tablesSelectionModel.addListSelectionListener(new ListSelectionListener() {
+
+        tablesSelectionModel = new DefaultListSelectionModel();
+        tablesSelectionModel.addListSelectionListener(new ListSelectionListener() {
+
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()){
-                    if (tablesTable.getSelectedRow() != -1)
+                if (!e.getValueIsAdjusting()) {
+                    if (tablesTable.getSelectedRow() != -1) {
                         updatePlayersTable(tablesList.get(tablesTable.getSelectedRow()));
+                    }
                 }
             }
         });
     }
 
     private void initModels() {
-        tournamentsModel = new DefaultTableModel(tournaments, new String [] {"ID", "Status"});
-        tablesModel = new DefaultTableModel(tables, new String [] {"Status", "Blinds", "Players", "Avg Pot"});
-        playersModel = new DefaultTableModel(players, new String [] {"Player", "Money"});
+        tournamentsModel = new DefaultTableModel(tournaments, new String[]{"ID", "Status"});
+        tablesModel = new DefaultTableModel(tables, new String[]{"Status", "Blinds", "Players", "Avg Pot"});
+        playersModel = new DefaultTableModel(players, new String[]{"Player", "Money"});
     }
     // End of variables declaration
-
     private void updateTablesTable(Tournament tournament) {
         try {
             tablesList = tournament.getTables();
-        System.out.println(tournament.getTables().size());
         } catch (RemoteException ex) {
             Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
+
         tables = new Object[tablesList.size()][4];
         Iterator<Table> iterator = tablesList.iterator();
         tablesModel.setRowCount(0);
         int i = 0;
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             Table table = iterator.next();
             try {
                 tables[i][0] = table.getStatus();
                 tables[i][1] = table.getBlinds();
-            tables[i][2] = table.getPlayers().size();
-            tables[i][3] = table.getAveragePot();
+                tables[i][2] = table.getPlayers().size();
+                tables[i][3] = table.getAveragePot();
             } catch (RemoteException ex) {
                 Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             tablesModel.addRow(tables[i]);
             i++;
         }
     }
-    
-   
-    
+
     private void updatePlayersTable(Table table) {
         try {
             playersList = table.getPlayers();
@@ -391,7 +419,7 @@ public class CGYMServerView extends javax.swing.JFrame {
         Iterator<Player> iterator = playersList.iterator();
         playersModel.setRowCount(0);
         int i = 0;
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             try {
                 Player player = iterator.next();
                 players[i][0] = player.getName();
@@ -419,7 +447,7 @@ public class CGYMServerView extends javax.swing.JFrame {
             } catch (RemoteException ex) {
                 Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             tournamentsModel.addRow(tournaments[i]);
             i++;
         }
@@ -443,5 +471,4 @@ public class CGYMServerView extends javax.swing.JFrame {
             Logger.getLogger(CGYMServerView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }
