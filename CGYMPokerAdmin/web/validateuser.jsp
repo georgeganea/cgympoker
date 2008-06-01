@@ -22,7 +22,7 @@ ServerCentral serv=idHandler.authenticate(userName, passWord);
       serverC.setServer(serv);
       response.sendRedirect("welcome.jsp");
 } else {
-    response.sendRedirect("index.jsp");
+    response.sendRedirect("retry.jsp");
 }
 %>
 </body></head>
