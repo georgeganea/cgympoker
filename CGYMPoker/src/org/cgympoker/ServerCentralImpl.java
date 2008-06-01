@@ -183,12 +183,12 @@ public class ServerCentralImpl implements ServerCentral{
 
     public boolean startTournament(String ID) throws RemoteException {
         Iterator<Tournament> iterator = tournaments.iterator();
-        System.out.println("Se va porni turneul:"+ID);
         while (iterator.hasNext()){
             Tournament tournament = iterator.next();
-            if (tournament.getID().compareTo(ID) == 0)
+            if (tournament.getID().compareTo(ID) == 0){
                 ((TournamentImpl)tournament).start();
                 return true;
+            }
         }
         return false;
     }

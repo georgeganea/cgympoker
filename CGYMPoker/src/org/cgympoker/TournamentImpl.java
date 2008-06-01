@@ -68,6 +68,8 @@ public class TournamentImpl implements Tournament {
      * 4. reseteaza mesele
      */
     public void start() throws RemoteException {
+        System.out.println("Turneul:"+ID);
+        System.out.println("Numarul de players:"+players.size());
         this.status = Status.STARTED;
         ArrayList<Player> tablePlayers = new ArrayList<Player>();
         for(int i=0;i<players.size();i++){
