@@ -17,8 +17,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JLabel;
+import javax.swing.JLabel;
 import org.cgympoker.common.Card;
 import org.cgympoker.common.Felix;
+import org.cgympoker.common.Player;
 import org.cgympoker.remoteobserver.Subscriber;
 
 /**
@@ -28,8 +32,10 @@ import org.cgympoker.remoteobserver.Subscriber;
 public class CGYMTableView extends javax.swing.JFrame {
     private TableSubscriber subscriber;
     private Felix felix;
+    private JLabel[] labelList = new JLabel[8];
+            
     public Subscriber getSubcriber(){
-    return subscriber;
+        return subscriber;
     }
             
     
@@ -53,11 +59,10 @@ public class CGYMTableView extends javax.swing.JFrame {
             initComponents();
             this.subscriber = new TableSubscriber();
             this.felix = felix;
+            printOponentsInfo();
             felixLabel.setText(felix.getMySelf().getName());
             blindsLabel.setText(felix.getTable().getBlinds());
             List<Card> cards = felix.getMySelf().getCards();
-            System.out.println(cards.get(0).getImageName());
-           
             ImageIcon icon = new ImageIcon(cards.get(0).getImageName());
             cardLabel0.setIcon(icon);
             icon = new ImageIcon(cards.get(1).getImageName());
@@ -70,6 +75,40 @@ public class CGYMTableView extends javax.swing.JFrame {
         }
     }
     
+    private void setTableCards(ArrayList<Card> cards){
+        try {
+            card0.setIcon(new ImageIcon(cards.get(0).getImageName()));
+            card1.setIcon(new ImageIcon(cards.get(1).getImageName()));
+            card2.setIcon(new ImageIcon(cards.get(2).getImageName()));
+            if (cards.size() >= 4){
+                card3.setIcon(new ImageIcon(cards.get(3).getImageName()));
+                if (cards.size() == 5)
+                    card4.setIcon(new ImageIcon(cards.get(4).getImageName()));
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(CGYMTableView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void printOponentsInfo(){
+        try {
+            labelList[0] = player0;
+            labelList[1] = player1;
+            labelList[2] = player2;
+            labelList[3] = player3;
+            labelList[4] = player4;
+            labelList[5] = player5;
+            labelList[6] = player6;
+            ArrayList<Player> opponents = felix.getOponents();
+            for(int i=0;i<opponents.size();i++){
+                labelList[i].setText(opponents.get(i).getName());
+            }
+//            for (int i= opponents.size();i<labelList.length;i++)
+//                labelList[i].setText("");
+        } catch (RemoteException ex) {
+            Logger.getLogger(CGYMTableView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -157,8 +196,8 @@ public class CGYMTableView extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
         setName("Form"); // NOI18N
-        setResizable(false);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(org.cgympoker.gui.CGYMPokerApp.class).getContext().getResourceMap(CGYMTableView.class);
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
